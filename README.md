@@ -78,7 +78,7 @@ npm run preview
 
 1. Créer une branche **au nom de l’issue** :
    ```bash
-   git checkout -b feature/nom-de-l-issue
+   git checkout -b feature/US-00-nom-de-l-issue
    ```
 2. Développer vos fonctionnalités.
 3. Commit avec des messages clairs :
@@ -93,10 +93,16 @@ npm run preview
 
 ---
 
+## 🛠️ Outils utilisés pour ce projet
+
+- 🎨 **Figma** → création des maquettes et schémas du site web
+- 📌 **Trello** → gestion de projet et suivi des tâches
+- 💬 **Discord** → messagerie et communication d’équipe
+- ▲ **Vercel** → hébergement gratuit du frontend
+- 🖥️ **Render** → hébergement gratuit du backend et de la base de données **PostgreSQL**
+
+---
+
 ## 👑 Notes finales
 
-- Organisation stricte → déploiement fluide.
-- Respect des conventions → moins de bugs.
-- Tests avant push → déploiement stable.
-
-*(Comme dirait **Erwin Smith** dans *Attack on Titan* : « Seule une organisation sans faille peut mener à la victoire ! » ⚔️)*
+je ne sais pas pourquoi je me fait chier a faire un readme car de toute façon vous ne le lirer jamais
