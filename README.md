@@ -58,6 +58,13 @@ Après un `git pull` :
 npm install
 ```
 
+créé un fichier .env avec à l'interieur :
+
+```bash
+// Environment variables for the application link to the backend server
+BACKEND_LINK=http://localhost:3000
+```
+
 Pour démarrer le serveur en local :
 
 ```bash
