@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import '../App.css';
-import '../accueil.css';
+import '../../App.css';
+import '../../Accueil.css';
 
 // Images
-import BackgroundEsport from '/background_esport.jpg';
-import EpicGames from '/sponsors/epicgames.png';
-import Steam from '/sponsors/steam.png';
-import Free from '/sponsors/free.png';
-import SCO from '/sponsors/SCO.png';
-import LeGaulois from '/sponsors/leGaulois.png';
-import RTX from '/sponsors/RTX.png';
-import MSI from '/sponsors/MSI.png';
-import Corsair from '/sponsors/corsair.png';
+import BackgroundEsport from '../../assets/background_esport.jpg';
+import EpicGames from '../../assets/sponsors/epicgames.png';
+import Steam from '../../assets/sponsors/steam.png';
+import Free from '../../assets/sponsors/free.png';
+import SCO from '../../assets/sponsors/SCO.png';
+import LeGaulois from '../../assets/sponsors/leGaulois.png';
+import RTX from '../../assets/sponsors/RTX.png';
+import MSI from '../../assets/sponsors/MSI.png';
+import Corsair from '../../assets/sponsors/corsair.png';
 
 // Tableau avec logo, lien et classe spécifique
 const sponsors = [

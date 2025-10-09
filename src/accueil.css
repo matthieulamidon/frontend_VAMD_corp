@@ -96,3 +96,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.title-games-accueil{
+  font-size: 3em;
+  color: white;
+  font-weight: bold;
+  text-shadow: var(--text-glow);
+  padding-bottom: 30px;
+}
+

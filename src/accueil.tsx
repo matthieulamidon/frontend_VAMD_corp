@@ -1,9 +1,8 @@
-import AccueilGames from './composants/accueil_games';
-import BodyAccueil from './composants/bodyAccueil';
-import Navbar from './composants/navbar';
+import AccueilGames from './composants/organims/games_accueil';
+import BodyAccueil from './composants/organims/bodyAccueil';
+import Navbar from './composants/organims/navbar';
 
 function Accueil() {
-
     return (
         <>
             <Navbar />

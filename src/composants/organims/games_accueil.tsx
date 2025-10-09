@@ -1,5 +1,5 @@
-import '../App.css';
-import '../accueil.css';
+import '../../App.css';
+import '../../accueil.css';
 
 const AccueilGames = () => {
     return (

@@ -1,10 +1,9 @@
-import '../App.css';
+import '../../App.css';
 import { useState } from "react";
 
 // Images
-import LogoNavbar from '/logo_vamd.png';
-import ToggleHamburger from '/togglehamburger.png';
-
+import LogoNavbar from '../../assets/logo_vamd.png';
+import ToggleHamburger from '../../assets/togglehamburger.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
