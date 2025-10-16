@@ -15,29 +15,37 @@ const Navbar = () => {
     return (
         <>
             <nav className="navbar">
-                <button
-                    className="navbar-toggler-hamburger"
-                    onClick={toggleMenu}
-                    aria-label="Ouvrir le menu"
-                >
-                    <img src={ToggleHamburger} alt="Menu" className="hamburger-icon" />
-                </button>
+                <div className='navbar-left'>
+                    <button
+                        className="navbar-toggler-hamburger"
+                        onClick={toggleMenu}
+                        aria-label="Ouvrir le menu"
+                    >
+                        <img src={ToggleHamburger} alt="Menu" className="hamburger-icon" />
+                    </button>
 
-                <a href="/">
-                    <img src={LogoNavbar} className="logoNavbar" alt="VAMD" />
-                </a>
+                    <a href="/">
+                        <img src={LogoNavbar} className="logoNavbar" alt="VAMD" />
+                    </a>
 
-                <a href="/" className="btnnav">Accueil</a>
-                <a href="/calendrier" className="btnnav">Calendrier</a>
-                <a href="/événements" className="btnnav">Événements</a>
-                <a href="/produits" className="btnnav">Produits</a>
+                    <a href="/" className="btnnav">Accueil</a>
+                    <a href="/calendrier" className="btnnav">Calendrier</a>
+                    <a href="/événements" className="btnnav">Événements</a>
+                    <a href="/produits" className="btnnav">Produits</a>
+                </div>
+                <div className='navbar-right'>
+                    <a href="/connexion" className="btnconnexion">Connectez-vous</a>
+                </div>
             </nav>
 
             <div className={`side-menu ${isOpen ? "open" : ""}`}>
+                <a href="/connexion" className="btnconnexion-sidemenu">Connexion</a>
                 <a href="/" onClick={toggleMenu}>Accueil</a>
                 <a href="/calendrier" onClick={toggleMenu}>Calendrier</a>
                 <a href="/événements" onClick={toggleMenu}>Événements</a>
                 <a href="/produits" onClick={toggleMenu}>Produits</a>
+                <div className='bottom-sidemenu'>
+                </div>
             </div>
 
             {isOpen && <div className="overlay" onClick={toggleMenu}></div>}
