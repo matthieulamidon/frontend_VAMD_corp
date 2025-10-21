@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../../App.css";
-import "../../Accueil.css";
+import "../../accueil.css";
 
 // Images
 import BackgroundEsport from "../../assets/background_esport.jpg";
