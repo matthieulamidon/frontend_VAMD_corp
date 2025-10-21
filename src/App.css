@@ -38,12 +38,14 @@
   font-family: Helvetica;
   font-size: 1.2rem;
   margin-left: 40px;
-  text-shadow: var(--text-glow)
+  text-shadow: var(--text-glow);
 }
 
 .btnnav:hover {
   color: white;
-  text-shadow: 0 0 8px rgba(128, 0, 255, 0.7), 0 0 16px rgba(128, 0, 255, 0.5);
+  text-shadow:
+    0 0 8px rgba(128, 0, 255, 0.7),
+    0 0 16px rgba(128, 0, 255, 0.5);
 }
 
 .btnconnexion {
@@ -58,7 +60,10 @@
   font-size: 1.2rem;
   box-shadow: var(--text-glow);
   border: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, scale 0.3s ease;  
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    scale 0.3s ease;
 }
 
 .btnconnexion-sidemenu:hover,
@@ -69,7 +74,10 @@
   scale: 1.05;
   background-color: rgba(187, 0, 255, 1);
   box-shadow: var(--text-glow);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, scale 0.3s ease;  
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    scale 0.3s ease;
 }
 
 .btnconnexion-sidemenu {
@@ -87,16 +95,18 @@
   font-size: 1.2rem;
   box-shadow: var(--text-glow);
   border: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, scale 0.3s ease;  
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    scale 0.3s ease;
 }
 
 .logoNavbar {
   height: 50px;
   margin: 0;
   filter: drop-shadow(0 0 10px rgba(128, 0, 255, 1))
-          drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
 }
-
 
 .navbar-toggler-hamburger {
   border: none;
@@ -178,8 +188,6 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 1500;
 }
-
-
 
 @media (max-width: 1100px) {
   .btnnav {

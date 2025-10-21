@@ -1,10 +1,13 @@
-
 .body-connection-utilisateur {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 8rem 2rem 2rem 2rem;
-  background: linear-gradient(180deg, rgba(6,0,28,0.95) 0%, rgba(12,6,40,0.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 0, 28, 0.95) 0%,
+    rgba(12, 6, 40, 0.95) 100%
+  );
   color: #fff;
   box-sizing: border-box;
 }
@@ -12,9 +15,9 @@
 .forms-wrapper {
   width: 100%;
   max-width: 1100px;
-  min-height: 720px; 
+  min-height: 720px;
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   overflow: visible;
@@ -26,17 +29,19 @@
   width: 360px;
   min-width: 300px;
   max-width: 420px;
-  background: linear-gradient(180deg,#0b1428 0%, #101428 100%);
+  background: linear-gradient(180deg, #0b1428 0%, #101428 100%);
   color: #fff;
   border-radius: 10px;
-  border: 1px solid rgba(187,0,255,0.12);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  border: 1px solid rgba(187, 0, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   padding: 1.25rem;
-  transition: transform 300ms ease, opacity 300ms ease;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
   cursor: pointer;
   user-select: none;
   position: absolute;
-  top: 20px; 
+  top: 20px;
 }
 
 .form-panel.center {
@@ -76,8 +81,8 @@
 .formulaire-connection select {
   padding: 0.6rem;
   margin-top: 0.25rem;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
   color: #fff;
   border-radius: 6px;
 }
@@ -90,13 +95,13 @@
 }
 
 .btn-valider {
-  background: linear-gradient(90deg,#b200ff 0%, #2b9bff 100%);
+  background: linear-gradient(90deg, #b200ff 0%, #2b9bff 100%);
   color: #fff;
   border: none;
   padding: 0.6rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(43,155,255,0.18);
+  box-shadow: 0 6px 18px rgba(43, 155, 255, 0.18);
 }
 
 .btn-forgot {

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import '../pages/connexionUtilisateur.css';
+import React, { useEffect } from "react";
+import "../pages/connexionUtilisateur.css";
 
 type Props = {
   firstName: string;
@@ -19,30 +19,59 @@ type Props = {
   loading?: boolean;
 };
 
-const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, lastName, setLastName, sex, setSex, desiredGames, desiredTeam, setDesiredTeam, teamRole, setTeamRole, onPrev, onSubmit, loading }) => {
+const FormulaireInscription3: React.FC<Props> = ({
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  sex,
+  setSex,
+  desiredGames,
+  desiredTeam,
+  setDesiredTeam,
+  teamRole,
+  setTeamRole,
+  onPrev,
+  onSubmit,
+  loading,
+}) => {
   useEffect(() => {
-    const game = desiredGames || desiredTeam?.split(' — ')[0];
-    if (game === 'League Of Legend') {
-      if (!teamRole || teamRole === 'joueur') setTeamRole('Top');
-    } else if (game === 'Valorant') {
-      if (!teamRole || teamRole === 'joueur') setTeamRole('Duelist');
+    const game = desiredGames || desiredTeam?.split(" — ")[0];
+    if (game === "League Of Legend") {
+      if (!teamRole || teamRole === "joueur") setTeamRole("Top");
+    } else if (game === "Valorant") {
+      if (!teamRole || teamRole === "joueur") setTeamRole("Duelist");
     } else {
-      setTeamRole('joueur');
+      setTeamRole("joueur");
     }
   }, [desiredGames, desiredTeam, teamRole, setTeamRole]);
 
   return (
-    <form className="formulaire-creation" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
+    <form
+      className="formulaire-creation"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+    >
       <h2>Créer ton compte — Étape 3</h2>
 
       <label htmlFor="firstName">Prénom</label>
-      <input id="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} />
+      <input
+        id="firstName"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
 
       <label htmlFor="lastName">Nom</label>
-      <input id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} />
+      <input
+        id="lastName"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+      />
 
       <label htmlFor="sex">Sexe</label>
-      <select id="sex" value={sex} onChange={e => setSex(e.target.value)}>
+      <select id="sex" value={sex} onChange={(e) => setSex(e.target.value)}>
         <option value="homme">Homme</option>
         <option value="femme">Femme</option>
         <option value="non precise">Non précisé</option>
@@ -50,21 +79,33 @@ const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, last
       </select>
 
       <label htmlFor="desiredTeam">Équipe souhaitée (choix par jeu)</label>
-      <select id="desiredTeam" value={desiredTeam} onChange={e => setDesiredTeam(e.target.value)}>
+      <select
+        id="desiredTeam"
+        value={desiredTeam}
+        onChange={(e) => setDesiredTeam(e.target.value)}
+      >
         {(() => {
-          const game = desiredGames || desiredTeam?.split(' — ')[0] || 'League Of Legend';
-          return [1, 2, 3, 4].map(n => (
-            <option key={n} value={`${game} — Équipe ${n}`}>{`${game} — Équipe ${n}`}</option>
+          const game =
+            desiredGames || desiredTeam?.split(" — ")[0] || "League Of Legend";
+          return [1, 2, 3, 4].map((n) => (
+            <option
+              key={n}
+              value={`${game} — Équipe ${n}`}
+            >{`${game} — Équipe ${n}`}</option>
           ));
         })()}
       </select>
 
       <label htmlFor="teamRole">Rôle dans l'équipe (si applicable)</label>
       {(() => {
-        const game = desiredGames || desiredTeam?.split(' — ')[0];
-        if (game === 'League Of Legend') {
+        const game = desiredGames || desiredTeam?.split(" — ")[0];
+        if (game === "League Of Legend") {
           return (
-            <select id="teamRole" value={teamRole} onChange={e => setTeamRole(e.target.value)}>
+            <select
+              id="teamRole"
+              value={teamRole}
+              onChange={(e) => setTeamRole(e.target.value)}
+            >
               <option value="Top">Top</option>
               <option value="Middle">Middle</option>
               <option value="Jungle">Jungle</option>
@@ -73,9 +114,13 @@ const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, last
             </select>
           );
         }
-        if (game === 'Valorant') {
+        if (game === "Valorant") {
           return (
-            <select id="teamRole" value={teamRole} onChange={e => setTeamRole(e.target.value)}>
+            <select
+              id="teamRole"
+              value={teamRole}
+              onChange={(e) => setTeamRole(e.target.value)}
+            >
               <option value="Duelist">Duelist</option>
               <option value="Sentinel">Sentinel</option>
               <option value="Initiator">Initiator</option>
@@ -83,14 +128,23 @@ const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, last
             </select>
           );
         }
-        return <input id="teamRole" value={teamRole || 'joueur'} readOnly />;
+        return <input id="teamRole" value={teamRole || "joueur"} readOnly />;
       })()}
 
       {/* keep teamRole defaults in sync when desiredTeam changes (handled in useEffect above) */}
 
       <div className="form-actions">
-        <button type="button" className="btn-forgot" onClick={onPrev} disabled={!!loading}>Précédent</button>
-        <button type="submit" className="btn-valider" disabled={!!loading}>{'Terminer'}</button>
+        <button
+          type="button"
+          className="btn-forgot"
+          onClick={onPrev}
+          disabled={!!loading}
+        >
+          Précédent
+        </button>
+        <button type="submit" className="btn-valider" disabled={!!loading}>
+          {"Terminer"}
+        </button>
       </div>
     </form>
   );
