@@ -113,3 +113,4 @@ npm run preview
 ## 👑 Notes finales
 
 je ne sais pas pourquoi je me fait chier a faire un readme car de toute façon vous ne le lirer jamais
+*lirez avec un Z

@@ -1,6 +1,11 @@
 import '../../App.css';
 import '../../accueil.css';
 
+// Images
+import Bg_lol from '../../assets/games/bg_lol.png';
+import Bg_valo from '../../assets/games/bg_valo.jpeg';
+import Bg_fortnite from '../../assets/games/bg_fortnite.jpeg';
+
 const AccueilGames = () => {
     return (
         <>
@@ -9,9 +14,18 @@ const AccueilGames = () => {
                     NOS JEUX
                 </div>
                 <div className='games-list-accueil'>
-                    <div className='game-item'>League of Legends</div>
-                    <div className='game-item'>Valorant</div>
-                    <div className='game-item'>Fortnite</div>
+                    <div className='game-item'>
+                        <h1 className='txt-game'>LEAGUE OF LEGENDS</h1>
+                        <img src={Bg_lol} alt="" className='game-img' />
+                    </div>
+                    <div className='game-item'>
+                        <h1 className='txt-game'>VALORANT</h1>
+                        <img src={Bg_valo} alt="" className='game-img' />
+                    </div>
+                    <div className='game-item'>
+                        <h1 className='txt-game'>FORTNITE</h1>
+                        <img src={Bg_fortnite} alt="" className='game-img' />
+                    </div>
                 </div>
             </div>
         </>
