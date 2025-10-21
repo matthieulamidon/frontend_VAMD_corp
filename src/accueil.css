@@ -35,7 +35,7 @@
   font-size: 3rem;
   color: rgb(255, 186, 253);
   font-weight: bold;
-  font-family: Helvetica;
+  font-family: Helvetica, Arial, sans-serif;
   text-shadow: var(--text-glow);
 }
 
