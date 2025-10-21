@@ -10,7 +10,7 @@ src/
 │   │── atoms/        # Composants de base (Button, Input, Icon…)
 │   │── molecules/    # Combinaisons d’atoms (SearchBar, Card…)
 │   │── organisms/    # Sections complexes (Navbar, Footer, Form…)
-│
+│   |── pages/        # Combinaisons des différents organismes
 │── layouts/          # Layouts globaux (Visiteur, Joueur, Coach)
 │── routes/           # Définition des routes avec React Router
 │── context/          # Contexte global (Auth, Theme…)

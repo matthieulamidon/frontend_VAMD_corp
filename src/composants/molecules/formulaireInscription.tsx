@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../pages/connexionUtilisateur.css';
-import FormulaireInscription2 from '../molecules/formulaireInscription2';
-import FormulaireInscription3 from '../molecules/formulaireInscription3';
+import FormulaireInscription2 from './formulaireInscription2';
+import FormulaireInscription3 from './formulaireInscription3';
 
 const FormulaireInscription: React.FC = () => {
    
@@ -14,6 +15,9 @@ const FormulaireInscription: React.FC = () => {
 
     const [roleWish, setRoleWish] = useState<string>('visiteur');
     const [desiredGames, setDesiredGames] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
+    const [skipBackendChecks, setSkipBackendChecks] = useState<boolean>(false);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
@@ -27,7 +31,6 @@ const FormulaireInscription: React.FC = () => {
         const prev = () => setStep((s) => Math.max(1, s - 1));
 
         const validateStep1 = () => {
-            // all fields must be filled and email contains '@' and password > 6 chars
             if (!pseudo.trim()) {
                 setError('Le pseudo est requis.');
                 return false;
@@ -53,7 +56,6 @@ const FormulaireInscription: React.FC = () => {
         };
 
         const validateStep2 = () => {
-            // roleWish required; if joueur or coach then desiredGames required
             if (!roleWish) {
                 setError('Le rôle souhaité est requis.');
                 return false;
@@ -83,7 +85,6 @@ const FormulaireInscription: React.FC = () => {
                 setError("L'équipe souhaitée est requise.");
                 return false;
             }
-            // teamRole required if desiredTeam chosen
             if (desiredTeam && !teamRole) {
                 setError('Le rôle dans l\'équipe est requis.');
                 return false;
@@ -92,34 +93,136 @@ const FormulaireInscription: React.FC = () => {
             return true;
         };
 
-        const handleNextFromStep1 = () => {
-            if (validateStep1()) next();
+        const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+
+        const navigate = useNavigate();
+
+        const handleNextFromStep1 = async () => {
+            if (!validateStep1()) return;
+            if (skipBackendChecks) {
+                setError(null);
+                next();
+                return;
+            }
+            setLoading(true);
+            try {
+                const res = await fetch(`${API_URL}/users/check-availability`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: pseudo, email }),
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && data?.available) {
+                    setError(null);
+                    next();
+                } else {
+                    setError(data?.message ?? 'Pseudo ou email déjà utilisé.');
+                }
+            } catch (err) {
+                console.error(err);
+                setError('Erreur réseau lors de la vérification.');
+            } finally {
+                setLoading(false);
+            }
         };
 
-        const handleNextFromStep2 = () => {
-            if (validateStep2()) next();
+        const handleNextFromStep2 = async (selectedGame?: string) => {
+            if (!validateStep2()) return;
+            if (selectedGame) {
+                setDesiredGames(selectedGame);
+                setDesiredTeam(`${selectedGame} — Équipe 1`);
+            }
+            if (roleWish === 'visiteur') {
+                if (skipBackendChecks) {
+                    setSuccess('Inscription effectuée (mode test). Vous pouvez vous connecter.');
+                    setTimeout(() => navigate('/connexion'), 800);
+                    return;
+                }
+                setLoading(true);
+                try {
+                    const payload: any = {
+                        username: pseudo || email,
+                        email,
+                        password,
+                        role: 'visiteur',
+                    };
+                    const res = await fetch(`${API_URL}/register`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                        credentials: 'include',
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (res.ok) {
+                        setSuccess('Inscription effectuée. Vous pouvez vous connecter.');
+                        setTimeout(() => navigate('/connexion'), 800);
+                        return;
+                    } else {
+                        setError(data?.message ?? `Erreur (${res.status})`);
+                    }
+                } catch (err) {
+                    console.error(err);
+                    setError("Erreur réseau lors de l'inscription.");
+                } finally {
+                    setLoading(false);
+                }
+                return;
+            }
+            next();
         };
 
-    const handleFinalSubmit = () => {
-        const allData = {
-            pseudo,
-            dateOfBirth,
+    const handleFinalSubmit = async () => {
+        if (!validateStep3()) return;
+        const payload: any = {
+            username: pseudo || email,
             email,
             password,
-            roleWish,
-            desiredGames,
+            role: roleWish,
             firstName,
             lastName,
+            dateOfBirth,
             sex,
+            games: desiredGames ? [desiredGames] : [],
             desiredTeam,
             teamRole,
         };
-        console.log("Données d'inscription complètes :", allData);
-        // TODO: envoyer vers API
+        if (skipBackendChecks) {
+            setSuccess('Inscription réussie (mode test). Vous pouvez vous connecter.');
+            setTimeout(() => navigate('/connexion'), 800);
+            return;
+        }
+        setLoading(true);
+        try {
+            const res = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                credentials: 'include',
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok) {
+                setSuccess('Inscription réussie. Vous pouvez vous connecter.');
+                setTimeout(() => navigate('/connexion'), 800);
+            } else {
+                setError(data?.message ?? `Erreur (${res.status})`);
+            }
+        } catch (err) {
+            console.error(err);
+            setError('Erreur réseau lors de l\'inscription.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div>
+            <div style={{ marginBottom: '0.5rem' }}>
+                <label style={{ fontSize: '0.9rem' }}>
+                    <input type="checkbox" checked={skipBackendChecks} onChange={e => setSkipBackendChecks(e.target.checked)} style={{ marginRight: '0.5rem' }} />
+                    Bypass backend checks (mode test)
+                </label>
+            </div>
+            {success && <div className="form-success" role="status" style={{color: '#b8ffbf', marginBottom: '0.5rem'}}>{success}</div>}
               {step === 1 && (
                         <form className="formulaire-creation" onSubmit={(e) => { e.preventDefault(); handleNextFromStep1(); }}>
                     <h2>Créer ton compte — Étape 1</h2>
@@ -152,6 +255,7 @@ const FormulaireInscription: React.FC = () => {
                     setDesiredGames={setDesiredGames}
                     onPrev={prev}
                     onNext={handleNextFromStep2}
+                    loading={loading}
                 />
             )}
 
@@ -163,12 +267,15 @@ const FormulaireInscription: React.FC = () => {
                     setLastName={setLastName}
                     sex={sex}
                     setSex={setSex}
+                    desiredGames={desiredGames}
+                    setDesiredGames={setDesiredGames}
                     desiredTeam={desiredTeam}
                     setDesiredTeam={setDesiredTeam}
                     teamRole={teamRole}
                     setTeamRole={setTeamRole}
                     onPrev={prev}
                     onSubmit={() => { if (validateStep3()) handleFinalSubmit(); }}
+                    loading={loading}
                 />
             )}
         </div>

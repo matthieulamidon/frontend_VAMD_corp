@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../pages/connexionUtilisateur.css';
 
 type Props = {
@@ -8,15 +8,29 @@ type Props = {
   setLastName: (v: string) => void;
   sex: string;
   setSex: (v: string) => void;
+  desiredGames: string;
+  setDesiredGames: (v: string) => void;
   desiredTeam: string;
   setDesiredTeam: (v: string) => void;
   teamRole: string;
   setTeamRole: (v: string) => void;
   onPrev: () => void;
   onSubmit: () => void;
+  loading?: boolean;
 };
 
-const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, lastName, setLastName, sex, setSex, desiredTeam, setDesiredTeam, teamRole, setTeamRole, onPrev, onSubmit }) => {
+const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, lastName, setLastName, sex, setSex, desiredGames, desiredTeam, setDesiredTeam, teamRole, setTeamRole, onPrev, onSubmit, loading }) => {
+  useEffect(() => {
+    const game = desiredGames || desiredTeam?.split(' — ')[0];
+    if (game === 'League Of Legend') {
+      if (!teamRole || teamRole === 'joueur') setTeamRole('Top');
+    } else if (game === 'Valorant') {
+      if (!teamRole || teamRole === 'joueur') setTeamRole('Duelist');
+    } else {
+      setTeamRole('joueur');
+    }
+  }, [desiredGames, desiredTeam, teamRole, setTeamRole]);
+
   return (
     <form className="formulaire-creation" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
       <h2>Créer ton compte — Étape 3</h2>
@@ -37,18 +51,46 @@ const FormulaireInscription3: React.FC<Props> = ({ firstName, setFirstName, last
 
       <label htmlFor="desiredTeam">Équipe souhaitée (choix par jeu)</label>
       <select id="desiredTeam" value={desiredTeam} onChange={e => setDesiredTeam(e.target.value)}>
-        <option value="League Of Legend">League Of Legend</option>
-        <option value="Fortnite">Fortnite</option>
-        <option value="Valorant">Valorant</option>
-        <option value="Fifa">Fifa</option>
+        {(() => {
+          const game = desiredGames || desiredTeam?.split(' — ')[0] || 'League Of Legend';
+          return [1, 2, 3, 4].map(n => (
+            <option key={n} value={`${game} — Équipe ${n}`}>{`${game} — Équipe ${n}`}</option>
+          ));
+        })()}
       </select>
 
       <label htmlFor="teamRole">Rôle dans l'équipe (si applicable)</label>
-      <input id="teamRole" value={teamRole} onChange={e => setTeamRole(e.target.value)} />
+      {(() => {
+        const game = desiredGames || desiredTeam?.split(' — ')[0];
+        if (game === 'League Of Legend') {
+          return (
+            <select id="teamRole" value={teamRole} onChange={e => setTeamRole(e.target.value)}>
+              <option value="Top">Top</option>
+              <option value="Middle">Middle</option>
+              <option value="Jungle">Jungle</option>
+              <option value="Support">Support</option>
+              <option value="ADC">ADC</option>
+            </select>
+          );
+        }
+        if (game === 'Valorant') {
+          return (
+            <select id="teamRole" value={teamRole} onChange={e => setTeamRole(e.target.value)}>
+              <option value="Duelist">Duelist</option>
+              <option value="Sentinel">Sentinel</option>
+              <option value="Initiator">Initiator</option>
+              <option value="Controller">Controller</option>
+            </select>
+          );
+        }
+        return <input id="teamRole" value={teamRole || 'joueur'} readOnly />;
+      })()}
+
+      {/* keep teamRole defaults in sync when desiredTeam changes (handled in useEffect above) */}
 
       <div className="form-actions">
-        <button type="button" className="btn-forgot" onClick={onPrev}>Précédent</button>
-        <button type="submit" className="btn-valider">Terminer</button>
+        <button type="button" className="btn-forgot" onClick={onPrev} disabled={!!loading}>Précédent</button>
+        <button type="submit" className="btn-valider" disabled={!!loading}>{'Terminer'}</button>
       </div>
     </form>
   );
