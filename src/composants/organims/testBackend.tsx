@@ -16,7 +16,7 @@ const AuthPage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-  const API_URL = " https://backend-vamd-corp.onrender.com/api/auth"; // adapte selon ton backend
+  const API_URL = "http://localhost:4000/api/auth"; //" https://backend-vamd-corp.onrender.com/api/auth"; // adapte selon ton backend7
 
   const handleRegister = async () => {
     try {
@@ -44,12 +44,15 @@ const AuthPage: React.FC = () => {
       const res = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }), // backend utilise email pour login
+        body: JSON.stringify({ email, password }),
         credentials: "include",
       });
       const data = await res.json();
       setMessage(data.message || "Connexion réussie !");
       if (data.user) setUserInfo(data.user);
+
+      // 🔍 Vérification des cookies côté navigateur (non httpOnly)
+      console.log("Cookies actuels :", document.cookie);
     } catch (err) {
       console.error(err);
       setMessage("Erreur lors du login");
