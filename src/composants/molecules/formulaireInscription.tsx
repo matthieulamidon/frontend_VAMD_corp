@@ -30,8 +30,8 @@ const FormulaireInscription: React.FC = () => {
   const prev = () => setStep((s) => Math.max(1, s - 1));
 
   const API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") +
-    "/api/auth";
+    (import.meta.env.VITE_BACKEND_LINK ??
+      "https://backend-vamd-corp.onrender.com") + "/api/auth";
 
   const validateStep1 = () => {
     if (!pseudo.trim()) {

@@ -7,8 +7,8 @@ const FormulaireConnexion: React.FC = () => {
   const [password, setPassword] = useState<string>("");
 
   const API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") +
-    "/api/auth";
+    (import.meta.env.VITE_BACKEND_LINK ??
+      "https://backend-vamd-corp.onrender.com") + "/api/auth";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
