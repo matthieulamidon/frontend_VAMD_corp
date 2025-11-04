@@ -29,6 +29,8 @@ const FormulaireInscription: React.FC = () => {
   const next = () => setStep((s) => Math.min(3, s + 1));
   const prev = () => setStep((s) => Math.max(1, s - 1));
 
+  const API_URL = "http://localhost:4000/api/auth";
+
   const validateStep1 = () => {
     if (!pseudo.trim()) {
       setError("Le pseudo est requis.");
@@ -94,11 +96,15 @@ const FormulaireInscription: React.FC = () => {
     return true;
   };
 
-  const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
-
   const navigate = useNavigate();
 
+  /*
+   * inscription étape 1 c'est a dire création du compte
+   */
   const handleNextFromStep1 = async () => {
+    console.log("handleNextFromStep1 called");
+    console.log({ pseudo, email, password, dateOfBirth });
+    console.log(API_URL);
     if (!validateStep1()) return;
     if (skipBackendChecks) {
       setError(null);
@@ -107,10 +113,16 @@ const FormulaireInscription: React.FC = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/users/check-availability`, {
+      const res = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: pseudo, email }),
+        body: JSON.stringify({
+          pseudo,
+          email,
+          password,
+          date_naissance: dateOfBirth,
+        }),
+        credentials: "include",
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data?.available) {
@@ -198,6 +210,7 @@ const FormulaireInscription: React.FC = () => {
     }
     setLoading(true);
     try {
+      // submit to backend
       const res = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

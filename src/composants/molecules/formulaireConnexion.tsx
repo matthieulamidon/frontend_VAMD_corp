@@ -1,17 +1,30 @@
 import React, { useState } from "react";
 import "../pages/connexionUtilisateur.css";
 
+const API_URL =
+  import.meta.env.BASE_URL + "/api/auth" || "http://localhost:4000/api/auth";
+
 const FormulaireConnexion: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [pseudo, setPseudo] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: remplacer par appel API ou gestion de state global
-    console.log("Soumission formulaire", { email, password });
-    // reset optionnel
-    // setEmail(''); setPassword('');
+    try {
+      const res = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
+      const data = await res.json();
+      alert(data.message || "Connexion réussie !");
+      if (data.user) console.info(data.user);
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors du login");
+    }
   };
 
   const handleForgotPassword = (e: React.MouseEvent) => {
