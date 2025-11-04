@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "../pages/connexionUtilisateur.css";
 
-const API_URL =
-  import.meta.env.BASE_URL + "/api/auth" || "http://localhost:4000/api/auth";
-
 const FormulaireConnexion: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [pseudo, setPseudo] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const API_URL =
+    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") +
+    "/api/auth";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

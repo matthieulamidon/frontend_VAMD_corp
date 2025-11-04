@@ -29,7 +29,9 @@ const FormulaireInscription: React.FC = () => {
   const next = () => setStep((s) => Math.min(3, s + 1));
   const prev = () => setStep((s) => Math.max(1, s - 1));
 
-  const API_URL = "http://localhost:4000/api/auth";
+  const API_URL =
+    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") +
+    "/api/auth";
 
   const validateStep1 = () => {
     if (!pseudo.trim()) {
@@ -125,11 +127,20 @@ const FormulaireInscription: React.FC = () => {
         credentials: "include",
       });
       const data = await res.json().catch(() => ({}));
+      /*
       if (res.ok && data?.available) {
         setError(null);
         next();
       } else {
         setError(data?.message ?? "Pseudo ou email déjà utilisé.");
+      }*/
+      console.log({ res, data });
+      if (data?.token) {
+        setError("Compte créé avec succès.");
+        next();
+        return;
+      } else {
+        setError(data?.message ?? "autre erreur");
       }
     } catch (err) {
       console.error(err);
