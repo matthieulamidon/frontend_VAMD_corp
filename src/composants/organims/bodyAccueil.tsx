@@ -15,26 +15,11 @@ import Corsair from "../../assets/sponsors/corsair.png";
 
 // Tableau avec logo, lien et classe spécifique
 const sponsors = [
-  {
-    id: "epicgames",
-    src: EpicGames,
-    link: "https://www.epicgames.com",
-    class: "",
-  },
-  {
-    id: "steam",
-    src: Steam,
-    link: "https://store.steampowered.com",
-    class: "",
-  },
+  { id: "epicgames", src: EpicGames, link: "https://www.epicgames.com", class: "" },
+  { id: "steam", src: Steam, link: "https://store.steampowered.com", class: "" },
   { id: "free", src: Free, link: "https://www.free.fr", class: "free" },
   { id: "sco", src: SCO, link: "https://www.sco.fr", class: "" },
-  {
-    id: "legaulois",
-    src: LeGaulois,
-    link: "https://www.legaulois.fr",
-    class: "",
-  },
+  { id: "legaulois", src: LeGaulois, link: "https://www.legaulois.fr", class: "" },
   { id: "rtx", src: RTX, link: "https://www.nvidia.com/rtx", class: "rtx" },
   { id: "msi", src: MSI, link: "https://www.msi.com", class: "" },
   { id: "corsair", src: Corsair, link: "https://www.corsair.com", class: "" },
@@ -45,7 +30,7 @@ const BodyAccueil = () => {
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
-    const speed = 0.5;
+    const speed =0.5;
     const track = trackRef.current;
     if (!track) return;
 
@@ -80,25 +65,21 @@ const BodyAccueil = () => {
           ref={trackRef}
           style={{ transform: `translateX(${position}px)` }}
         >
-          {sponsors
-            .flatMap((sponsor) => [
-              { ...sponsor, _dup: "a", _key: `${sponsor.id}-a` },
-              { ...sponsor, _dup: "b", _key: `${sponsor.id}-b` },
-            ])
-            .map((sponsor) => (
-              <a
-                key={sponsor._key}
-                href={sponsor.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={sponsor.src}
-                  alt={`Sponsor ${sponsor.id}`}
-                  className={`sponsors ${sponsor.class}`}
-                />
-              </a>
-            ))}
+          {[...sponsors, ...sponsors].map((sponsor, index) => (
+            <a
+              key={`${sponsor.id}-${index}`}
+              href={sponsor.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={sponsor.src}
+                alt={`Sponsor ${sponsor.id}`}
+                className={`sponsors ${sponsor.class}`}
+              />
+            </a>
+          ))}
+
         </div>
       </div>
     </div>

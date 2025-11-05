@@ -196,7 +196,7 @@
   }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1080px) {
   .btnnav {
     font-size: 1rem;
     gap: 2rem;
@@ -207,9 +207,18 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 990px) {
+  .btnnav:nth-child(6) {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
   .btnnav:nth-child(5) {
     display: none;
+  }
+  .btnconnexion-sidemenu {
+    width: 90%;
   }
 }
 
@@ -231,6 +240,6 @@
   }
 
   .logoNavbar {
-    height: 50px;
+    height: 40px;
   }
 }
