@@ -16,8 +16,8 @@ const AuthPage: React.FC = () => {
   const [message, setMessage] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-  //const API_URL = "http://localhost:4000/api/auth";
-  const API_URL = "https://backend-vamd-corp.onrender.com/api/auth"; // adapte selon ton backend7
+  const API_URL = "http://localhost:4000/api/auth";
+  //const API_URL = "https://backend-vamd-corp.onrender.com/api/auth"; // adapte selon ton backend7
 
   const handleRegister = async () => {
     try {

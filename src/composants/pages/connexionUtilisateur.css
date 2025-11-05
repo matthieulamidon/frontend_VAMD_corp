@@ -87,6 +87,41 @@
   border-radius: 6px;
 }
 
+/* Style spécifique pour les selects */
+.formulaire-creation select,
+.formulaire-connection select {
+  opacity: 1;
+  color: #dcd6e8;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23dcd6e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.formulaire-creation select:hover,
+.formulaire-connection select:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.formulaire-creation select:focus,
+.formulaire-connection select:focus {
+  outline: none;
+  border-color: rgba(178, 0, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(178, 0, 255, 0.15);
+}
+
+/* Style pour les options dans les selects */
+.formulaire-creation select option,
+.formulaire-connection select option {
+  background-color: #0b1428;
+  color: #dcd6e8;
+  padding: 0.5rem;
+}
+
 .form-actions {
   display: flex;
   gap: 0.5rem;
