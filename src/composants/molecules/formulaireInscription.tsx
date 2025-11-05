@@ -15,7 +15,6 @@ const FormulaireInscription: React.FC = () => {
   const [roleWish, setRoleWish] = useState<string>("visiteur");
   const [desiredGames, setDesiredGames] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [skipBackendChecks, setSkipBackendChecks] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | null>(null);
 
   const [firstName, setFirstName] = useState<string>("");
@@ -97,9 +96,6 @@ const FormulaireInscription: React.FC = () => {
     setError(null);
     return true;
   };
-
-  const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000";
-
   const navigate = useNavigate();
 
   /*
@@ -110,11 +106,7 @@ const FormulaireInscription: React.FC = () => {
     console.log({ pseudo, email, password, dateOfBirth });
     console.log(API_URL);
     if (!validateStep1()) return;
-    if (skipBackendChecks) {
-      setError(null);
-      next();
-      return;
-    }
+
     setLoading(true);
     try {
       const res = await fetch(`${API_URL}/register`, {
@@ -152,13 +144,6 @@ const FormulaireInscription: React.FC = () => {
       setDesiredTeam(`${selectedGame} — Équipe 1`);
     }
     if (roleWish === "visiteur") {
-      if (skipBackendChecks) {
-        setSuccess(
-          "Inscription effectuée (mode test). Vous pouvez vous connecter."
-        );
-        setTimeout(() => navigate("/connexion"), 800);
-        return;
-      }
       setLoading(true);
       try {
         const payload: unknown = {
@@ -207,13 +192,6 @@ const FormulaireInscription: React.FC = () => {
       desiredTeam,
       teamRole,
     };
-    if (skipBackendChecks) {
-      setSuccess(
-        "Inscription réussie (mode test). Vous pouvez vous connecter."
-      );
-      setTimeout(() => navigate("/connexion"), 800);
-      return;
-    }
     setLoading(true);
     try {
       // submit to backend
@@ -240,17 +218,7 @@ const FormulaireInscription: React.FC = () => {
 
   return (
     <div>
-      <div style={{ marginBottom: "0.5rem" }}>
-        <label style={{ fontSize: "0.9rem" }}>
-          <input
-            type="checkbox"
-            checked={skipBackendChecks}
-            onChange={(e) => setSkipBackendChecks(e.target.checked)}
-            style={{ marginRight: "0.5rem" }}
-          />{" "}
-          Bypass backend checks (mode test)
-        </label>
-      </div>
+      
       {success && (
         <output
           className="form-success"

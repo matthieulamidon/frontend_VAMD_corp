@@ -130,13 +130,13 @@
 }
 
 .btn-valider {
-  background: linear-gradient(90deg, #b200ff 0%, #2b9bff 100%);
+   background-color: rgba(187, 0, 255, 0.8);
   color: #fff;
   border: none;
   padding: 0.6rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(43, 155, 255, 0.18);
+  box-shadow: var(--text-glow);
 }
 
 .btn-forgot {
