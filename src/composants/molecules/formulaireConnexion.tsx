@@ -6,17 +6,30 @@ const FormulaireConnexion: React.FC = () => {
   const [pseudo, setPseudo] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const API_URL =
+    (import.meta.env.VITE_BACKEND_LINK ??
+      "https://backend-vamd-corp.onrender.com") + "/api/auth";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: remplacer par appel API ou gestion de state global
-    console.log("Soumission formulaire", { email, password });
-    // reset optionnel
-    // setEmail(''); setPassword('');
+    try {
+      const res = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
+      const data = await res.json();
+      alert(data.message || "Connexion réussie !");
+      if (data.user) console.info(data.user);
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors du login");
+    }
   };
 
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault();
-    // TODO: naviguer vers la page de récupération de mot de passe
     console.log("Mot de passe oublié cliqué");
   };
 

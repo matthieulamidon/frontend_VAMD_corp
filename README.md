@@ -6,7 +6,7 @@ Nous utilisons **Atomic Design** comme base d’organisation :
 
 ```
 src/
-│── components/
+│── composants/
 │   │── atoms/        # Composants de base (Button, Input, Icon…)
 │   │── molecules/    # Combinaisons d’atoms (SearchBar, Card…)
 │   │── organisms/    # Sections complexes (Navbar, Footer, Form…)
@@ -41,7 +41,7 @@ src/
 ## 🌍 Accès au serveur web
 
 Le serveur est déployé ici :  
-👉 [https://jeLeDeploieCeSoirePromi.com](https://jeLeDeploieCeSoirePromi.com)
+👉 [https://frontend-vamd-corp.vercel.app](https://frontend-vamd-corp.vercel.app/)
 
 ⚠️ **Cold Start** (plan gratuit) :
 
@@ -62,7 +62,7 @@ créé un fichier .env avec à l'interieur :
 
 ```bash
 // Environment variables for the application link to the backend server
-BACKEND_LINK=http://localhost:3000
+VITE_BACKEND_LINK=http://localhost:4000
 ```
 
 Pour démarrer le serveur en local :
@@ -90,7 +90,7 @@ npm run preview
 2. Développer vos fonctionnalités.
 3. Commit avec des messages clairs :
    ```bash
-   git commit -m "feat: ajout du composant Button"
+   git commit -m "feat(fonctionnalité): ajout du composant Button"
    ```
 4. Push votre branche :
    ```bash
@@ -112,5 +112,4 @@ npm run preview
 
 ## 👑 Notes finales
 
-je ne sais pas pourquoi je me fait chier a faire un readme car de toute façon vous ne le lirer jamais
-\*lirez avec un Z
+Tu es capables d'accomplire de grande choses. Tu es capables de réaliser tes rêves
