@@ -30,7 +30,6 @@ const FormulaireConnexion: React.FC = () => {
 
   const handleForgotPassword = (e: React.MouseEvent) => {
     e.preventDefault();
-    // TODO: naviguer vers la page de récupération de mot de passe
     console.log("Mot de passe oublié cliqué");
   };
 

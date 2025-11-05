@@ -127,13 +127,6 @@ const FormulaireInscription: React.FC = () => {
         credentials: "include",
       });
       const data = await res.json().catch(() => ({}));
-      /*
-      if (res.ok && data?.available) {
-        setError(null);
-        next();
-      } else {
-        setError(data?.message ?? "Pseudo ou email déjà utilisé.");
-      }*/
       console.log({ res, data });
       if (data?.token) {
         setError("Compte créé avec succès.");

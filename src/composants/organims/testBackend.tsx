@@ -1,3 +1,8 @@
+/*
+ * c'est une page de test pour l'authentification avec JWT et cookies httpOnly
+ * elle permet de tester toutes les fonctionnalités du backend facilement sans devoir créé 500 autres fichier de test
+ */
+
 import React, { useState } from "react";
 
 interface UserInfo {
@@ -17,9 +22,9 @@ const AuthPage: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   const API_URL =
-    import.meta.env.BASE_URL + "/api/auth" || "http://localhost:4000/api/auth";
-  //const API_URL = "https://backend-vamd-corp.onrender.com/api/auth"; // adapte selon ton backend7
-  console.log("API_URL:", API_URL);
+    import.meta.env.VITE_BACKEND_LINK + "/api/auth" ||
+    "http://localhost:4000/api/auth";
+  console.log("API_URL:", import.meta.env.VITE_BACKEND_LINK);
 
   const handleRegister = async () => {
     try {
