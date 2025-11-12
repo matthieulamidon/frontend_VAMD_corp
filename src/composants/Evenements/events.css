@@ -1,0 +1,67 @@
+.body-events {
+    padding-top: 88px;
+    width: 100%;
+    position: relative;
+    background-color: black;
+    color: white;
+}
+
+.filter-games-events{
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-filter-games-events {
+    width: 70%;
+    height: 65%;
+    border-radius: 20px;
+    background-color: rgb(23, 0, 39);
+    border: 2px solid rgba(217, 113, 255, 0.8);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.filter-tous-games-events {
+    padding: 5px 8px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: rgb(14, 0, 24);
+    transition: scale 0.2s, background-color 0.2s;
+}
+
+.filter-tous-games-events:hover {
+    background-color: rgb(44, 0, 73);
+    scale: 1.05;
+    transition: scale 0.2s, background-color 0.2s;
+}
+
+.filter-logo-games-events{
+    height: 70%;
+    background-color: rgb(8, 0, 14);
+    border-radius: 7px;
+}
+
+
+.filter-logo-games-events:hover{
+    border-radius: 5px;
+    background-color: rgb(10, 0, 18);
+    scale: 1.1;
+}
+
+.game-logo-filter-img{
+    height: 100%;
+    border-radius: 7px;
+}
+
+.game-logo-filter-img.pokemon {
+    width: 40%;
+    height: auto;
+}

@@ -18,7 +18,7 @@ const sponsors = [
   { id: "epicgames", src: EpicGames, link: "https://www.epicgames.com", class: "" },
   { id: "steam", src: Steam, link: "https://store.steampowered.com", class: "" },
   { id: "free", src: Free, link: "https://www.free.fr", class: "free" },
-  { id: "sco", src: SCO, link: "https://www.sco.fr", class: "" },
+  { id: "sco", src: SCO, link: "https://angers-sco.fr", class: "" },
   { id: "legaulois", src: LeGaulois, link: "https://www.legaulois.fr", class: "" },
   { id: "rtx", src: RTX, link: "https://www.nvidia.com/rtx", class: "rtx" },
   { id: "msi", src: MSI, link: "https://www.msi.com", class: "" },
