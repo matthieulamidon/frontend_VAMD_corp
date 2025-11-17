@@ -4,6 +4,7 @@ import { useState } from "react";
 // Images
 import LogoNavbar from "../../assets/logo_vamd.png";
 import ToggleHamburger from "../../assets/togglehamburger.png";
+import VisuelProfil from "../molecules/VisuelProfile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,16 +43,12 @@ const Navbar = () => {
           </a>
         </div>
         <div className="navbar-right">
-          <a href="/connexion" className="btnconnexion">
-            Connectez-vous
-          </a>
+          <VisuelProfil />
         </div>
       </nav>
 
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
-        <a href="/connexion" className="btnconnexion-sidemenu">
-          Connexion
-        </a>
+        <VisuelProfil />
         <a href="/" onClick={toggleMenu}>
           Accueil
         </a>
