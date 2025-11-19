@@ -7,6 +7,7 @@ import AccueilJoueur from "../composants/pages/AccueilJoueur";
 
 import { ProtectedRoute } from "./ProtectedRoute";
 import PageAdmin from "../composants/pages/PageAdmin";
+import Postulation from "../composants/pages/postulation";
 
 //requiredRole="JOUEUR"
 
@@ -18,6 +19,14 @@ const router = createBrowserRouter([
   {
     path: "/connexion",
     element: <ConnexionUtilisateur />,
+  },
+  {
+    path: "/postulation",
+    element: (
+      <ProtectedRoute requiredRole="USER">
+        <Postulation />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/auth-test",

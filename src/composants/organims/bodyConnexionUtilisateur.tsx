@@ -4,13 +4,13 @@ import "../pages/connexionUtilisateur.css";
 import FormulaireInscription from "../molecules/formulaireInscription";
 import FormulaireConnexion from "../molecules/formulaireConnexion";
 
-const BodyConnectionUtilisateur: React.FC = () => {
+const BodyconnexionUtilisateur: React.FC = () => {
   // 0 = inscription active (centre), 1 = connexion active (centre)
   const [active, setActive] = useState<number>(0);
 
   return (
-    <div className="body-connection-utilisateur">
-      <div className="subtitle-connection-utilisateur">
+    <div className="body-connexion-utilisateur">
+      <div className="subtitle-connexion-utilisateur">
         Connecte-toi ou crée un compte pour continuer.
       </div>
 
@@ -37,4 +37,4 @@ const BodyConnectionUtilisateur: React.FC = () => {
   );
 };
 
-export default BodyConnectionUtilisateur;
+export default BodyconnexionUtilisateur;

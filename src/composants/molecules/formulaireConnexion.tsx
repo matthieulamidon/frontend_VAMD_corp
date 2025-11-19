@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "../pages/connexionUtilisateur.css";
 
 const FormulaireConnexion: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [pseudo, setPseudo] = useState<string>("");
+  const [emailOrPseudo, setEmailOrpseudo] = useState<string>(""); 
   const [password, setPassword] = useState<string>("");
 
   const API_URL =
@@ -16,7 +15,7 @@ const FormulaireConnexion: React.FC = () => {
       const res = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ emailOrPseudo, password }),
         credentials: "include",
       });
       const data = await res.json();
@@ -35,29 +34,23 @@ const FormulaireConnexion: React.FC = () => {
 
   return (
     <form
-      className="formulaire-connection"
+      className="formulaire-connexion"
       onSubmit={handleSubmit}
       aria-label="Formulaire de connexion"
     >
       <h2>Connecte-toi à ton compte</h2>
 
-      <label htmlFor="email">Adresse e-mail</label>
+      <label htmlFor="emailOrPseudo">Adresse e-mail ou Pseudo</label>
       <input
-        id="email"
-        name="email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        id="emailOrPseudo"
+        name="emailOrPseudo"
+        type="emailOrPseudo"
+        value={emailOrPseudo}
+        onChange={(e) => setEmailOrpseudo(e.target.value)}
         required
         placeholder="exemple@domaine.com"
       />
-      <label htmlFor="pseudo">pseudo</label>
-      <input
-        id="pseudo"
-        name="pseudo"
-        value={pseudo}
-        onChange={(e) => setPseudo(e.target.value)}
-      />
+      
 
       <label htmlFor="password">Mot de passe</label>
       <input
