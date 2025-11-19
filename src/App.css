@@ -4,6 +4,55 @@
   text-align: center;
 }
 
+:root {
+  --couleur-fond-tournoi: rgb(23, 0, 39);
+  --couleur-fond-tournoi-blue: rgb(5, 0, 60);
+  --couleur-fond-tournoi-lightblue: rgb(40, 32, 130);
+  --couleur-bordure-tournoi: rgba(217, 113, 255, 0.8);
+  --couleur-bordure-tournoi-blue: rgba(113, 113, 255, 0.8);
+
+  --degrade-transparent-lateral: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--couleur-fond-tournoi) 10%,
+    var(--couleur-fond-tournoi) 90%,
+    transparent 100%
+  );
+
+  --degrade-transparent-lateral-blue: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--couleur-fond-tournoi-blue) 10%,
+    var(--couleur-fond-tournoi-blue) 90%,
+    transparent 100%
+  );
+
+  --degrade-transparent-lateral-lightblue: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--couleur-fond-tournoi-lightblue) 20%,
+    var(--couleur-fond-tournoi-lightblue) 80%,
+    transparent 100%
+  );
+
+  --degrade-border-lateral: linear-gradient(
+    to right,
+    rgba(217, 113, 255, 0) 0%,
+    var(--couleur-bordure-tournoi) 10%,
+    var(--couleur-bordure-tournoi) 90%,
+    rgba(217, 113, 255, 0) 100%
+  );
+
+  --degrade-border-lateral-blue: linear-gradient(
+    to right,
+    rgba(217, 113, 255, 0) 0%,
+    var(--couleur-bordure-tournoi-blue) 10%,
+    var(--couleur-bordure-tournoi-blue) 90%,
+    rgba(217, 113, 255, 0) 100%
+  );
+}
+
+
 .navbar {
   background-color: rgb(9, 0, 15);
   padding: 1rem 2rem;
