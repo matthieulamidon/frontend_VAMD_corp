@@ -4,6 +4,7 @@ import Accueil from "../accueil";
 import ConnexionUtilisateur from "../composants/pages/connexionUtilisateur";
 import AuthPage from "../composants/organims/testBackend";
 import Calendrier from "../composants/calendar/calendrier";
+
 import Evenements from "../composants/Evenements/evenements";
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     element: <Calendrier />,
   },
   {
-    path: "/evenements",
+   path: "/evenements",
     element: <Evenements />,
   },
 ]);
