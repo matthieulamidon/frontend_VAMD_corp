@@ -3,6 +3,7 @@ import "../App.css";
 import Accueil from "../accueil";
 import ConnexionUtilisateur from "../composants/pages/connexionUtilisateur";
 import AuthPage from "../composants/organims/testBackend";
+import Postulation from "../composants/pages/postulation";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/connexion",
     element: <ConnexionUtilisateur />,
+  },
+  {
+    path: "/postulation",
+    element: <Postulation />,
   },
   {
     path: "/auth-test",

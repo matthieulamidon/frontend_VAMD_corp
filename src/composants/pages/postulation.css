@@ -1,0 +1,149 @@
+.body-postulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem 2rem 2rem 2rem;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 0, 28, 0.95) 0%,
+    rgba(12, 6, 40, 0.95) 100%
+  );
+  color: #fff;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.formulaire-creation,
+.formulaire-connection {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  min-width: 300px;
+  max-width: 900px;
+  background: linear-gradient(180deg, #0b1428 0%, #101428 100%);
+  color: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(187, 0, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  padding: 2rem;
+}
+
+.formulaire-creation label,
+.formulaire-connection label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #dcd6e8;
+}
+
+.formulaire-creation h2,
+.formulaire-connection h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.formulaire-creation input,
+.formulaire-connection input,
+.formulaire-creation select,
+.formulaire-connection select {
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  border-radius: 6px;
+}
+
+/* Style spécifique pour les selects */
+.formulaire-creation select,
+.formulaire-connection select {
+  opacity: 1;
+  color: #dcd6e8;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23dcd6e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.formulaire-creation select:hover,
+.formulaire-connection select:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.formulaire-creation select:focus,
+.formulaire-connection select:focus {
+  outline: none;
+  border-color: rgba(178, 0, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(178, 0, 255, 0.15);
+}
+
+/* Style pour les options dans les selects */
+.formulaire-creation select option,
+.formulaire-connection select option {
+  background-color: #0b1428;
+  color: #dcd6e8;
+  padding: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-valider {
+  background-color: rgba(187, 0, 255, 0.8);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: var(--text-glow);
+}
+
+.btn-valider:hover {
+  background-color: rgba(187, 0, 255, 1);
+}
+
+.btn-valider:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-forgot {
+  background: transparent;
+  border: none;
+  color: #bda3e6;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.form-error {
+  color: #ffb4b4;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-success {
+  color: #b8ffbf;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .body-postulation {
+    padding: 6rem 1rem 2rem 1rem;
+  }
+
+  .formulaire-creation,
+  .formulaire-connection {
+    width: 100%;
+    max-width: 480px;
+  }
+}
