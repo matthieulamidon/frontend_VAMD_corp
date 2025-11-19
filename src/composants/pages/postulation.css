@@ -13,10 +13,10 @@
   min-height: 100vh;
 }
 
-.formulaire-creation,
-.formulaire-connection {
+.body-postulation .formulaire-creation {
   display: flex;
   flex-direction: column;
+  /* largeur spécifique à la page de postulation uniquement */
   width: 600px;
   min-width: 300px;
   max-width: 900px;
@@ -28,25 +28,21 @@
   padding: 2rem;
 }
 
-.formulaire-creation label,
-.formulaire-connection label {
+.body-postulation .formulaire-creation label {
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #dcd6e8;
 }
 
-.formulaire-creation h2,
-.formulaire-connection h2 {
+.body-postulation .formulaire-creation h2 {
   margin-top: 0;
   font-size: 1.2rem;
   color: #fff;
   margin-bottom: 0.5rem;
 }
 
-.formulaire-creation input,
-.formulaire-connection input,
-.formulaire-creation select,
-.formulaire-connection select {
+.body-postulation .formulaire-creation input,
+.body-postulation .formulaire-creation select {
   padding: 0.6rem;
   margin-top: 0.25rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -55,9 +51,7 @@
   border-radius: 6px;
 }
 
-/* Style spécifique pour les selects */
-.formulaire-creation select,
-.formulaire-connection select {
+.body-postulation .formulaire-creation select {
   opacity: 1;
   color: #dcd6e8;
   background: rgba(255, 255, 255, 0.05);
@@ -69,22 +63,19 @@
   background-position: right 0.5rem center;
 }
 
-.formulaire-creation select:hover,
-.formulaire-connection select:hover {
+.body-postulation .formulaire-creation select:hover {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.formulaire-creation select:focus,
-.formulaire-connection select:focus {
+.body-postulation .formulaire-creation select:focus {
   outline: none;
   border-color: rgba(178, 0, 255, 0.5);
   box-shadow: 0 0 0 2px rgba(178, 0, 255, 0.15);
 }
 
 /* Style pour les options dans les selects */
-.formulaire-creation select option,
-.formulaire-connection select option {
+.body-postulation .formulaire-creation select option {
   background-color: #0b1428;
   color: #dcd6e8;
   padding: 0.5rem;
@@ -141,8 +132,7 @@
     padding: 6rem 1rem 2rem 1rem;
   }
 
-  .formulaire-creation,
-  .formulaire-connection {
+  .body-postulation .formulaire-creation {
     width: 100%;
     max-width: 480px;
   }
