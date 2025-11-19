@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import "../pages//postulation.css";
-import FormulaireInscription3 from "../molecules/formulairePostulation";
+import FormulairePostulation from "../molecules/formulairePostulation";
 
 const BodyPostulation: React.FC = () => {
 
@@ -78,7 +78,7 @@ const BodyPostulation: React.FC = () => {
     }
     setLoading(true);
     try {
-      // submit to backend
+      // envoie au backend
       const res = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -104,7 +104,7 @@ const BodyPostulation: React.FC = () => {
         <div className="body-postulation">
         {success && <div className="form-success">{success}</div>}
         {error && <div className="form-error">{error}</div>}
-          <FormulaireInscription3
+          <FormulairePostulation
           firstName={firstName}
           setFirstName={setFirstName}
           lastName={lastName}

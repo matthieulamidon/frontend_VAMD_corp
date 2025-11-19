@@ -34,7 +34,7 @@ const FormulaireConnexion: React.FC = () => {
 
   return (
     <form
-      className="formulaire-connection"
+      className="formulaire-connexion"
       onSubmit={handleSubmit}
       aria-label="Formulaire de connexion"
     >

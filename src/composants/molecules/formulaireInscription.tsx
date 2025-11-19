@@ -13,7 +13,6 @@ const FormulaireInscription: React.FC = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  // single-step flow: account created at the end of step 1 with role 'visiteur'
 
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
@@ -48,7 +47,7 @@ const FormulaireInscription: React.FC = () => {
   const navigate = useNavigate();
 
   /*
-   * Single-step: create account at the end of this form. Default role = 'visiteur'
+   * Créer le compte à la fin de ce formulaire. Rôle par défaut = 'visiteur'
    */
   const handleCreateAccount = async () => {
     if (!validateStep1()) return;
@@ -56,7 +55,7 @@ const FormulaireInscription: React.FC = () => {
     setLoading(true);
     try {
       const payload: any = {
-        // backend expects 'pseudo' (see testBackend.tsx), not 'username'
+        // le backend attend 'pseudo' (voir testBackend.tsx), pas 'username'
         pseudo: pseudo || email,
         email,
         password,
@@ -161,7 +160,7 @@ const FormulaireInscription: React.FC = () => {
 
      
 
-      {/* single-step form only; post-inscription flow handled above */}
+  {/* Formulaire en une seule étape ; le flux post-inscription est géré ci-dessus */}
     </div>
   );
 };

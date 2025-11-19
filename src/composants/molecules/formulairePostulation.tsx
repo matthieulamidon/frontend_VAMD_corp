@@ -172,7 +172,7 @@ const FormulairePostulation: React.FC<Props> = ({
         return <input id="teamRole" value={teamRole || "joueur"} readOnly />;
       })()}
 
-      {/* keep teamRole defaults in sync when desiredTeam changes (handled in useEffect above) */}
+  {/* maintenir la synchronisation des valeurs par défaut de teamRole lorsque desiredTeam change (géré dans le useEffect ci-dessus) */}
 
       <div className="form-actions">
         <button type="submit" className="btn-valider" disabled={!!loading}>
