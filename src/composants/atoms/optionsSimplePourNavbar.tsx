@@ -38,8 +38,8 @@ export function OptionSimplePourNavbar() {
       content = (
         <div>
           {/* TODO : a linker */}
-          <a href="/profile" className="vp-menu-item">
-            postuler pour rejoindre une équipe
+          <a href="/postuler" className="vp-menu-item">
+            Postuler
           </a>
         </div>
       );

@@ -1,8 +1,10 @@
+import AdminEquipePage from "../organims/AdminEquipePage";
+
 // <Navbar />
 function PageAdmin() {
   return (
     <>
-      <div>Ceci est une page Admin</div>
+      <AdminEquipePage />
     </>
   );
 }

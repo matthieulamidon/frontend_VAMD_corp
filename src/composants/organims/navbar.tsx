@@ -5,6 +5,7 @@ import { useState } from "react";
 import LogoNavbar from "../../assets/logo_vamd.png";
 import ToggleHamburger from "../../assets/togglehamburger.png";
 import VisuelProfil from "../molecules/VisuelProfile";
+import OptionSimplePourNavbar from "../atoms/optionsSimplePourNavbar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,9 +30,7 @@ const Navbar = () => {
             <img src={LogoNavbar} className="logoNavbar" alt="VAMD" />
           </a>
 
-          <a href="/" className="btnnav">
-            Accueil
-          </a>
+          <OptionSimplePourNavbar />
           <a href="/calendrier" className="btnnav">
             Calendrier
           </a>
