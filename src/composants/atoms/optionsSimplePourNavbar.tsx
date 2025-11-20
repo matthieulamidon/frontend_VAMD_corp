@@ -1,4 +1,5 @@
 import { useAuth } from "../../contexte/useAuth";
+import "../../App.css";
 
 export function OptionSimplePourNavbar() {
   const { role } = useAuth();
@@ -9,7 +10,7 @@ export function OptionSimplePourNavbar() {
     case "ADMIN":
       content = (
         <div>
-          <a href="/admin" className="vp-menu-item">
+          <a href="/admin" className="btnnav">
             Panel Admin
           </a>
         </div>
@@ -19,7 +20,7 @@ export function OptionSimplePourNavbar() {
       content = (
         <div>
           {/* TODO : a linker */}
-          <a href="/profile" className="vp-menu-item">
+          <a href="/profile" className="btnnav">
             Portail Coach
           </a>
         </div>
@@ -28,7 +29,7 @@ export function OptionSimplePourNavbar() {
     case "JOUEUR":
       content = (
         <div>
-          <a href="/portail-joueur" className="vp-menu-item">
+          <a href="/portail-joueur" className="btnnav">
             Portail Joueur
           </a>
         </div>
@@ -38,7 +39,7 @@ export function OptionSimplePourNavbar() {
       content = (
         <div>
           {/* TODO : a linker */}
-          <a href="/postuler" className="vp-menu-item">
+          <a href="/postulation" className="btnnav">
             Postuler
           </a>
         </div>

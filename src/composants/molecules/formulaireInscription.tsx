@@ -41,46 +41,6 @@ const FormulaireInscription: React.FC = () => {
     return true;
   };
 
-  const validateStep2 = () => {
-    if (!roleWish) {
-      setError("Le rôle souhaité est requis.");
-      return false;
-    }
-    if ((roleWish === "joueur" || roleWish === "coach") && !desiredGames) {
-      setError(
-        "Veuillez choisir un jeu si vous souhaitez être joueur ou coach."
-      );
-      return false;
-    }
-    setError(null);
-    return true;
-  };
-
-  const validateStep3 = () => {
-    if (!firstName.trim()) {
-      setError("Le prénom est requis.");
-      return false;
-    }
-    if (!lastName.trim()) {
-      setError("Le nom est requis.");
-      return false;
-    }
-    if (!sex) {
-      setError("Le sexe est requis.");
-      return false;
-    }
-    if (!desiredTeam) {
-      setError("L'équipe souhaitée est requise.");
-      return false;
-    }
-    if (desiredTeam && !teamRole) {
-      setError("Le rôle dans l'équipe est requis.");
-      return false;
-    }
-    setError(null);
-    return true;
-  };
-
   const navigate = useNavigate();
 
   /*
@@ -91,7 +51,14 @@ const FormulaireInscription: React.FC = () => {
 
     setLoading(true);
     try {
-      const payload: any = {
+      interface RegisterPayload {
+        pseudo: string;
+        email: string;
+        password: string;
+        role: string;
+        date_naissance: string;
+      }
+      const payload: RegisterPayload = {
         // le backend attend 'pseudo' (voir testBackend.tsx), pas 'username'
         pseudo: pseudo || email,
         email,
@@ -106,7 +73,7 @@ const FormulaireInscription: React.FC = () => {
         credentials: "include",
       });
       const data = await res.json().catch(() => ({}));
-      if (res.ok) {
+      if (res.status === 201) {
         setSuccess("Compte créé avec succès. Vous pouvez vous connecter.");
         setTimeout(() => navigate("/connexion"), 800);
         return;

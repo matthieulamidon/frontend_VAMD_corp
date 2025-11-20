@@ -37,9 +37,6 @@ const Navbar = () => {
           <a href="/événements" className="btnnav">
             Événements
           </a>
-          <a href="/postulation" className="btnnav">
-            Postuler
-          </a>
         </div>
         <div className="navbar-right">
           <VisuelProfil />
@@ -56,9 +53,6 @@ const Navbar = () => {
         </a>
         <a href="/événements" onClick={toggleMenu}>
           Événements
-        </a>
-        <a href="/postulation" onClick={toggleMenu}>
-          Postuler
         </a>
         <div className="bottom-sidemenu"></div>
       </div>
