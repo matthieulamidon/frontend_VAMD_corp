@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../contexte/useAuth";
 import "../styles/VisuelProfile.css";
+import avatar from "../../assets/avatar/avatar_par_default.png";
 import { useNavigate } from "react-router-dom";
 
 export function VisuelProfil() {
@@ -14,11 +15,7 @@ export function VisuelProfil() {
   return (
     <div className="vp-container">
       {isLogged ? (
-        <img
-          src="/src/assets/avatar/avatar-par-default.png"
-          alt="avatar"
-          className="vp-avatar"
-        />
+        <img src={avatar} alt="avatar" className="vp-avatar" />
       ) : (
         <div></div>
       )}
