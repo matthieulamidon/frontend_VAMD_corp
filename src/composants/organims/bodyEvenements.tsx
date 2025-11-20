@@ -1,5 +1,5 @@
 import "../styles/App.css";
-import "../styles/Accueil.css";
+import "../styles/accueil.css";
 import "../styles/events.css";
 import TournoiCard from "../molecules/TournoiCard";
 
