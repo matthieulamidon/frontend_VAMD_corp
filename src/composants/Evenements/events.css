@@ -1,0 +1,357 @@
+.body-events {
+    padding-top: 88px;
+    width: 100%;
+    position: relative;
+    background-color: black;
+    color: white;
+}
+
+.filter-games-events {
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-filter-games-events {
+    width: 70%;
+    height: 65%;
+    border-radius: 20px;
+    background-color: rgb(23, 0, 39);
+    border: 2px solid rgba(217, 113, 255, 0.8);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.filter-tous-games-events {
+    padding: 5px 8px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: rgb(14, 0, 24);
+    transition: scale 0.2s, background-color 0.2s;
+}
+
+.filter-tous-games-events:hover {
+    background-color: rgb(44, 0, 73);
+    scale: 1.05;
+    transition: scale 0.2s, background-color 0.2s;
+}
+
+.filter-logo-games-events {
+    height: 70%;
+    background-color: rgb(8, 0, 14);
+    border-radius: 7px;
+}
+
+
+.filter-logo-games-events:hover {
+    border-radius: 5px;
+    background-color: rgb(10, 0, 18);
+    scale: 1.1;
+}
+
+.game-logo-filter-img {
+    height: 100%;
+    border-radius: 7px;
+}
+
+.body-content-events {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 73%;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Partie gauche */
+.body-left-events {
+    width: 60%;
+}
+
+/* Partie droite */
+.body-right-events {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 42px;
+    width: 40%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text-title-events {
+    text-align: left;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.rubrique-partie-tournois-title-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 95%;
+    height: 50px;
+
+    background: var(--degrade-transparent-lateral);
+    color: white;
+    font-weight: bold;
+
+    border-top: 2px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-image: var(--degrade-border-lateral) 1;
+    border-image-slice: 1;
+}
+
+.rubrique-partie-tournois-subtitles-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto 20px auto;
+    margin-top: 30px;
+}
+
+
+.rubrique-partie-tournois-subtitle-body {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: calc(100% / 3);
+    border-image: var(--degrade-border-lateral-blue) 1;
+    background: var(--degrade-transparent-lateral-blue);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, scale 0.2s ease;
+    margin-bottom: 10px;
+}
+
+.rubrique-partie-tournois-subtitle-body:hover {
+    scale: 1.02;
+    opacity: 1;
+    transition: opacity 0.2s ease, scale 0.2s ease;
+}
+
+.body-tournois-en-cours {
+    height: auto;
+    margin: 20px auto 20px auto;
+    background-color: rgba(29, 18, 89, 0.735);
+    border-radius: 10px;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-tournoi {
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.img-logo-game-tournoi {
+    width: 30px;
+    height: auto;
+}
+
+.separation {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    border-radius: 1px;
+}
+
+.content-tournoi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    background: var(--degrade-transparent-lateral-lightblue);
+}
+
+.content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% / 2 - 5%);
+}
+
+.content-col:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.content-col:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.logo-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    padding: 20px;
+}
+
+.img-logo-tournoi {
+    width: 100%;
+    height: auto;
+}
+
+.ekips-select-event{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    gap: 15px;
+    width: 100%;
+}
+
+.img-logo-ekips-tournoi {
+    height: 25px;
+    width: auto;
+}
+
+/* Partie droite Evenements */
+
+.paris-celsius {
+    width: 100%;
+    background-color: black;
+    border-radius: 15px;
+    border: 2px solid var(--couleur-bordure-tournoi);
+    transition: all 0.2s;
+}
+
+.paris-celsius:hover{
+    scale: 1.005;
+    box-shadow: var(--text-glow);
+    transition: all 0.2s;
+}
+
+.txt-betway{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    font-style: italic;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 15px;
+    padding: 15px 15px 0px 15px;
+}
+
+.img-betway{
+    width: 90%;
+    padding-bottom: 0;
+}
+
+.match-du-jour{
+    width: 100%;
+    background-color: black;
+    border-radius: 15px;
+    background-color: rgba(76, 57, 170, 0.735);
+    border: 2px solid var(--couleur-bordure-tournoi-blue);
+    transition: all 0.2s;
+    padding-bottom: 20px;
+}
+
+.txt-match-du-jour{
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    padding: 0px 15px 15px 15px;
+}
+
+
+.content-match-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.hour-col-matchday {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    padding: 20px;
+    background-color: rgba(29, 18, 89, 0.735);
+    border-radius: 15px;
+}
+
+.img-logo-matchday {
+    width: 50px;
+    height: auto;
+    border-radius: 10px;
+}
+.teamsecret{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.content-col-matchday {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 3);
+}
+
+
+
+
+
+
+
+
+@media (max-width: 990px) {
+  .txt-betway{
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 830px) {
+  .game-logo-filter-img{
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .txt-betway{
+    font-size: 1rem;
+  }
+  .body-content-events {
+    width: 90%;
+  }
+}

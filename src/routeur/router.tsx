@@ -52,6 +52,14 @@ const router = createBrowserRouter([
     path: "*",
     element: <Accueil />,
   },
+  {
+    path: "/calendrier",
+    element: <Calendrier />,
+  },
+  {
+    path: "/evenements",
+    element: <Evenements />,
+  },
 ]);
 
 export default router;

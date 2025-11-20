@@ -34,7 +34,7 @@ const Navbar = () => {
           <a href="/calendrier" className="btnnav">
             Calendrier
           </a>
-          <a href="/événements" className="btnnav">
+          <a href="/evenements" className="btnnav">
             Événements
           </a>
         </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
         <a href="/calendrier" onClick={toggleMenu}>
           Calendrier
         </a>
-        <a href="/événements" onClick={toggleMenu}>
+        <a href="/evenements" onClick={toggleMenu}>
           Événements
         </a>
         <div className="bottom-sidemenu"></div>
