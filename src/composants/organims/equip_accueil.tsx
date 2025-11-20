@@ -1,5 +1,5 @@
-import "../../App.css";
-import "../../accueil.css";
+import "../styles/App.css";
+import "../styles/accueil.css";
 
 // Images
 import VAMD_ekip from "../../assets/equip/equipe_projet_advm.png";

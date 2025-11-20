@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
 const FormulaireInscription: React.FC = () => {
   const [pseudo, setPseudo] = useState<string>("");
   const [dateOfBirth, setDateOfBirth] = useState<string>("");

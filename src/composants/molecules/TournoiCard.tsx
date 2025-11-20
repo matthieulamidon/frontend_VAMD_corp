@@ -19,14 +19,18 @@ const TournoiCard: React.FC<TournoiCardProps> = ({
   orgLogo,
   location,
   prize,
-  ekips
+  ekips,
 }) => {
   return (
     <div className="body-tournois-en-cours">
       <div className="top-row">
         <div className="title-tournoi">{title}</div>
         <div className="logo-jeu-tournoi">
-          <img src={gameLogo} alt="game" className="game-logo-filter-img img-logo-game-tournoi" />
+          <img
+            src={gameLogo}
+            alt="game"
+            className="game-logo-filter-img img-logo-game-tournoi"
+          />
         </div>
       </div>
 
@@ -35,7 +39,9 @@ const TournoiCard: React.FC<TournoiCardProps> = ({
       <div className="content-tournoi">
         <div className="content-col">
           <div className="content-tournoi-time">Date de début: {startDate}</div>
-          <div className="content-tournoi-limittime">Date d'achèvement: {endDate}</div>
+          <div className="content-tournoi-limittime">
+            Date d'achèvement: {endDate}
+          </div>
         </div>
 
         <div className="content-col logo-col">
@@ -52,7 +58,12 @@ const TournoiCard: React.FC<TournoiCardProps> = ({
 
       <div className="ekips-select-event">
         {ekips.map((logo: string, index: number) => (
-          <img key={index} src={logo} alt="equipe" className="img-logo-ekips-tournoi" />
+          <img
+            key={index}
+            src={logo}
+            alt="equipe"
+            className="img-logo-ekips-tournoi"
+          />
         ))}
       </div>
     </div>

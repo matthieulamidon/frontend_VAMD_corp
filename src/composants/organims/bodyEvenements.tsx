@@ -1,8 +1,7 @@
-import '../../App.css';
-import '../../Accueil.css';
-import './events.css';
-import TournoiCard from "./TournoiCard";
-
+import "../styles/App.css";
+import "../styles/Accueil.css";
+import "../styles/events.css";
+import TournoiCard from "../molecules/TournoiCard";
 
 // Images
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
@@ -26,16 +25,12 @@ import Teamsecret from "../../assets/equip/logos_tournois/logo_teamsecret.png";
 import Logo_Apagnan from "../../../public/logo_vamd_icon.png";
 import Logo_Betway from "../../assets/logo_betway.png";
 
-
-
 const BodyEvenement = () => {
   return (
     <div className="body-events">
       <div className="filter-games-events">
         <div className="body-filter-games-events">
-          <div className="filter-tous-games-events">
-            TOUS
-          </div>
+          <div className="filter-tous-games-events">TOUS</div>
           <div className="filter-logo-games-events">
             <img src={Logo_Valo} alt="Valo" className="game-logo-filter-img" />
           </div>
@@ -43,28 +38,46 @@ const BodyEvenement = () => {
             <img src={Logo_LoL} alt="Lol" className="game-logo-filter-img" />
           </div>
           <div className="filter-logo-games-events">
-            <img src={Logo_Fortnite} alt="Fortnite" className="game-logo-filter-img" />
+            <img
+              src={Logo_Fortnite}
+              alt="Fortnite"
+              className="game-logo-filter-img"
+            />
           </div>
           <div className="filter-logo-games-events">
             <img src={Logo_Fc26} alt="Fc26" className="game-logo-filter-img" />
           </div>
           <div className="filter-logo-games-events">
-            <img src={Logo_Pokemon} alt="Pokemon" className="game-logo-filter-img pokemon" />
+            <img
+              src={Logo_Pokemon}
+              alt="Pokemon"
+              className="game-logo-filter-img pokemon"
+            />
           </div>
           <div className="filter-logo-games-events">
-            <img src={Logo_RocketL} alt="Rocket League" className="game-logo-filter-img" />
+            <img
+              src={Logo_RocketL}
+              alt="Rocket League"
+              className="game-logo-filter-img"
+            />
           </div>
           <div className="filter-logo-games-events">
-            <img src={Logo_OW} alt="OverWatch" className="game-logo-filter-img" />
+            <img
+              src={Logo_OW}
+              alt="OverWatch"
+              className="game-logo-filter-img"
+            />
           </div>
         </div>
-      </div >
+      </div>
 
       <div className="body-content-events">
         <div className="body-left-events">
           {/* contenu gauche */}
-          <div className='text-title-events'>VAMD.corp / Calendrier des événements et des tournois</div>
-          <div className='rubrique-partie-tournois-title-body'>
+          <div className="text-title-events">
+            VAMD.corp / Calendrier des événements et des tournois
+          </div>
+          <div className="rubrique-partie-tournois-title-body">
             TOURNOIS ESPORT
           </div>
           <div className="rubrique-partie-tournois-subtitles-container">
@@ -79,7 +92,7 @@ const BodyEvenement = () => {
             </div>
           </div>
 
-          <div className='rubrique-partie-tournois-title-body'>
+          <div className="rubrique-partie-tournois-title-body">
             TOURNOIS EN COURS
           </div>
 
@@ -91,7 +104,13 @@ const BodyEvenement = () => {
             orgLogo={Blast}
             location="Manchester"
             prize="$863,170"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
           <TournoiCard
@@ -102,10 +121,16 @@ const BodyEvenement = () => {
             orgLogo={GVC}
             location="China"
             prize="$60,438"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
-          <div className='rubrique-partie-tournois-title-body'>
+          <div className="rubrique-partie-tournois-title-body">
             TOURNOIS À VENIR
           </div>
 
@@ -117,7 +142,13 @@ const BodyEvenement = () => {
             orgLogo={GC}
             location="South Korea"
             prize="$500,000"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
           <TournoiCard
@@ -128,7 +159,13 @@ const BodyEvenement = () => {
             orgLogo={PkmIntern}
             location="Brazil"
             prize="$240,000"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
           <TournoiCard
@@ -139,10 +176,16 @@ const BodyEvenement = () => {
             orgLogo={Nova}
             location="France, Paris"
             prize="$11,159"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
-          <div className='rubrique-partie-tournois-title-body'>
+          <div className="rubrique-partie-tournois-title-body">
             TOURNOIS PASSÉS
           </div>
 
@@ -154,7 +197,13 @@ const BodyEvenement = () => {
             orgLogo={MCC}
             location="Online"
             prize="$9,400 USD"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
 
           <TournoiCard
@@ -165,40 +214,62 @@ const BodyEvenement = () => {
             orgLogo={Saudi}
             location="Saudi Arabia"
             prize="$32,024"
-            ekips={[Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan, Logo_Apagnan]}
+            ekips={[
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+              Logo_Apagnan,
+            ]}
           />
         </div>
 
-
         <div className="body-right-events">
           {/* contenu droite */}
-          <a className='paris-celsius' href="https://new.betway.co.za" target="_blank" rel="noopener noreferrer">
-            <div className='txt-betway' >Mets un pari. <br />  Ta dignité ? Elle respawn.</div>
+          <a
+            className="paris-celsius"
+            href="https://new.betway.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="txt-betway">
+              Mets un pari. <br /> Ta dignité ? Elle respawn.
+            </div>
             <img src={Logo_Betway} alt="BetWay" className="img-betway" />
           </a>
 
-          <div className='rubrique-partie-tournois-title-body'>
+          <div className="rubrique-partie-tournois-title-body">
             MATCH DU JOUR
           </div>
 
-          <div className='match-du-jour'>
-            <div className='txt-match-du-jour' >T2 Grand Finals Europe 2025-2026</div>
+          <div className="match-du-jour">
+            <div className="txt-match-du-jour">
+              T2 Grand Finals Europe 2025-2026
+            </div>
             <div className="content-match-day">
               <div className="content-col-matchday">
-                <img src={Pannuhuone} alt="Pannuhuone" className="img-logo-matchday" />
+                <img
+                  src={Pannuhuone}
+                  alt="Pannuhuone"
+                  className="img-logo-matchday"
+                />
                 pannuhuone
               </div>
 
               <div className="content-col-matchday hour-col-matchday">
-                <div className='date-matchday'>
-                  {new Date().toLocaleDateString('fr-FR')}
-                  <div style={{ fontSize: '2rem' }}>19:00</div>
+                <div className="date-matchday">
+                  {new Date().toLocaleDateString("fr-FR")}
+                  <div style={{ fontSize: "2rem" }}>19:00</div>
                   Bo3
                 </div>
               </div>
 
               <div className="content-col-matchday">
-                <img src={Teamsecret} alt="Teamsecret" className="img-logo-matchday teamsecret" />
+                <img
+                  src={Teamsecret}
+                  alt="Teamsecret"
+                  className="img-logo-matchday teamsecret"
+                />
                 teamsecret
               </div>
             </div>

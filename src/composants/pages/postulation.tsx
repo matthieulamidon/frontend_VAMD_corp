@@ -10,4 +10,5 @@ function Postulation() {
       <Footer />
     </>
   );
-}export default Postulation;    
+}
+export default Postulation;

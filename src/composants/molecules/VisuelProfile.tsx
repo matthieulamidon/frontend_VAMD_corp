@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../contexte/useAuth";
-import "./VisuelProfile.css";
+import "../styles/VisuelProfile.css";
 import { useNavigate } from "react-router-dom";
 
 export function VisuelProfil() {

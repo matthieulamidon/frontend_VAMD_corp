@@ -1,4 +1,4 @@
-import "../../App.css";
+import "../styles/App.css";
 
 const Footer = () => (
   <footer className="footer-vamd">

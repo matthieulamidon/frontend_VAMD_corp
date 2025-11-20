@@ -47,17 +47,7 @@ export default function AdminEquipePage() {
         nom_equipe: nomEquipe,
         jeux_equipe: jeuEquipe,
       }),
-    }); /*
-    const res = await fetch(`${API_URL}/CreateEquipe`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nom_equipe: nomEquipe,
-        jeux_equipe: jeuEquipe,
-      }),
-      credentials: "include",
     });
-    const data = await res.json();*/
 
     loadEquipes();
 

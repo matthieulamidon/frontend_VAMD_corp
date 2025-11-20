@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
 
 type Props = {
   firstName: string;
@@ -87,7 +87,7 @@ const FormulairePostulation: React.FC<Props> = ({
         <option value="non precise">Non précisé</option>
         <option value="autre">Autre</option>
       </select>
-       <label htmlFor="roleWish">Rôle souhaité</label>
+      <label htmlFor="roleWish">Rôle souhaité</label>
       <select
         id="roleWish"
         value={roleWish}
@@ -97,20 +97,18 @@ const FormulairePostulation: React.FC<Props> = ({
         <option value="coach">Coach</option>
       </select>
 
-      <label htmlFor="desiredGames">
-            Jeu souhaité
-          </label>
-          <select
-            id="desiredGames"
-            value={desiredGames}
-            onChange={(e) => setDesiredGames(e.target.value)}
-          >
-            <option value="">-- Choisir un jeu --</option>
-            <option value="League Of Legend">League Of Legend</option>
-            <option value="Fortnite">Fortnite</option>
-            <option value="Valorant">Valorant</option>
-            <option value="Fifa">Fifa</option>
-          </select>
+      <label htmlFor="desiredGames">Jeu souhaité</label>
+      <select
+        id="desiredGames"
+        value={desiredGames}
+        onChange={(e) => setDesiredGames(e.target.value)}
+      >
+        <option value="">-- Choisir un jeu --</option>
+        <option value="League Of Legend">League Of Legend</option>
+        <option value="Fortnite">Fortnite</option>
+        <option value="Valorant">Valorant</option>
+        <option value="Fifa">Fifa</option>
+      </select>
 
       <label htmlFor="desiredTeam">Équipe souhaitée (choix par jeu)</label>
       {roleWish === "coach" ? (
@@ -123,7 +121,9 @@ const FormulairePostulation: React.FC<Props> = ({
         >
           {(() => {
             const game =
-              desiredGames || desiredTeam?.split(" — ")[0] || "League Of Legend";
+              desiredGames ||
+              desiredTeam?.split(" — ")[0] ||
+              "League Of Legend";
             return [1, 2, 3, 4].map((n) => (
               <option
                 key={n}
@@ -172,7 +172,7 @@ const FormulairePostulation: React.FC<Props> = ({
         return <input id="teamRole" value={teamRole || "joueur"} readOnly />;
       })()}
 
-  {/* maintenir la synchronisation des valeurs par défaut de teamRole lorsque desiredTeam change (géré dans le useEffect ci-dessus) */}
+      {/* maintenir la synchronisation des valeurs par défaut de teamRole lorsque desiredTeam change (géré dans le useEffect ci-dessus) */}
 
       <div className="form-actions">
         <button type="submit" className="btn-valider" disabled={!!loading}>

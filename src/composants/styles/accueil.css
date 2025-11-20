@@ -15,8 +15,7 @@
 }
 
 :root {
-  --text-glow:
-    0 0 10px rgba(187, 0, 255, 0.7), 0 0 20px rgba(187, 0, 255, 0.6);
+  --text-glow: 0 0 10px rgba(187, 0, 255, 0.7), 0 0 20px rgba(187, 0, 255, 0.6);
 
   --text-glow-red:
     0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.7),
@@ -234,7 +233,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .footer-content-row {
   display: flex;

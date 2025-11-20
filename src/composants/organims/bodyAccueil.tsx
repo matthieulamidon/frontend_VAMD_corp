@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import "../../App.css";
-import "../../accueil.css";
+import "../styles/App.css";
+import "../styles/accueil.css";
 
 // Images
 import BackgroundEsport from "../../assets/background_esport.jpg";
@@ -15,11 +15,26 @@ import Corsair from "../../assets/sponsors/corsair.png";
 
 // Tableau avec logo, lien et classe spécifique
 const sponsors = [
-  { id: "epicgames", src: EpicGames, link: "https://www.epicgames.com", class: "" },
-  { id: "steam", src: Steam, link: "https://store.steampowered.com", class: "" },
+  {
+    id: "epicgames",
+    src: EpicGames,
+    link: "https://www.epicgames.com",
+    class: "",
+  },
+  {
+    id: "steam",
+    src: Steam,
+    link: "https://store.steampowered.com",
+    class: "",
+  },
   { id: "free", src: Free, link: "https://www.free.fr", class: "free" },
   { id: "sco", src: SCO, link: "https://angers-sco.fr", class: "" },
-  { id: "legaulois", src: LeGaulois, link: "https://www.legaulois.fr", class: "" },
+  {
+    id: "legaulois",
+    src: LeGaulois,
+    link: "https://www.legaulois.fr",
+    class: "",
+  },
   { id: "rtx", src: RTX, link: "https://www.nvidia.com/rtx", class: "rtx" },
   { id: "msi", src: MSI, link: "https://www.msi.com", class: "" },
   { id: "corsair", src: Corsair, link: "https://www.corsair.com", class: "" },
@@ -30,7 +45,7 @@ const BodyAccueil = () => {
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
-    const speed =0.5;
+    const speed = 0.5;
     const track = trackRef.current;
     if (!track) return;
 
@@ -79,7 +94,6 @@ const BodyAccueil = () => {
               />
             </a>
           ))}
-
         </div>
       </div>
     </div>

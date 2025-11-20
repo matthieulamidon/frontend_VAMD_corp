@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import "../App.css";
+import "../composants/styles/App.css";
 import Accueil from "../accueil";
 import ConnexionUtilisateur from "../composants/pages/connexionUtilisateur";
 import AuthPage from "../composants/organims/testBackend";
@@ -8,6 +8,8 @@ import AccueilJoueur from "../composants/pages/AccueilJoueur";
 import { ProtectedRoute } from "./ProtectedRoute";
 import PageAdmin from "../composants/pages/PageAdmin";
 import Postulation from "../composants/pages/postulation";
+import Calendrier from "../composants/pages/calendrier";
+import Evenements from "../composants/pages/evenements";
 
 //requiredRole="JOUEUR"
 

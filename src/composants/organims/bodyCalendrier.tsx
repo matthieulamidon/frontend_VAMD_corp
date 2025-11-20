@@ -1,19 +1,18 @@
 import React from "react";
-import '../../App.css';
-import '../../Accueil.css';
-import './Calendrier.css';
+import "../styles/App.css";
+import "../styles/Accueil.css";
+import "../styles/Calendrier.css";
 
 // Images
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
 import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
-import { useEffect, useState } from "react";  
+import { useEffect, useState } from "react";
 
 // Calendrier
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import frLocale from '@fullcalendar/core/locales/fr';
-
+import frLocale from "@fullcalendar/core/locales/fr";
 
 interface AgendaEvent {
   id: string;
@@ -28,7 +27,6 @@ interface BackendEvent {
   date_heure_fin: string;
   type_event: string; // tu peux mettre "LOL" | "VALO" | "FORTNITE" si tu veux stricter
 }
-
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
@@ -47,10 +45,14 @@ const BodyCalendrier: React.FC = () => {
 
   const getLogo = (game: AgendaEvent["game"]) => {
     switch (game) {
-      case "lol": return Logo_LoL;
-      case "valo": return Logo_Valo;
-      case "fortnite": return Logo_Fortnite;
-      default: return "";
+      case "lol":
+        return Logo_LoL;
+      case "valo":
+        return Logo_Valo;
+      case "fortnite":
+        return Logo_Fortnite;
+      default:
+        return "";
     }
   };
 
@@ -59,7 +61,8 @@ const BodyCalendrier: React.FC = () => {
       try {
         const res = await fetch(`${EVENTS_API_URL}/events`); // pas besoin de token
         console.log("Réponse fetch :", res);
-        if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
+        if (!res.ok)
+          throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
         console.log("Événements récupérés :", data);
@@ -87,7 +90,11 @@ const BodyCalendrier: React.FC = () => {
 
         {events.map((ev) => (
           <div key={ev.id} className="body-child-event">
-            <img src={getLogo(ev.game)} alt={ev.game} className="logo-child-event" />
+            <img
+              src={getLogo(ev.game)}
+              alt={ev.game}
+              className="logo-child-event"
+            />
             <h3 className="subtitle-child-calendrier">{ev.title}</h3>
             <span className="date-child-event">
               {ev.date.slice(8, 10)}/{ev.date.slice(5, 7)}

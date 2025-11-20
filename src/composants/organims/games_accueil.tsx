@@ -1,5 +1,5 @@
-import "../../App.css";
-import "../../accueil.css";
+import "../styles/App.css";
+import "../styles/accueil.css";
 
 // Images
 import Bg_lol from "../../assets/games/bg_lol.png";

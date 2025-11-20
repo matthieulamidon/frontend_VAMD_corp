@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
 import { useNavigate } from "react-router-dom";
 
 const FormulaireConnexion: React.FC = () => {

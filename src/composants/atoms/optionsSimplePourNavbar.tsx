@@ -1,5 +1,5 @@
 import { useAuth } from "../../contexte/useAuth";
-import "../../App.css";
+import "../styles/App.css";
 
 export function OptionSimplePourNavbar() {
   const { role } = useAuth();
@@ -35,12 +35,21 @@ export function OptionSimplePourNavbar() {
         </div>
       );
       break;
+    case "USER":
+      content = (
+        <div>
+          <a href="/postulation" className="btnnav">
+            Postuler
+          </a>
+        </div>
+      );
+      break;
     default:
       content = (
         <div>
           {/* TODO : a linker */}
-          <a href="/postulation" className="btnnav">
-            Postuler
+          <a href="/connexion" className="btnnav">
+            connexion
           </a>
         </div>
       );

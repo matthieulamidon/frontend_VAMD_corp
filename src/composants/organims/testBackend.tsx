@@ -24,7 +24,7 @@ const AuthPage: React.FC = () => {
   const API_URL =
     import.meta.env.VITE_BACKEND_LINK + "/api/auth" ||
     "http://localhost:4000/api/auth";
-    
+
   console.log("API_URL:", import.meta.env.VITE_BACKEND_LINK);
 
   const handleRegister = async () => {
