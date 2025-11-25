@@ -10,7 +10,7 @@ import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
 import Logo_Fc26 from "../../assets/games/logos_games/logo_fc26.png";
 import Logo_Pokemon from "../../assets/games/logos_games/pokemon.png";
-import Logo_RocketL from "../../assets/games/logos_games/logo_rocket_league.png";
+import Logo_RocketL from "../../assets/games/logos_games/logo_rocketleague.png";
 import Logo_OW from "../../assets/games/logos_games/logo_ow.png";
 
 import Blast from "../../assets/equip/logos_tournois/logo_blast.png";
