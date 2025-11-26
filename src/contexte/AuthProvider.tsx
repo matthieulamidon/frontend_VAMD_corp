@@ -33,12 +33,15 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         setRole("ADMIN");
         break;
       case 2:
-        setRole("COACH");
+        setRole("PATRON");
         break;
       case 3:
-        setRole("JOUEUR");
+        setRole("COACH");
         break;
       case 4:
+        setRole("JOUEUR");
+        break;
+      case 5:
         setRole("USER");
         break;
       default:
