@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../../App.css';
 import '../../Accueil.css';
 import './Calendrier.css';
@@ -7,43 +7,55 @@ import './Calendrier.css';
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
 import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
-import { useEffect, useState } from "react";  
 
 // Calendrier
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import frLocale from '@fullcalendar/core/locales/fr';
+import type { EventClickArg } from "@fullcalendar/core";
+
+
 
 
 interface AgendaEvent {
   id: string;
   title: string;
-  date: string; // YYYY-MM-DD
+  start: string;
+  end?: string;
+  allDay?: boolean;
   game: "lol" | "valo" | "fortnite";
+  lieu?: string | null;
+  description?: string | null;
 }
+
 interface BackendEvent {
   id_event: number;
   titre_event: string;
   date_heure_debut: string;
   date_heure_fin: string;
-  type_event: string; // tu peux mettre "LOL" | "VALO" | "FORTNITE" si tu veux stricter
+  type_event: string;
+  lieu?: string | null;
+  description?: string | null;
 }
 
+// Convertit l'ENUM backend vers les valeurs front
+const mapBackendEnumToFront = (
+  e: string
+): "lol" | "valo" | "fortnite" => {
+  switch (e) {
+    case "LEAGUEOFLEGENDES": return "lol";
+    case "VALORANT": return "valo";
+    case "FORTNITE": return "fortnite";
+    default: return "lol";
+  }
+};
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ??
-      "https://backend-vamd-corp.onrender.com") + "/api/events";
-
-  console.log("URL des événements :", EVENTS_API_URL);
+    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") + "/api/events";
 
   const [events, setEvents] = useState<AgendaEvent[]>([]);
-
-  /* const events: AgendaEvent[] = [
-    { id: "lol-1311", title: "Entrainement LoL ADC", date: "2025-11-13", game: "lol" },
-    { id: "valo-1811", title: "Analyse Map Corrode", date: "2025-11-18", game: "valo" },
-    { id: "fn-2611", title: "MaÃ®triser les rotations (FN)", date: "2025-11-26", game: "fortnite" },
-  ];*/
+  const [selectedEvent, setSelectedEvent] = useState<AgendaEvent | null>(null);
 
   const getLogo = (game: AgendaEvent["game"]) => {
     switch (game) {
@@ -54,21 +66,24 @@ const BodyCalendrier: React.FC = () => {
     }
   };
 
+  // Chargement des événements
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(`${EVENTS_API_URL}/events`); // pas besoin de token
-        console.log("Réponse fetch :", res);
+        const res = await fetch(`${EVENTS_API_URL}/events`);
         if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
-        console.log("Événements récupérés :", data);
 
         const formatted: AgendaEvent[] = data.map((ev) => ({
           id: ev.id_event.toString(),
           title: ev.titre_event,
-          date: ev.date_heure_debut.slice(0, 10), // YYYY-MM-DD
-          game: ev.type_event.toLowerCase() as "lol" | "valo" | "fortnite",
+          start: ev.date_heure_debut,
+          end: ev.date_heure_fin,
+          allDay: true, // false pour FullCalendar précis sur les heures
+          game: mapBackendEnumToFront(ev.type_event),
+          lieu: ev.lieu,
+          description: ev.description,
         }));
 
         setEvents(formatted);
@@ -79,23 +94,31 @@ const BodyCalendrier: React.FC = () => {
 
     fetchEvents();
   }, [EVENTS_API_URL]);
-  console.log("Événements dans le state :", events);
+
+  // Click sur un événement du calendrier
+  const handleEventClick = (clickInfo: EventClickArg) => {
+    const ev = events.find(e => e.id === clickInfo.event.id);
+    if (ev) setSelectedEvent(ev);
+  };
+
   return (
     <div className="body-calendrier">
+      {/* Colonne de gauche : liste d'événements */}
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
-
         {events.map((ev) => (
-          <div key={ev.id} className="body-child-event">
+          <div key={ev.id} className="body-child-event" onClick={() => setSelectedEvent(ev)}>
             <img src={getLogo(ev.game)} alt={ev.game} className="logo-child-event" />
             <h3 className="subtitle-child-calendrier">{ev.title}</h3>
             <span className="date-child-event">
-              {ev.date.slice(8, 10)}/{ev.date.slice(5, 7)}
+              {new Date(ev.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
+              {ev.end && " - " + new Date(ev.end).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
             </span>
           </div>
         ))}
       </div>
 
+      {/* Calendrier central */}
       <div className="body-middle-calendrier">
         <div className="calendar-container">
           <FullCalendar
@@ -103,11 +126,42 @@ const BodyCalendrier: React.FC = () => {
             initialView="dayGridMonth"
             events={events}
             locale={frLocale}
+            eventDisplay="block"
+            eventClick={handleEventClick}
           />
         </div>
       </div>
 
-      <div className="body-right-calendrier"></div>
+      {/* Colonne de droite : détails de l'événement sélectionné */}
+      <div className="body-right-calendrier">
+        {selectedEvent ? (
+          <div className="event-details">
+            <h2>{selectedEvent.title}</h2>
+            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-child-event" />
+            <p>
+              <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()} <br />
+              <strong>Début :</strong> {new Date(selectedEvent.start).toLocaleString()} <br />
+              {selectedEvent.end && (
+                <>
+                  <strong>Fin :</strong> {new Date(selectedEvent.end).toLocaleString()} <br />
+                </>
+              )}
+              {selectedEvent.lieu && (
+                <>
+                  <strong>Lieu :</strong> {selectedEvent.lieu} <br />
+                </>
+              )}
+              {selectedEvent.description && (
+                <>
+                  <strong>Description :</strong> {selectedEvent.description} <br />
+                </>
+              )}
+            </p>
+          </div>
+        ) : (
+          <p>Sélectionnez un événement pour voir les détails</p>
+        )}
+      </div>
     </div>
   );
 };
