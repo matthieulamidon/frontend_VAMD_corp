@@ -1,18 +1,21 @@
-import React from "react";
-import "../styles/App.css";
-import "../styles/accueil.css";
-import "../styles/Calendrier.css";
+import React, { useEffect, useState } from "react";
+import '../styles/App.css';
+import '../styles/Accueil.css';
+import '../styles/Calendrier.css';
 
 // Images
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
 import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
-import { useEffect, useState } from "react";
 
 // Calendrier
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import frLocale from "@fullcalendar/core/locales/fr";
+import frLocale from '@fullcalendar/core/locales/fr';
+import type { EventClickArg } from "@fullcalendar/core";
+
+
+
 
 interface AgendaEvent {
   id: string;
@@ -30,8 +33,22 @@ interface BackendEvent {
   titre_event: string;
   date_heure_debut: string;
   date_heure_fin: string;
-  type_event: string; // tu peux mettre "LOL" | "VALO" | "FORTNITE" si tu veux stricter
+  type_event: string;
+  lieu?: string | null;
+  description?: string | null;
 }
+
+// Convertit l'ENUM backend vers les valeurs front
+const mapBackendEnumToFront = (
+  e: string
+): "lol" | "valo" | "fortnite" => {
+  switch (e) {
+    case "LEAGUEOFLEGENDES": return "lol";
+    case "VALORANT": return "valo";
+    case "FORTNITE": return "fortnite";
+    default: return "lol";
+  }
+};
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
@@ -42,14 +59,10 @@ const BodyCalendrier: React.FC = () => {
 
   const getLogo = (game: AgendaEvent["game"]) => {
     switch (game) {
-      case "lol":
-        return Logo_LoL;
-      case "valo":
-        return Logo_Valo;
-      case "fortnite":
-        return Logo_Fortnite;
-      default:
-        return "";
+      case "lol": return Logo_LoL;
+      case "valo": return Logo_Valo;
+      case "fortnite": return Logo_Fortnite;
+      default: return "";
     }
   };
 
@@ -57,10 +70,8 @@ const BodyCalendrier: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(`${EVENTS_API_URL}/events`); // pas besoin de token
-        console.log("Réponse fetch :", res);
-        if (!res.ok)
-          throw new Error("Erreur lors de la récupération des événements");
+        const res = await fetch(`${EVENTS_API_URL}/events`);
+        if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
 
@@ -96,12 +107,8 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
         {events.map((ev) => (
-          <div key={ev.id} className="body-child-event">
-            <img
-              src={getLogo(ev.game)}
-              alt={ev.game}
-              className="logo-child-event"
-            />
+          <div key={ev.id} className="body-child-event" onClick={() => setSelectedEvent(ev)}>
+            <img src={getLogo(ev.game)} alt={ev.game} className="logo-child-event" />
             <h3 className="subtitle-child-calendrier">{ev.title}</h3>
             <span className="date-child-event">
               {new Date(ev.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
@@ -160,4 +167,3 @@ const BodyCalendrier: React.FC = () => {
 };
 
 export default BodyCalendrier;
-
