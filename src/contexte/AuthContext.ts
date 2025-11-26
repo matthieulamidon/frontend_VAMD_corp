@@ -6,6 +6,8 @@ export interface AuthContextType {
   pseudo: string;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  setTeamSelectFun: (team: string) => void;
+  teamSelect: string;
   loading: boolean;
 }
 

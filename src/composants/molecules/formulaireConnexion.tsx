@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "../styles/connexionUtilisateur.css";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const FormulaireConnexion: React.FC = () => {
   const [emailOrPseudo, setEmailOrpseudo] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
@@ -26,7 +26,7 @@ const FormulaireConnexion: React.FC = () => {
       console.log("Réponse du serveur :", data.status);
       if (res.status === 201) {
         setMessage(data.message || "Connexion réussie !");
-        setTimeout(() => navigate("/"), 800);
+        setTimeout(() => (window.location.href = "/"), 800);
       } else {
         setMessage(data.message || "Échec de la connexion.");
       }

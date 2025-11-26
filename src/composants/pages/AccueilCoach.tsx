@@ -1,6 +1,6 @@
 import NavbarJoueur from "../organims/navbarJoueur";
 
-function AccueilPortailJoueur() {
+function AccueilPortailCoach() {
   return (
     <>
       <NavbarJoueur />
@@ -10,4 +10,4 @@ function AccueilPortailJoueur() {
     </>
   );
 }
-export default AccueilPortailJoueur;
+export default AccueilPortailCoach;

@@ -45,6 +45,7 @@ const Navbar = () => {
 
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
         <VisuelProfil />
+        <OptionSimplePourNavbar />
         <a href="/" onClick={toggleMenu}>
           Accueil
         </a>

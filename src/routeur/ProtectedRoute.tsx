@@ -11,7 +11,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRole,
 }) => {
-  const { isAuthenticated, loading, role } = useAuth(); // <- récupère le user si ton hook le fournit
+  const { isAuthenticated, loading, role } = useAuth();
   console.log(
     "ProtectedRoute - isAuthenticated:",
     isAuthenticated,
@@ -27,7 +27,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     return <Navigate to="/" replace />;
   }
 
-  if (requiredRole && role !== requiredRole) {
+  if (requiredRole && role !== requiredRole && role !== "ADMIN") {
     return <Navigate to="/unauthorized" replace />; // page d’accès refusé
   }
 

@@ -16,11 +16,19 @@ export function OptionSimplePourNavbar() {
         </div>
       );
       break;
+    case "PATRON":
+      content = (
+        <div>
+          <a href="/portail-patron" className="btnnav">
+            Portail Patron
+          </a>
+        </div>
+      );
+      break;
     case "COACH":
       content = (
         <div>
-          {/* TODO : a linker */}
-          <a href="/profile" className="btnnav">
+          <a href="/portail-coach" className="btnnav">
             Portail Coach
           </a>
         </div>
@@ -47,7 +55,6 @@ export function OptionSimplePourNavbar() {
     default:
       content = (
         <div>
-          {/* TODO : a linker */}
           <a href="/connexion" className="btnnav">
             connexion
           </a>

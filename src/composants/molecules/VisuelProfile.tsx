@@ -39,6 +39,7 @@ export function VisuelProfil() {
             onClick={() => {
               logout();
               window.location.reload();
+              window.location.href = "/";
             }}
             className="vp-menu-item btn"
           >

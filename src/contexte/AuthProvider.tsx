@@ -17,6 +17,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<string>("VISITOR");
   const [pseudo, setPseudo] = useState<string>("");
+  const [teamSelect, setTeamSelect] = useState<string>("");
 
   const checkAuthStatus = async () => {
     const response = await authService.checkAuth();
@@ -61,9 +62,23 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setIsAuthenticated(false);
   }, []);
 
+  const setTeamSelectFun = useCallback((team: string) => {
+    // TODO : implémenter la sélection d'équipe
+    setTeamSelect(team);
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, login, logout, role, pseudo, loading }}
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        setTeamSelectFun,
+        role,
+        pseudo,
+        loading,
+        teamSelect,
+      }}
     >
       {children}
     </AuthContext.Provider>

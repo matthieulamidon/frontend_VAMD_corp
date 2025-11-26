@@ -31,6 +31,7 @@ export const authService = {
     }
   },
 
+  //et oui j'ai coder ça mais ça ne sert a rien vu que je ne suis pas repaser sur le code de victor pour l'instant
   login: async (emailOrPseudo: string, password: string): Promise<boolean> => {
     const response = await fetch(API_URL + "/login", {
       method: "POST",
