@@ -5,6 +5,7 @@ export function OptionSimplePourNavbar() {
   const { role } = useAuth();
 
   let content;
+  console.log("role", role);
 
   switch (role) {
     case "ADMIN":

@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   {
     path: "/portail-joueur",
     element: (
-      <ProtectedRoute requiredRole="Joueur">
+      <ProtectedRoute requiredRole="JOUEUR">
         <AccueilJoueur />
       </ProtectedRoute>
     ),
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ProtectedRoute requiredRole="USER">
+      <ProtectedRoute requiredRole="ADMIN">
         <PageAdmin />
       </ProtectedRoute>
     ),
