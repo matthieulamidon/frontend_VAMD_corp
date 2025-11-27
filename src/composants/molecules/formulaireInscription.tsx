@@ -54,7 +54,13 @@ const FormulaireInscription: React.FC = () => {
 
     setLoading(true);
     try {
-      const payload: any = {
+      const payload: {
+        pseudo: string;
+        email: string;
+        password: string;
+        role: string;
+        date_naissance: string;
+      } = {
         // le backend attend 'pseudo' (voir testBackend.tsx), pas 'username'
         pseudo: pseudo || email,
         email,
@@ -77,8 +83,8 @@ const FormulaireInscription: React.FC = () => {
         setError(data?.message ?? `Erreur (${res.status})`);
       }
     } catch (err) {
-      console.error(err);
-      setError("Erreur réseau lors de la création du compte.");
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message ?? "Erreur réseau lors de la création du compte.");
     } finally {
       setLoading(false);
     }
