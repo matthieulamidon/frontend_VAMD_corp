@@ -1,132 +1,166 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import "../pages//postulation.css";
 import FormulairePostulation from "../molecules/formulairePostulation";
 
 const BodyPostulation: React.FC = () => {
+  const navigate = useNavigate();
 
-    const [roleWish, setRoleWish] = useState<string>("visiteur");
-    const [loading, setLoading] = useState<boolean>(false);
-    const [success, setSuccess] = useState<string | null>(null);
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [sex, setSex] = useState<string>("non precise");
-    const [desiredGames, setDesiredGames] = useState<string>("");
-    const [desiredTeam, setDesiredTeam] = useState<string>("League Of Legend");
-    const [teamRole, setTeamRole] = useState<string>("joueur");
+  const [roleWish, setRoleWish] = useState<string>("visiteur");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [sex, setSex] = useState<string>("non precise");
+  const [desiredGames, setDesiredGames] = useState<string>("");
+  const [desiredTeam, setDesiredTeam] = useState<string>("League Of Legend");
+  const [teamRole, setTeamRole] = useState<string>("joueur");
+  const [error, setError] = useState<string | null>(null);
 
-    const [error, setError] = useState<string | null>(null);
-
-    
-
-    const API_URL =
+  const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
-        "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
-    
-    const validatePostulation = () => {
-        if (!firstName.trim()) {
-          setError("Le prénom est requis.");
-          return false;
+      "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_URL}/infoUserForComplete`, {
+          credentials: "include",
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setFirstName(data.firstName || "");
+          setLastName(data.name || "");
+          setSex(data.sexe || "non precise");
+        } else {
+          const data = await res.json().catch(() => ({}));
+          console.error(data?.message ?? `Erreur (${res.status})`);
         }
-        if (!lastName.trim()) {
-          setError("Le nom est requis.");
-          return false;
-        }
-        if (!sex) {
-          setError("Le sexe est requis.");
-          return false;
-        }
-         if (!roleWish) {
-          setError("Le rôle souhaité est requis.");
-          return false;
-        }
-        if ((roleWish === "joueur" || roleWish === "coach") && !desiredGames) {
-          setError(
-            "Veuillez choisir un jeu si vous souhaitez être joueur ou coach."
-          );
-          return false;
-        }
-        if (!desiredTeam) {
-          setError("L'équipe souhaitée est requise.");
-          return false;
-        }
-        if (desiredTeam && !teamRole) {
-          setError("Le rôle dans l'équipe est requis.");
-          return false;
-        }
-        setError(null);
-        return true;
-      };
-      const navigate = useNavigate();
-    
-      const handleFinalSubmit = async (selectedGame?: string) => {
-    if (!validatePostulation()) return;
-    const payload: unknown = {
-      role: roleWish,
-      firstName,
-      lastName,
-      sex,
-      games: desiredGames ? [desiredGames] : [],
-      desiredTeam,
-      teamRole,
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
-    
-    if (selectedGame) {
-      setDesiredGames(selectedGame);
-      setDesiredTeam(`${selectedGame} — Équipe 1`);
+    fetchUserInfo();
+  }, []);
+
+  const validatePostulation = () => {
+    if (!firstName.trim()) {
+      setError("Le prénom est requis.");
+      return false;
     }
+    if (!lastName.trim()) {
+      setError("Le nom est requis.");
+      return false;
+    }
+    if (!sex) {
+      setError("Le sexe est requis.");
+      return false;
+    }
+    if (!roleWish) {
+      setError("Le rôle souhaité est requis.");
+      return false;
+    }
+    if ((roleWish === "joueur" || roleWish === "coach") && !desiredGames) {
+      setError("Veuillez choisir un jeu si vous postulez comme joueur ou coach.");
+      return false;
+    }
+    if (roleWish === "joueur" && !desiredTeam) {
+      setError("L'équipe souhaitée est requise.");
+      return false;
+    }
+    if (roleWish === "joueur" && !teamRole) {
+      setError("Le rôle dans l'équipe est requis.");
+      return false;
+    }
+    setError(null);
+    return true;
+  };
+
+  const handleFinalSubmit = async () => {
+    if (!validatePostulation()) return;
     setLoading(true);
+    setError(null);
+    setSuccess(null);
+
     try {
-      // envoie au backend
-      const res = await fetch(`${API_URL}/inscryptionEquipe`, {
+      const profileRes = await fetch(`${API_URL}/completeProfile`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ name: lastName, firstName, sexe: sex }),
         credentials: "include",
       });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok) {
-        setSuccess("Inscription réussie. Vous pouvez vous connecter.");
-        setTimeout(() => navigate("/connexion"), 800);
+
+      if (!profileRes.ok) {
+        const data = await profileRes.json().catch(() => ({}));
+        throw new Error(data?.message ?? `Erreur profil (${profileRes.status})`);
+      }
+
+      let finalRes;
+      if (roleWish === "coach") {
+        finalRes = await fetch(`${API_URL}/inscriptionCoach`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nameGame: desiredGames }),
+          credentials: "include",
+        });
+      } else if (roleWish === "joueur") {
+        const payload = { nameEquipe: desiredTeam, post: teamRole };
+        finalRes = await fetch(`${API_URL}/equipeInscryption`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          credentials: "include",
+        });
       } else {
-        setError(data?.message ?? `Erreur (${res.status})`);
+        setSuccess("Profil mis à jour !");
+        setTimeout(() => navigate("/profil"), 2000);
+        setLoading(false);
+        return;
+      }
+
+      if (finalRes && finalRes.ok) {
+        setSuccess("Votre postulation a été enregistrée avec succès !");
+        setTimeout(() => navigate("/profil"), 2000);
+      } else if (finalRes) {
+        const data = await finalRes.json().catch(() => ({}));
+        throw new Error(data?.message ?? `Erreur postulation (${finalRes.status})`);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
-      setError(message ?? "Erreur réseau lors de l'inscription.");
+      setError(message ?? "Erreur réseau lors de la postulation.");
     } finally {
       setLoading(false);
     }
   };
-    
-      return (
-        <div className="body-postulation">
-        {success && <div className="form-success">{success}</div>}
-        {error && <div className="form-error">{error}</div>}
-          <FormulairePostulation
-          firstName={firstName}
-          setFirstName={setFirstName}
-          lastName={lastName}
-          setLastName={setLastName}
-          sex={sex}
-          setSex={setSex}
-          roleWish={roleWish}
-          setRoleWish={setRoleWish}
-          desiredGames={desiredGames}
-          setDesiredGames={setDesiredGames}
-          desiredTeam={desiredTeam}
-          setDesiredTeam={setDesiredTeam}
-          teamRole={teamRole}
-          setTeamRole={setTeamRole}
-          onSubmit={() => {
-            if (validatePostulation()) handleFinalSubmit();
-          }}
-          loading={loading}
-        />
-        
-        </div> 
-    );
+
+  return (
+    <div className="body-postulation">
+      {success && <div className="form-success">{success}</div>}
+      {error && <div className="form-error">{error}</div>}
+      <FormulairePostulation
+        firstName={firstName}
+        setFirstName={setFirstName}
+        lastName={lastName}
+        setLastName={setLastName}
+        sex={sex}
+        setSex={setSex}
+        roleWish={roleWish}
+        setRoleWish={setRoleWish}
+        desiredGames={desiredGames}
+        setDesiredGames={setDesiredGames}
+        desiredTeam={desiredTeam}
+        setDesiredTeam={setDesiredTeam}
+        teamRole={teamRole}
+        setTeamRole={setTeamRole}
+        onSubmit={handleFinalSubmit}
+        loading={loading}
+      />
+    </div>
+  );
 };
 
 export default BodyPostulation;
