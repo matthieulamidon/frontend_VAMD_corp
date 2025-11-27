@@ -22,7 +22,7 @@ const BodyPostulation: React.FC = () => {
 
     const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
-        "https://backend-vamd-corp.onrender.com") + "/api/auth";
+        "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
     
     const validatePostulation = () => {
         if (!firstName.trim()) {
@@ -79,7 +79,7 @@ const BodyPostulation: React.FC = () => {
     setLoading(true);
     try {
       // envoie au backend
-      const res = await fetch(`${API_URL}/register`, {
+      const res = await fetch(`${API_URL}/inscryptionEquipe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -93,8 +93,8 @@ const BodyPostulation: React.FC = () => {
         setError(data?.message ?? `Erreur (${res.status})`);
       }
     } catch (err) {
-      console.error(err);
-      setError("Erreur réseau lors de l'inscription.");
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message ?? "Erreur réseau lors de l'inscription.");
     } finally {
       setLoading(false);
     }
