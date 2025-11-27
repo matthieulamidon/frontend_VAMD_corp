@@ -15,9 +15,7 @@
 }
 
 :root {
-  --text-glow:
-    0 0 10px rgba(187, 0, 255, 0.7), 0 0 20px rgba(187, 0, 255, 0.6),
-    0 0 40px rgba(187, 0, 255, 0.5), 0 0 80px rgba(187, 0, 255, 0.4);
+  --text-glow: 0 0 10px rgba(187, 0, 255, 0.7), 0 0 20px rgba(187, 0, 255, 0.6);
 
   --text-glow-red:
     0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.7),
@@ -225,12 +223,13 @@
 .footer-vamd {
   width: 100%;
   background-color: black;
-  border-top: 1px solid white;
+  border-top: 1px solid rgba(217, 113, 255, 0.8);
   color: rgb(255, 186, 253);
   text-shadow: var(--text-glow);
   font-size: 1.5em;
   padding: 15px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -239,6 +238,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
@@ -320,6 +320,9 @@
 
   .equip-description h2 {
     font-size: 1.5em;
+  }
+  .title-accueil {
+    font-size: 1.5rem;
   }
 }
 

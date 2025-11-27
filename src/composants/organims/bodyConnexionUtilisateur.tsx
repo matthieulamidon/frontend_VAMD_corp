@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../App.css";
-import "../pages/connexionUtilisateur.css";
+import "../styles/App.css";
+import "../styles/connexionUtilisateur.css";
 import FormulaireInscription from "../molecules/formulaireInscription";
 import FormulaireConnexion from "../molecules/formulaireConnexion";
 

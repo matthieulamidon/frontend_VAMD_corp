@@ -87,7 +87,6 @@
   border-radius: 6px;
 }
 
-
 .form-actions {
   display: flex;
   gap: 0.5rem;
@@ -96,7 +95,7 @@
 }
 
 .btn-valider {
-   background-color: rgba(187, 0, 255, 0.8);
+  background-color: rgba(187, 0, 255, 0.8);
   color: #fff;
   border: none;
   padding: 0.6rem 1rem;

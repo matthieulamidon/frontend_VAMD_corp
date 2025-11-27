@@ -24,7 +24,7 @@ const AuthPage: React.FC = () => {
   const API_URL =
     import.meta.env.VITE_BACKEND_LINK + "/api/auth" ||
     "http://localhost:4000/api/auth";
-    
+
   console.log("API_URL:", import.meta.env.VITE_BACKEND_LINK);
 
   const handleRegister = async () => {
@@ -50,17 +50,19 @@ const AuthPage: React.FC = () => {
 
   const handleLogin = async () => {
     try {
+      console.log("Tentative de login avec :", { pseudo, password });
+      const emailOrPseudo = pseudo; // backend accepte email ou pseudo
       const res = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ emailOrPseudo, password }),
         credentials: "include",
       });
       const data = await res.json();
       setMessage(data.message || "Connexion réussie !");
       if (data.user) setUserInfo(data.user);
 
-      // 🔍 Vérification des cookies côté navigateur (non httpOnly)
+      // Vérification des cookies côté navigateur (non httpOnly)
       console.log("Cookies actuels :", document.cookie);
     } catch (err) {
       console.error(err);

@@ -1,9 +1,11 @@
-import "../../App.css";
+import "../styles/App.css";
 import { useState } from "react";
 
 // Images
 import LogoNavbar from "../../assets/logo_vamd.png";
 import ToggleHamburger from "../../assets/togglehamburger.png";
+import VisuelProfil from "../molecules/VisuelProfile";
+import OptionSimplePourNavbar from "../atoms/optionsSimplePourNavbar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,41 +30,30 @@ const Navbar = () => {
             <img src={LogoNavbar} className="logoNavbar" alt="VAMD" />
           </a>
 
-          <a href="/" className="btnnav">
-            Accueil
-          </a>
+          <OptionSimplePourNavbar />
           <a href="/calendrier" className="btnnav">
             Calendrier
           </a>
-          <a href="/événements" className="btnnav">
+          <a href="/evenements" className="btnnav">
             Événements
-          </a>
-          <a href="/postulation" className="btnnav">
-            Postuler
           </a>
         </div>
         <div className="navbar-right">
-          <a href="/connexion" className="btnconnexion">
-            Connectez-vous
-          </a>
+          <VisuelProfil />
         </div>
       </nav>
 
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
-        <a href="/connexion" className="btnconnexion-sidemenu">
-          Connexion
-        </a>
+        <VisuelProfil />
+        <OptionSimplePourNavbar />
         <a href="/" onClick={toggleMenu}>
           Accueil
         </a>
         <a href="/calendrier" onClick={toggleMenu}>
           Calendrier
         </a>
-        <a href="/événements" onClick={toggleMenu}>
+        <a href="/evenements" onClick={toggleMenu}>
           Événements
-        </a>
-        <a href="/postulation" onClick={toggleMenu}>
-          Postuler
         </a>
         <div className="bottom-sidemenu"></div>
       </div>

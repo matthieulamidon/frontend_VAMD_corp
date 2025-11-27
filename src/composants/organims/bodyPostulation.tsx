@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../App.css";
-import "../pages//postulation.css";
+import "../styles/App.css";
+import "../styles/postulation.css";
 import FormulairePostulation from "../molecules/formulairePostulation";
 
 const BodyPostulation: React.FC = () => {
@@ -18,6 +18,7 @@ const BodyPostulation: React.FC = () => {
   const [teamRole, setTeamRole] = useState<string>("joueur");
   const [error, setError] = useState<string | null>(null);
 
+  const API_URL =
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
       "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";

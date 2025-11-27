@@ -1,5 +1,5 @@
-import "../../App.css";
-import "../../accueil.css";
+import "../styles/App.css";
+import "../styles/accueil.css";
 
 // Images
 import VAMD_ekip from "../../assets/equip/equipe_projet_advm.png";
@@ -15,7 +15,11 @@ const AccueilEquip = () => {
           <h2>L'APAGNAN CORP</h2>
           <p>
             L’Apagnan Corp est l’équipe fondatrice à l’origine du projet VAMD.
-            <hr style={{ borderColor: "red" }} />
+          </p>
+
+          <hr style={{ borderColor: "red" }} />
+
+          <p>
             Créée en 2025, elle s’est rapidement imposée comme la force motrice
             derrière le développement de l’application. Composée de membres
             passionnés, dynamiques et complémentaires, l’Apagnan Corp ne cesse

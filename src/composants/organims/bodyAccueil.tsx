@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import "../../App.css";
-import "../../accueil.css";
+import "../styles/App.css";
+import "../styles/accueil.css";
 
 // Images
 import BackgroundEsport from "../../assets/background_esport.jpg";
@@ -28,7 +28,7 @@ const sponsors = [
     class: "",
   },
   { id: "free", src: Free, link: "https://www.free.fr", class: "free" },
-  { id: "sco", src: SCO, link: "https://www.sco.fr", class: "" },
+  { id: "sco", src: SCO, link: "https://angers-sco.fr", class: "" },
   {
     id: "legaulois",
     src: LeGaulois,
@@ -80,25 +80,20 @@ const BodyAccueil = () => {
           ref={trackRef}
           style={{ transform: `translateX(${position}px)` }}
         >
-          {sponsors
-            .flatMap((sponsor) => [
-              { ...sponsor, _dup: "a", _key: `${sponsor.id}-a` },
-              { ...sponsor, _dup: "b", _key: `${sponsor.id}-b` },
-            ])
-            .map((sponsor) => (
-              <a
-                key={sponsor._key}
-                href={sponsor.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={sponsor.src}
-                  alt={`Sponsor ${sponsor.id}`}
-                  className={`sponsors ${sponsor.class}`}
-                />
-              </a>
-            ))}
+          {[...sponsors, ...sponsors].map((sponsor, index) => (
+            <a
+              key={`${sponsor.id}-${index}`}
+              href={sponsor.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={sponsor.src}
+                alt={`Sponsor ${sponsor.id}`}
+                className={`sponsors ${sponsor.class}`}
+              />
+            </a>
+          ))}
         </div>
       </div>
     </div>

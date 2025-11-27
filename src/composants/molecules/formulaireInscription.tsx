@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
 const FormulaireInscription: React.FC = () => {
-
   const [pseudo, setPseudo] = useState<string>("");
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -12,7 +11,6 @@ const FormulaireInscription: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
-
 
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
@@ -43,7 +41,6 @@ const FormulaireInscription: React.FC = () => {
     return true;
   };
 
-  
   const navigate = useNavigate();
 
   /*
@@ -54,13 +51,14 @@ const FormulaireInscription: React.FC = () => {
 
     setLoading(true);
     try {
-      const payload: {
+      interface RegisterPayload {
         pseudo: string;
         email: string;
         password: string;
         role: string;
         date_naissance: string;
-      } = {
+      }
+      const payload: RegisterPayload = {
         // le backend attend 'pseudo' (voir testBackend.tsx), pas 'username'
         pseudo: pseudo || email,
         email,
@@ -75,7 +73,7 @@ const FormulaireInscription: React.FC = () => {
         credentials: "include",
       });
       const data = await res.json().catch(() => ({}));
-      if (res.ok) {
+      if (res.status === 201) {
         setSuccess("Compte créé avec succès. Vous pouvez vous connecter.");
         setTimeout(() => navigate("/connexion"), 800);
         return;
@@ -89,11 +87,9 @@ const FormulaireInscription: React.FC = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div>
-      
       {success && (
         <output
           className="form-success"
@@ -112,50 +108,50 @@ const FormulaireInscription: React.FC = () => {
       >
         <h2>Créer ton compte</h2>
 
-          {error && (
-            <div
-              className="form-error"
-              role="alert"
-              style={{ color: "#ffb4b4", marginBottom: "0.5rem" }}
-            >
-              {error}
-            </div>
-          )}
+        {error && (
+          <div
+            className="form-error"
+            role="alert"
+            style={{ color: "#ffb4b4", marginBottom: "0.5rem" }}
+          >
+            {error}
+          </div>
+        )}
 
-          <label htmlFor="pseudo">Pseudo</label>
-          <input
-            id="pseudo"
-            name="pseudo"
-            value={pseudo}
-            onChange={(e) => setPseudo(e.target.value)}
-          />
+        <label htmlFor="pseudo">Pseudo</label>
+        <input
+          id="pseudo"
+          name="pseudo"
+          value={pseudo}
+          onChange={(e) => setPseudo(e.target.value)}
+        />
 
-          <label htmlFor="dateOfBirth">Date de naissance</label>
-          <input
-            id="dateOfBirth"
-            name="dateOfBirth"
-            type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-          />
+        <label htmlFor="dateOfBirth">Date de naissance</label>
+        <input
+          id="dateOfBirth"
+          name="dateOfBirth"
+          type="date"
+          value={dateOfBirth}
+          onChange={(e) => setDateOfBirth(e.target.value)}
+        />
 
-          <label htmlFor="email">Adresse e-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <label htmlFor="email">Adresse e-mail</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-          <label htmlFor="password">Mot de passe</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <label htmlFor="password">Mot de passe</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <div className="form-actions">
           <button type="submit" className="btn-valider" disabled={!!loading}>
@@ -164,9 +160,7 @@ const FormulaireInscription: React.FC = () => {
         </div>
       </form>
 
-     
-
-  {/* Formulaire en une seule étape ; le flux post-inscription est géré ci-dessus */}
+      {/* Formulaire en une seule étape ; le flux post-inscription est géré ci-dessus */}
     </div>
   );
 };

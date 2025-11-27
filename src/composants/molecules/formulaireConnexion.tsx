@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
+//import { useNavigate } from "react-router-dom";
 
 const FormulaireConnexion: React.FC = () => {
-  const [emailOrPseudo, setEmailOrpseudo] = useState<string>(""); 
+  const [emailOrPseudo, setEmailOrpseudo] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  //const navigate = useNavigate();
 
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
@@ -19,11 +23,18 @@ const FormulaireConnexion: React.FC = () => {
         credentials: "include",
       });
       const data = await res.json();
-      alert(data.message || "Connexion réussie !");
+      console.log("Réponse du serveur :", data.status);
+      if (res.status === 201) {
+        setMessage(data.message || "Connexion réussie !");
+        setTimeout(() => (window.location.href = "/"), 800);
+      } else {
+        setMessage(data.message || "Échec de la connexion.");
+      }
+
       if (data.user) console.info(data.user);
     } catch (err) {
       console.error(err);
-      alert("Erreur lors du login");
+      setMessage("Erreur lors du login");
     }
   };
 
@@ -39,6 +50,7 @@ const FormulaireConnexion: React.FC = () => {
       aria-label="Formulaire de connexion"
     >
       <h2>Connecte-toi à ton compte</h2>
+      <a>{message}</a>
 
       <label htmlFor="emailOrPseudo">Adresse e-mail ou Pseudo</label>
       <input
@@ -50,7 +62,6 @@ const FormulaireConnexion: React.FC = () => {
         required
         placeholder="exemple@domaine.com"
       />
-      
 
       <label htmlFor="password">Mot de passe</label>
       <input
