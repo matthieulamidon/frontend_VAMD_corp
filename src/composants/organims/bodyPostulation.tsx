@@ -12,13 +12,12 @@ const BodyPostulation: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const [sex, setSex] = useState<string>("non precise");
+  const [sexe, setSexe] = useState<string>("non precise");
   const [desiredGames, setDesiredGames] = useState<string>("");
   const [desiredTeam, setDesiredTeam] = useState<string>("League Of Legend");
   const [teamRole, setTeamRole] = useState<string>("joueur");
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL =
   const API_URL =
     (import.meta.env.VITE_BACKEND_LINK ??
       "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
@@ -34,7 +33,7 @@ const BodyPostulation: React.FC = () => {
           const data = await res.json();
           setFirstName(data.firstName || "");
           setLastName(data.name || "");
-          setSex(data.sexe || "non precise");
+          setSexe(data.sexe || "non precise");
         } else {
           const data = await res.json().catch(() => ({}));
           console.error(data?.message ?? `Erreur (${res.status})`);
@@ -57,7 +56,7 @@ const BodyPostulation: React.FC = () => {
       setError("Le nom est requis.");
       return false;
     }
-    if (!sex) {
+    if (!sexe) {
       setError("Le sexe est requis.");
       return false;
     }
@@ -91,7 +90,13 @@ const BodyPostulation: React.FC = () => {
       const profileRes = await fetch(`${API_URL}/completeProfile`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: lastName, firstName, sexe: sex }),
+        body: JSON.stringify({
+          name: lastName,
+          firstName,
+          sexe:
+            sexe === "homme" ? "HOMME"
+            : sexe === "femme" ? "FEMME" : "NON_PRECISE",
+        }),
         credentials: "include",
       });
 
@@ -147,8 +152,8 @@ const BodyPostulation: React.FC = () => {
         setFirstName={setFirstName}
         lastName={lastName}
         setLastName={setLastName}
-        sex={sex}
-        setSex={setSex}
+        sexe={sexe}
+        setSexe={setSexe}
         roleWish={roleWish}
         setRoleWish={setRoleWish}
         desiredGames={desiredGames}

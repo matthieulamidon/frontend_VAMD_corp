@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import "../styles/connexionUtilisateur.css";
 import React, { useEffect, useState } from "react";
-import "../pages/connexionUtilisateur.css";
+import "../styles/connexionUtilisateur.css";
 
 type Props = {
   firstName: string;
   setFirstName: (v: string) => void;
   lastName: string;
   setLastName: (v: string) => void;
-  sex: string;
-  setSex: (v: string) => void;
+  sexe: string;
+  setSexe: (v: string) => void;
   roleWish: string;
   setRoleWish: (v: string) => void;
   desiredGames: string;
@@ -31,8 +29,8 @@ const FormulairePostulation: React.FC<Props> = ({
   setFirstName,
   lastName,
   setLastName,
-  sex,
-  setSex,
+  sexe,
+  setSexe,
   roleWish,
   setRoleWish,
   desiredGames,
@@ -143,8 +141,8 @@ const FormulairePostulation: React.FC<Props> = ({
         onChange={(e) => setLastName(e.target.value)}
       />
 
-      <label htmlFor="sex">Sexe</label>
-      <select id="sex" value={sex} onChange={(e) => setSex(e.target.value)}>
+      <label htmlFor="sexe">Sexe</label>
+      <select id="sexe" value={sexe} onChange={(e) => setSexe(e.target.value)}>
         <option value="homme">Homme</option>
         <option value="femme">Femme</option>
         <option value="non precise">Non précisé</option>
@@ -160,18 +158,7 @@ const FormulairePostulation: React.FC<Props> = ({
         <option value="coach">Coach</option>
       </select>
 
-      <label htmlFor="desiredGames">Jeu souhaité</label>
-      <select
-        id="desiredGames"
-        value={desiredGames}
-        onChange={(e) => setDesiredGames(e.target.value)}
-      >
-        <option value="">-- Choisir un jeu --</option>
-        <option value="League Of Legend">League Of Legend</option>
-        <option value="Fortnite">Fortnite</option>
-        <option value="Valorant">Valorant</option>
-        <option value="Fifa">Fifa</option>
-      </select>
+    
       <label htmlFor="desiredGames">
             Jeu souhaité
           </label>
@@ -199,18 +186,7 @@ const FormulairePostulation: React.FC<Props> = ({
           value={desiredTeam}
           onChange={(e) => setDesiredTeam(e.target.value)}
         >
-          {(() => {
-            const game =
-              desiredGames ||
-              desiredTeam?.split(" — ")[0] ||
-              "League Of Legend";
-            return [1, 2, 3, 4].map((n) => (
-              <option
-                key={n}
-                value={`${game} — Équipe ${n}`}
-              >{`${game} — Équipe ${n}`}</option>
-            ));
-          })()}
+          
             {(() => {
               const selectedGame = desiredGames || desiredTeam?.split(" — ")[0];
               const teamsForGame = selectedGame ? teamsByGame[selectedGame] || [] : [];
@@ -261,10 +237,11 @@ const FormulairePostulation: React.FC<Props> = ({
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
-              <option value="Duelist">Duelist</option>
-              <option value="Sentinel">Sentinel</option>
-              <option value="Initiator">Initiator</option>
-              <option value="Controller">Controller</option>
+              <option value="DUELIST">Duelist</option>
+              <option value="SENTINEL">Sentinel</option>
+              <option value="INITIATOR">Initiator</option>
+              <option value="CONTROLLER">Controller</option>
+              <option value="POLYVALENT">Polyvalent</option>
             </select>
           );
         }
