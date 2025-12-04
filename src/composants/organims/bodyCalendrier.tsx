@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import '../styles/App.css';
-import '../styles/Accueil.css';
-import '../styles/Calendrier.css';
+import "../styles/App.css";
+import "../styles/accueil.css";
+import "../styles/Calendrier.css";
 
 // Images
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
@@ -11,11 +11,8 @@ import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
 // Calendrier
 import FullCalendar from "@fullcalendar/react"; // @fullcalendar/react
 import dayGridPlugin from "@fullcalendar/daygrid";
-import frLocale from '@fullcalendar/core/locales/fr';
+import frLocale from "@fullcalendar/core/locales/fr";
 import type { EventClickArg } from "@fullcalendar/core";
-
-
-
 
 interface AgendaEvent {
   id: string;
@@ -39,30 +36,37 @@ interface BackendEvent {
 }
 
 // Convertit l'ENUM backend vers les valeurs front
-const mapBackendEnumToFront = (
-  e: string
-): "lol" | "valo" | "fortnite" => {
+const mapBackendEnumToFront = (e: string): "lol" | "valo" | "fortnite" => {
   switch (e) {
-    case "LEAGUEOFLEGENDES": return "lol";
-    case "VALORANT": return "valo";
-    case "FORTNITE": return "fortnite";
-    default: return "lol";
+    case "LEAGUEOFLEGENDES":
+      return "lol";
+    case "VALORANT":
+      return "valo";
+    case "FORTNITE":
+      return "fortnite";
+    default:
+      return "lol";
   }
 };
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") + "/api/events";
+    (import.meta.env.VITE_BACKEND_LINK ??
+      "https://backend-vamd-corp.onrender.com") + "/api/events";
 
   const [events, setEvents] = useState<AgendaEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<AgendaEvent | null>(null);
 
   const getLogo = (game: AgendaEvent["game"]) => {
     switch (game) {
-      case "lol": return Logo_LoL;
-      case "valo": return Logo_Valo;
-      case "fortnite": return Logo_Fortnite;
-      default: return "";
+      case "lol":
+        return Logo_LoL;
+      case "valo":
+        return Logo_Valo;
+      case "fortnite":
+        return Logo_Fortnite;
+      default:
+        return "";
     }
   };
 
@@ -71,7 +75,8 @@ const BodyCalendrier: React.FC = () => {
     const fetchEvents = async () => {
       try {
         const res = await fetch(`${EVENTS_API_URL}/events`);
-        if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
+        if (!res.ok)
+          throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
 
@@ -97,7 +102,7 @@ const BodyCalendrier: React.FC = () => {
 
   // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
-    const ev = events.find(e => e.id === clickInfo.event.id);
+    const ev = events.find((e) => e.id === clickInfo.event.id);
     if (ev) setSelectedEvent(ev);
   };
 
@@ -107,12 +112,28 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
         {events.map((ev) => (
-          <div key={ev.id} className="body-child-event" onClick={() => setSelectedEvent(ev)}>
-            <img src={getLogo(ev.game)} alt={ev.game} className="logo-child-event" />
+          <div
+            key={ev.id}
+            className="body-child-event"
+            onClick={() => setSelectedEvent(ev)}
+          >
+            <img
+              src={getLogo(ev.game)}
+              alt={ev.game}
+              className="logo-child-event"
+            />
             <h3 className="subtitle-child-calendrier">{ev.title}</h3>
             <span className="date-child-event">
-              {new Date(ev.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
-              {ev.end && " - " + new Date(ev.end).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
+              {new Date(ev.start).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "2-digit",
+              })}
+              {ev.end &&
+                " - " +
+                  new Date(ev.end).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                  })}
             </span>
           </div>
         ))}
@@ -137,13 +158,19 @@ const BodyCalendrier: React.FC = () => {
         {selectedEvent ? (
           <div className="event-details">
             <h2>{selectedEvent.title}</h2>
-            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-child-event" />
+            <img
+              src={getLogo(selectedEvent.game)}
+              alt={selectedEvent.game}
+              className="logo-child-event"
+            />
             <p>
               <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()} <br />
-              <strong>Début :</strong> {new Date(selectedEvent.start).toLocaleString()} <br />
+              <strong>Début :</strong>{" "}
+              {new Date(selectedEvent.start).toLocaleString()} <br />
               {selectedEvent.end && (
                 <>
-                  <strong>Fin :</strong> {new Date(selectedEvent.end).toLocaleString()} <br />
+                  <strong>Fin :</strong>{" "}
+                  {new Date(selectedEvent.end).toLocaleString()} <br />
                 </>
               )}
               {selectedEvent.lieu && (
@@ -153,7 +180,8 @@ const BodyCalendrier: React.FC = () => {
               )}
               {selectedEvent.description && (
                 <>
-                  <strong>Description :</strong> {selectedEvent.description} <br />
+                  <strong>Description :</strong> {selectedEvent.description}{" "}
+                  <br />
                 </>
               )}
             </p>
