@@ -22,7 +22,6 @@ import Saudi from "../../assets/equip/logos_tournois/logo_saudi_league.png";
 import Pannuhuone from "../../assets/equip/logos_tournois/logo_pannuhuone.png";
 import Teamsecret from "../../assets/equip/logos_tournois/logo_teamsecret.png";
 
-import Logo_Apagnan from "../../../public/logo_vamd_icon.png";
 import Logo_Betway from "../../assets/logo_betway.png";
 
 const BodyEvenement = () => {
@@ -105,11 +104,11 @@ const BodyEvenement = () => {
             location="Manchester"
             prize="$863,170"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -122,11 +121,11 @@ const BodyEvenement = () => {
             location="China"
             prize="$60,438"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -143,11 +142,11 @@ const BodyEvenement = () => {
             location="South Korea"
             prize="$500,000"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -160,11 +159,11 @@ const BodyEvenement = () => {
             location="Brazil"
             prize="$240,000"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -177,11 +176,11 @@ const BodyEvenement = () => {
             location="France, Paris"
             prize="$11,159"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -198,11 +197,11 @@ const BodyEvenement = () => {
             location="Online"
             prize="$9,400 USD"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
 
@@ -215,11 +214,11 @@ const BodyEvenement = () => {
             location="Saudi Arabia"
             prize="$32,024"
             ekips={[
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
-              Logo_Apagnan,
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
+              "/logo_apagnan.png",
             ]}
           />
         </div>

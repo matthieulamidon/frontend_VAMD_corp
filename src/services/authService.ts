@@ -3,14 +3,13 @@
 import type { UserCookies } from "../types/user";
 
 const API_URL =
-  import.meta.env.VITE_BACKEND_LINK + "/api/auth" ||
-  "http://localhost:4000/api/auth";
+  import.meta.env.VITE_BACKEND_LINK + "/api" || "http://localhost:4000/api";
 
 // Service d'authentification pour communiquer avec le backend j'ai suivi un tuto et je suis a deux doigts de tout suprimer car on a que un systeme de  login
 export const authService = {
   checkAuth: async (): Promise<UserCookies | false> => {
     try {
-      const response = await fetch(API_URL + "/me", {
+      const response = await fetch(API_URL + "/auth/me", {
         method: "GET",
         credentials: "include",
       });
@@ -33,7 +32,7 @@ export const authService = {
 
   //et oui j'ai coder ça mais ça ne sert a rien vu que je ne suis pas repaser sur le code de victor pour l'instant
   login: async (emailOrPseudo: string, password: string): Promise<boolean> => {
-    const response = await fetch(API_URL + "/login", {
+    const response = await fetch(API_URL + "/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -44,9 +43,22 @@ export const authService = {
   },
 
   logout: async (): Promise<void> => {
-    await fetch(API_URL + "/logout", {
+    await fetch(API_URL + "/auth/logout", {
       method: "POST",
       credentials: "include",
     });
+  },
+
+  equipeParDefault: async (): Promise<string | null> => {
+    const response = await fetch(
+      API_URL + "/managmentEquipe/getAllEquipeOfPlayer",
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+    return data.equipes && data.equipes.length > 0 ? data.equipes[0] : null;
   },
 };

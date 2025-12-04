@@ -67,6 +67,23 @@
   box-sizing: border-box;
 }
 
+.vp-menu-deroulant {
+  position: absolute; /* Sort du flux normal */
+  top: 100%; /* Se place juste en dessous du conteneur */
+  left: 0; /* S'aligne sur le bord gauche du conteneur */
+
+  background-color: #ffffff;
+  min-width: 180px; /* Largeur minimum pour que ce soit lisible */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Une jolie ombre portée */
+
+  display: flex;
+  flex-direction: column; /* Empile les boutons verticalement */
+  padding: 5px 0; /* Un peu d'espace en haut et en bas */
+  z-index: 1000; /* S'assure qu'il passe au-dessus du reste du site */
+  overflow: hidden; /* Pour que les enfants ne dépassent pas des coins arrondis */
+}
+
 .navbar-left {
   display: flex;
   align-items: center;
