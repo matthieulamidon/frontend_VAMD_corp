@@ -9,7 +9,7 @@ import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
 
 // Calendrier
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react"; // @fullcalendar/react
 import dayGridPlugin from "@fullcalendar/daygrid";
 import frLocale from '@fullcalendar/core/locales/fr';
 import type { EventClickArg } from "@fullcalendar/core";
