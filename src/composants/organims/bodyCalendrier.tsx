@@ -66,7 +66,6 @@ const BodyCalendrier: React.FC = () => {
     }
   };
 
-  // Chargement des événements
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -74,19 +73,21 @@ const BodyCalendrier: React.FC = () => {
         if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
-
         const formatted: AgendaEvent[] = data.map((ev) => ({
           id: ev.id_event.toString(),
           title: ev.titre_event,
           start: ev.date_heure_debut,
           end: ev.date_heure_fin,
-          allDay: true, // false pour FullCalendar précis sur les heures
+          allDay: false,
           game: mapBackendEnumToFront(ev.type_event),
           lieu: ev.lieu,
           description: ev.description,
         }));
 
         setEvents(formatted);
+
+        // Sélection automatique du premier event
+        if (formatted.length > 0) setSelectedEvent(formatted[0]);
       } catch (err) {
         console.error("Erreur fetchEvents:", err);
       }
@@ -94,6 +95,7 @@ const BodyCalendrier: React.FC = () => {
 
     fetchEvents();
   }, [EVENTS_API_URL]);
+
 
   // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
@@ -128,6 +130,7 @@ const BodyCalendrier: React.FC = () => {
             locale={frLocale}
             eventDisplay="block"
             eventClick={handleEventClick}
+            timeZone="UTC"
           />
         </div>
       </div>
@@ -136,26 +139,45 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-right-calendrier">
         {selectedEvent ? (
           <div className="event-details">
-            <h2>{selectedEvent.title}</h2>
-            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-child-event" />
+            <div className="title-calendrier title-descrip-event">{selectedEvent.title}</div>
+            <div className="separation sep-des-event"></div>
+            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-descrptn-child-event" />
             <p>
-              <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()} <br />
-              <strong>Début :</strong> {new Date(selectedEvent.start).toLocaleString()} <br />
-              {selectedEvent.end && (
-                <>
-                  <strong>Fin :</strong> {new Date(selectedEvent.end).toLocaleString()} <br />
-                </>
-              )}
-              {selectedEvent.lieu && (
-                <>
-                  <strong>Lieu :</strong> {selectedEvent.lieu} <br />
-                </>
-              )}
-              {selectedEvent.description && (
-                <>
-                  <strong>Description :</strong> {selectedEvent.description} <br />
-                </>
-              )}
+              <div className="content-descrptn-event-jeu">
+                <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()}
+              </div>
+              <div className="content-descrptn-event-jeu">
+                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", })}
+                <div className="content-descrptn-event-horaires">
+                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                  {"  ⟼  "}
+                  {selectedEvent.end && (
+                    <>
+                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                    </>
+                  )}
+                </div>
+              </div>
+              <div className="content-descrptn-event-jeu">
+                {selectedEvent.lieu && (
+                  <>
+                    <strong>Lieu :</strong> {selectedEvent.lieu} <br />
+                    {selectedEvent.lieu && (
+                      <div className="map-container">
+                        <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
+                      </div>
+                    )}
+
+                  </>
+                )}
+              </div>
+              <div className="content-descrptn-event-description">
+                {selectedEvent.description && (
+                  <>
+                    <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
+                  </>
+                )}
+              </div>
             </p>
           </div>
         ) : (

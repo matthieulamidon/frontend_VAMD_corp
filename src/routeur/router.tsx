@@ -12,6 +12,7 @@ import Calendrier from "../composants/pages/calendrier";
 import Evenements from "../composants/pages/evenements";
 import AccueilPortailPatron from "../composants/pages/AccueilPatron";
 import AccueilPortailCoach from "../composants/pages/AccueilCoach";
+import CreationEvent from "../composants/pages/CreationEvent";
 
 //requiredRole="JOUEUR"
 
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="COACH">
         <AccueilPortailCoach />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/creation-evenement",
+    element: (
+      <ProtectedRoute requiredRole="COACH">
+        <CreationEvent />
       </ProtectedRoute>
     ),
   },

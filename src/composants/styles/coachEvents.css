@@ -1,0 +1,74 @@
+.body-coach-events {
+  padding-top: 88px;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: black;
+  color: white;
+}
+
+.tableau-events-coach {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  border-collapse: collapse;
+  border-radius: 20px;
+  border: 2px solid rgba(217, 113, 255, 0.8);
+}
+
+.title-tableau-events-coach {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  height: 70px;
+  color: rgb(255, 186, 253);
+  font-weight: bold;
+  font-family: Helvetica;
+  background-color: rgb(30, 11, 104);
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+  border-bottom: 2px solid rgba(217, 113, 255, 0.8);
+  text-shadow: var(--text-glow-blue);
+}
+
+.ajout-event {
+  font-size: 1.3rem;
+  font-style: italic;
+  background-color: rgb(69, 0, 116);
+  border-radius: 0;
+  text-shadow: var(--text-glow);
+}
+
+.ajout-event:hover {
+  background-color: rgb(95, 0, 158);
+}
+
+.table-coach-events {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table-coach-events th,
+.table-coach-events td {
+  border-bottom: 1px solid rgba(217, 113, 255, 0.5);
+  padding: 20px;
+  color: #fff;
+}
+
+.table-coach-events th {
+  font-weight: bold;
+  background-color: rgba(39, 0, 65, 0.8);
+}
+.table-coach-events tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-coach-events tbody tr:hover {
+  background-color: rgba(39, 0, 65, 0.8);
+}
+

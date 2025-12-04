@@ -22,7 +22,7 @@ import Saudi from "../../assets/equip/logos_tournois/logo_saudi_league.png";
 import Pannuhuone from "../../assets/equip/logos_tournois/logo_pannuhuone.png";
 import Teamsecret from "../../assets/equip/logos_tournois/logo_teamsecret.png";
 
-import Logo_Apagnan from "../../../public/logo_vamd_icon.png";
+import Logo_Apagnan from "../../assets/logo_vamd_icon.png";
 import Logo_Betway from "../../assets/logo_betway.png";
 
 const BodyEvenement = () => {
