@@ -45,7 +45,7 @@ const BodyPostulation: React.FC = () => {
       }
     };
     fetchUserInfo();
-  }, []);
+  }, [API_URL]);
 
   const validatePostulation = () => {
     if (!firstName.trim()) {
@@ -65,7 +65,9 @@ const BodyPostulation: React.FC = () => {
       return false;
     }
     if ((roleWish === "joueur" || roleWish === "coach") && !desiredGames) {
-      setError("Veuillez choisir un jeu si vous postulez comme joueur ou coach.");
+      setError(
+        "Veuillez choisir un jeu si vous postulez comme joueur ou coach."
+      );
       return false;
     }
     if (roleWish === "joueur" && !desiredTeam) {
@@ -94,15 +96,20 @@ const BodyPostulation: React.FC = () => {
           name: lastName,
           firstName,
           sexe:
-            sexe === "homme" ? "HOMME"
-            : sexe === "femme" ? "FEMME" : "NON_PRECISE",
+            sexe === "homme"
+              ? "HOMME"
+              : sexe === "femme"
+                ? "FEMME"
+                : "NON_PRECISE",
         }),
         credentials: "include",
       });
 
       if (!profileRes.ok) {
         const data = await profileRes.json().catch(() => ({}));
-        throw new Error(data?.message ?? `Erreur profil (${profileRes.status})`);
+        throw new Error(
+          data?.message ?? `Erreur profil (${profileRes.status})`
+        );
       }
 
       let finalRes;
@@ -133,7 +140,9 @@ const BodyPostulation: React.FC = () => {
         setTimeout(() => navigate("/profil"), 2000);
       } else if (finalRes) {
         const data = await finalRes.json().catch(() => ({}));
-        throw new Error(data?.message ?? `Erreur postulation (${finalRes.status})`);
+        throw new Error(
+          data?.message ?? `Erreur postulation (${finalRes.status})`
+        );
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
