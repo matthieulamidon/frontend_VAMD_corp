@@ -13,6 +13,7 @@ import Evenements from "../composants/pages/evenements";
 import AccueilPortailPatron from "../composants/pages/AccueilPatron";
 import AccueilPortailCoach from "../composants/pages/AccueilCoach";
 import CreationEvent from "../composants/pages/CreationEvent";
+import ModifEvent from "../composants/pages/ModifEvent";
 
 //requiredRole="JOUEUR"
 
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="COACH">
         <CreationEvent />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/modif-evenement",
+    element: (
+      <ProtectedRoute requiredRole="COACH">
+        <ModifEvent />
       </ProtectedRoute>
     ),
   },

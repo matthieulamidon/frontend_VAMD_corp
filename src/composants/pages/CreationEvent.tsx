@@ -13,11 +13,11 @@ function CreationEvent() {
 
                     <div className="switch-event-bigevent">
                         <button className={!isBigEvent ? "switch-btn active" : "switch-btn"} onClick={() => setIsBigEvent(false)}>
-                            Événement classique
+                            Créer un Entraînement
                         </button>
                         <div className="emoji-fleche-tournante">🗘</div>
                         <button className={isBigEvent ? "switch-btn active" : "switch-btn"} onClick={() => setIsBigEvent(true)}>
-                            Événement mondial
+                            Créer un Match
                         </button>
                     </div>
 

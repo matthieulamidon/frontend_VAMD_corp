@@ -21,7 +21,6 @@ function AccueilPortailCoach() {
       { date: "07/12/2025", name: "Réunion vidéo", lieu: "En ligne" },
       { date: "10/12/2025", name: "Analyse des matchs", lieu: "Salle vidéo" },
     ];
-
     setEvents(fakeEvents);
   }, []);
 
@@ -33,7 +32,6 @@ function AccueilPortailCoach() {
   return (
     <>
       <NavbarJoueur />
-
       <div className="body-coach-events">
         <div className="tableau-events-coach">
           <div className="title-tableau-events-coach">Événements</div>
