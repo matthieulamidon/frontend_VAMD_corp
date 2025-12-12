@@ -12,6 +12,7 @@ import Calendrier from "../composants/pages/calendrier";
 import Evenements from "../composants/pages/evenements";
 import AccueilPortailPatron from "../composants/pages/AccueilPatron";
 import AccueilPortailCoach from "../composants/pages/AccueilCoach";
+import ProfilJoueur from "../composants/pages/profilJoueur";
 
 //requiredRole="JOUEUR"
 
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
   {
     path: "/evenements",
     element: <Evenements />,
+  },
+  {
+    path: "/profil",
+    element: (
+        <ProfilJoueur />
+    ),
   },
 ]);
 

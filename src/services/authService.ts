@@ -6,6 +6,10 @@ const API_URL =
   import.meta.env.VITE_BACKEND_LINK + "/api/auth" ||
   "http://localhost:4000/api/auth";
 
+const API_USER_URL =
+  import.meta.env.VITE_BACKEND_LINK + "/api/user" ||
+  "http://localhost:4000/api/auth";
+
 // Service d'authentification pour communiquer avec le backend j'ai suivi un tuto et je suis a deux doigts de tout suprimer car on a que un systeme de  login
 export const authService = {
   checkAuth: async (): Promise<UserCookies | false> => {
@@ -49,4 +53,4 @@ export const authService = {
       credentials: "include",
     });
   },
-};
+};export { API_URL, API_USER_URL };
