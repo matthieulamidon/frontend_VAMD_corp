@@ -1,134 +1,204 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import "../composants/styles/App.css";
-import Accueil from "../composants/pages/accueil";
-import ConnexionUtilisateur from "../composants/pages/connexionUtilisateur";
-import AuthPage from "../composants/organims/testBackend";
-import AccueilJoueur from "../composants/pages/AccueilJoueur";
 
 import { ProtectedRoute } from "./ProtectedRoute";
-import PageAdmin from "../composants/pages/PageAdmin";
-import Postulation from "../composants/pages/postulation";
-import Calendrier from "../composants/pages/calendrier";
-import Evenements from "../composants/pages/evenements";
-import AccueilPortailPatron from "../composants/pages/AccueilPatron";
-import AccueilPortailCoach from "../composants/pages/AccueilCoach";
-import CreationEvent from "../composants/pages/CreationEvent";
-import ModifEvent from "../composants/pages/ModifEvent";
-import ProfilJoueur from "../composants/pages/profilJoueur";
 
-//requiredRole="JOUEUR"
-import GestionDesPostulantPortailCoach from "../composants/pages/gestionDesInscriptionCoach";
-import StateUser from "../composants/pages/StateUser";
-import AdminJoueurDashbord from "../composants/organims/AdminJoueurDashbord";
+// 🔥 Lazy loading pour réduire ton bundle
+const Accueil = lazy(() => import("../composants/pages/accueil"));
+const ConnexionUtilisateur = lazy(
+  () => import("../composants/pages/connexionUtilisateur")
+);
+const AuthPage = lazy(() => import("../composants/organims/testBackend"));
+const AccueilJoueur = lazy(() => import("../composants/pages/AccueilJoueur"));
+const PageAdmin = lazy(() => import("../composants/pages/PageAdmin"));
+const Postulation = lazy(() => import("../composants/pages/postulation"));
+const Calendrier = lazy(() => import("../composants/pages/calendrier"));
+const Evenements = lazy(() => import("../composants/pages/evenements"));
+const AccueilPortailPatron = lazy(
+  () => import("../composants/pages/AccueilPatron")
+);
+const AccueilPortailCoach = lazy(
+  () => import("../composants/pages/AccueilCoach")
+);
+const CreationEvent = lazy(() => import("../composants/pages/CreationEvent"));
+const ModifEvent = lazy(() => import("../composants/pages/ModifEvent"));
+const ProfilJoueur = lazy(() => import("../composants/pages/profilJoueur"));
+const GestionDesPostulantPortailCoach = lazy(
+  () => import("../composants/pages/gestionDesInscriptionCoach")
+);
+const StateUser = lazy(() => import("../composants/pages/StateUser"));
+const AdminJoueurDashbord = lazy(
+  () => import("../composants/organims/AdminJoueurDashbord")
+);
+
+// Composant wrapper pour Suspense
+const Loader = (
+  <div style={{ color: "white", textAlign: "center", paddingTop: "30px" }}>
+    Chargement...
+  </div>
+);
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Accueil />,
+    element: (
+      <Suspense fallback={Loader}>
+        <Accueil />
+      </Suspense>
+    ),
   },
   {
     path: "/connexion",
-    element: <ConnexionUtilisateur />,
+    element: (
+      <Suspense fallback={Loader}>
+        <ConnexionUtilisateur />
+      </Suspense>
+    ),
   },
   {
     path: "/postulation",
     element: (
-      <ProtectedRoute requiredRole="USER">
-        <Postulation />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="USER">
+          <Postulation />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/auth-test",
-    element: <AuthPage />,
+    element: (
+      <Suspense fallback={Loader}>
+        <AuthPage />
+      </Suspense>
+    ),
   },
   {
     path: "/portail-joueur",
     element: (
-      <ProtectedRoute requiredRole="JOUEUR">
-        <AccueilJoueur />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="JOUEUR">
+          <AccueilJoueur />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/portail-coach",
     element: (
-      <ProtectedRoute requiredRole="COACH">
-        <AccueilPortailCoach />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="COACH">
+          <AccueilPortailCoach />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/gestion-postulants-coach",
     element: (
-      <ProtectedRoute requiredRole="COACH">
-        <GestionDesPostulantPortailCoach />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="COACH">
+          <GestionDesPostulantPortailCoach />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/stateJoueur",
     element: (
-      <ProtectedRoute requiredRole="JOUEUR">
-        <StateUser />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="JOUEUR">
+          <StateUser />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/creation-evenement",
     element: (
-      <ProtectedRoute requiredRole="COACH">
-        <CreationEvent />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="COACH">
+          <CreationEvent />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/modif-evenement/:id",
     element: (
-      <ProtectedRoute requiredRole="COACH">
-        <ModifEvent />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="COACH">
+          <ModifEvent />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/portail-patron",
     element: (
-      <ProtectedRoute requiredRole="PATRON">
-        <AccueilPortailPatron />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="PATRON">
+          <AccueilPortailPatron />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/admin",
     element: (
-      <ProtectedRoute requiredRole="ADMIN">
-        <PageAdmin />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="ADMIN">
+          <PageAdmin />
+        </ProtectedRoute>
+      </Suspense>
     ),
   },
   {
     path: "/adminDashboard",
     element: (
-      <ProtectedRoute requiredRole="ADMIN">
-        <AdminJoueurDashbord />
-      </ProtectedRoute>
+      <Suspense fallback={Loader}>
+        <ProtectedRoute requiredRole="ADMIN">
+          <AdminJoueurDashbord />
+        </ProtectedRoute>
+      </Suspense>
+    ),
+  },
+
+  // Pages publiques
+  {
+    path: "/calendrier",
+    element: (
+      <Suspense fallback={Loader}>
+        <Calendrier />
+      </Suspense>
     ),
   },
   {
-    path: "*",
-    element: <Accueil />,
-  },
-  {
-    path: "/calendrier",
-    element: <Calendrier />,
-  },
-  {
     path: "/evenements",
-    element: <Evenements />,
+    element: (
+      <Suspense fallback={Loader}>
+        <Evenements />
+      </Suspense>
+    ),
   },
   {
     path: "/profil",
-    element: <ProfilJoueur />,
+    element: (
+      <Suspense fallback={Loader}>
+        <ProfilJoueur />
+      </Suspense>
+    ),
+  },
+
+  // Fallback route
+  {
+    path: "*",
+    element: (
+      <Suspense fallback={Loader}>
+        <Accueil />
+      </Suspense>
+    ),
   },
 ]);
 

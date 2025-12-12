@@ -49,7 +49,7 @@ const TabInfoProfilJoueur: React.FC<TabInfoProfilJoueurProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const dataToSend = { ...formData };
 
     if (!dataToSend.date_naissance) {
@@ -60,20 +60,37 @@ const TabInfoProfilJoueur: React.FC<TabInfoProfilJoueurProps> = ({
   };
 
   if (!user) {
-    return null; 
+    return null;
   }
 
   if (!isEditing) {
     return (
       <div className="profil-joueur-container">
         <h1>Profil de {user.pseudo}</h1>
-        <p><strong>Pseudo:</strong> {user.pseudo}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Nom:</strong> {user.nom}</p>
-        <p><strong>Prénom:</strong> {user.prenom}</p>
-        <p><strong>Description:</strong> {user.description || "Non renseignée"}</p>
-        <p><strong>Date de naissance:</strong> {user.date_naissance ? new Date(user.date_naissance).toLocaleDateString() : "Non renseignée"}</p>
-        <button onClick={onEdit} className="btn-edit-profil">Modifier le profil</button>
+        <p>
+          <strong>Pseudo:</strong> {user.pseudo}
+        </p>
+        <p>
+          <strong>Email:</strong> {user.email}
+        </p>
+        <p>
+          <strong>Nom:</strong> {user.nom}
+        </p>
+        <p>
+          <strong>Prénom:</strong> {user.prenom}
+        </p>
+        <p>
+          <strong>Description:</strong> {user.description || "Non renseignée"}
+        </p>
+        <p>
+          <strong>Date de naissance:</strong>{" "}
+          {user.date_naissance
+            ? new Date(user.date_naissance).toLocaleDateString()
+            : "Non renseignée"}
+        </p>
+        <button onClick={onEdit} className="btn-edit-profil">
+          Modifier le profil
+        </button>
       </div>
     );
   }
@@ -81,21 +98,46 @@ const TabInfoProfilJoueur: React.FC<TabInfoProfilJoueurProps> = ({
   return (
     <form onSubmit={handleSubmit} className="profil-joueur-container">
       <h1>Modifier mon profil</h1>
-      
+
       <label>Pseudo:</label>
-      <input type="text" name="pseudo" value={formData.pseudo || ""} onChange={handleChange} />
+      <input
+        type="text"
+        name="pseudo"
+        value={formData.pseudo || ""}
+        onChange={handleChange}
+      />
 
       <label>Email:</label>
-      <input type="email" name="email" value={formData.email || ""} onChange={handleChange} />
+      <input
+        type="email"
+        name="email"
+        value={formData.email || ""}
+        onChange={handleChange}
+      />
 
       <label>Nom:</label>
-      <input type="text" name="nom" value={formData.nom || ""} onChange={handleChange} />
+      <input
+        type="text"
+        name="nom"
+        value={formData.nom || ""}
+        onChange={handleChange}
+      />
 
       <label>Prénom:</label>
-      <input type="text" name="prenom" value={formData.prenom || ""} onChange={handleChange} />
+      <input
+        type="text"
+        name="prenom"
+        value={formData.prenom || ""}
+        onChange={handleChange}
+      />
 
       <label>Date de naissance:</label>
-      <input type="date" name="date_naissance" value={formData.date_naissance?.toString() || ""} onChange={handleChange} />
+      <input
+        type="date"
+        name="date_naissance"
+        value={formData.date_naissance?.toString() || ""}
+        onChange={handleChange}
+      />
 
       <label>Sexe:</label>
       <select name="sexe" value={formData.sexe || ""} onChange={handleChange}>
@@ -105,13 +147,22 @@ const TabInfoProfilJoueur: React.FC<TabInfoProfilJoueurProps> = ({
       </select>
 
       <label>Description:</label>
-      <textarea name="description" value={formData.description || ""} onChange={handleChange} />
+      <textarea
+        name="description"
+        value={formData.description || ""}
+        onChange={handleChange}
+      />
 
       <div className="form-actions">
         <button type="submit" className="btn-save" disabled={isLoading}>
           {isLoading ? "Sauvegarde..." : "Sauvegarder"}
         </button>
-        <button type="button" className="btn-cancel" onClick={onCancel} disabled={isLoading}>
+        <button
+          type="button"
+          className="btn-cancel"
+          onClick={onCancel}
+          disabled={isLoading}
+        >
           Annuler
         </button>
       </div>

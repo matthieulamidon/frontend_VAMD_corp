@@ -3,7 +3,6 @@ import type { User } from "../../types/user";
 import TabInfoProfilJoueur from "../molecules/tabInfoProfilJoueur";
 import { API_USER_URL } from "../../services/authService";
 
-
 const BodyProfilJoueur: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -37,7 +36,9 @@ const BodyProfilJoueur: React.FC = () => {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError("Une erreur inattendue est survenue lors du chargement des données.");
+          setError(
+            "Une erreur inattendue est survenue lors du chargement des données."
+          );
         }
         console.error(err);
       } finally {
@@ -69,7 +70,9 @@ const BodyProfilJoueur: React.FC = () => {
       if (!contentType || !contentType.includes("application/json")) {
         const text = await response.text();
         console.error("Réponse non-JSON reçue du serveur :", text);
-        throw new Error(`Erreur serveur (${response.status}) : L'API n'a pas renvoyé de JSON.`);
+        throw new Error(
+          `Erreur serveur (${response.status}) : L'API n'a pas renvoyé de JSON.`
+        );
       }
 
       if (!response.ok) {
@@ -78,9 +81,9 @@ const BodyProfilJoueur: React.FC = () => {
       }
 
       const data = await response.json();
-      setUser(data.user); 
+      setUser(data.user);
       setSuccess("Profil mis à jour avec succès !");
-      setIsEditing(false); 
+      setIsEditing(false);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);

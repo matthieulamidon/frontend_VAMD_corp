@@ -66,4 +66,4 @@ export const authService = {
     return data.equipes && data.equipes.length > 0 ? data.equipes[0] : null;
   },
 };
-};export { API_URL, API_USER_URL };
+export { API_URL, API_USER_URL };

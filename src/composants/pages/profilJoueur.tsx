@@ -11,4 +11,4 @@ function ProfilJoueur() {
     </div>
   );
 }
-export default profilJoueur;
+export default ProfilJoueur;
