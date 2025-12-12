@@ -52,12 +52,6 @@ const NavbarJoueur = () => {
       const teamList = await fetchPlayerTeams();
       if (teamList && Array.isArray(teamList)) {
         setTeams(teamList);
-
-        // Optionnel : Si aucune équipe n'est sélectionnée mais qu'il y en a, on sélectionne la première par défaut
-        /* if (!teamSelect && teamList.length > 0) {
-             setTeamSelectFun(teamList[0]);
-        } 
-        */
       }
     };
     loadTeams();
@@ -85,13 +79,12 @@ const NavbarJoueur = () => {
             <img src={LogoNavbar} className="logoNavbar" alt="VAMD" />
           </a>
 
-          <a href="/portail-joueur" className="btnnav">
-            Accueil Joueur
+          <a href="/portail-coach" className="btnnav">
+            Accueil Coach
           </a>
 
           <div className="vp-username" onClick={() => setOpen(!open)}>
             <span></span>
-            {/* Affiche le nom de l'équipe sélectionnée ou un texte par défaut */}
             <a className="btnnav">
               {teamSelect ? teamSelect : "Sélecteur d'équipe"}
             </a>
@@ -121,9 +114,6 @@ const NavbarJoueur = () => {
           </a>
           <a href="/evenements" className="btnnav">
             Événements
-          </a>
-          <a href="/stateJoueur" className="btnnav">
-            State Joueur
           </a>
         </div>
         <div className="navbar-right">

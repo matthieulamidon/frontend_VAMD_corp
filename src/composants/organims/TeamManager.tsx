@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexte/useAuth"; // Adapte le chemin
 import icon_bot from "../../assets/map/bot_icon.png"; // Placeholder image
+import DataPlayerCard from "../molecules/DataPlayerCard";
 
 // --- TYPES ---
 type GameType = "League of Legends" | "Valorant" | "Fortnite";
@@ -41,11 +42,14 @@ export const TeamManager = () => {
   // Liste plate de tous les joueurs modifiables
   const [players, setPlayers] = useState<PlayerEditState[]>([]);
 
+  // --- NOUVEAUX ÉTATS POUR LA MODALE ---
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState("");
+
   const API_URL =
     import.meta.env.VITE_BACKEND_LINK + "/api/managmentEquipe" ||
     "http://localhost:4000/api/managmentEquipe";
 
-  // --- 1. CHARGEMENT DES DONNÉES ---
   useEffect(() => {
     if (!teamSelect) return;
 
@@ -62,17 +66,13 @@ export const TeamManager = () => {
         if (response.ok) {
           const data = await response.json();
 
-          // Détection du jeu
           let detectedGame: GameType = "League of Legends";
           if (data.gameName === "VALORANT") detectedGame = "Valorant";
           else if (data.gameName === "FORTNITE") detectedGame = "Fortnite";
           setGame(detectedGame);
 
-          // APLATISSEMENT DES DONNÉES (Flattening)
-          // On transforme la structure complexe (mainTeam, subs, etc.) en une liste simple
           const allPlayers: PlayerEditState[] = [];
 
-          // A. Titulaires (Main Team) : data.mainTeam est { duelist: "Pseudo", ... }
           if (data.mainTeam) {
             Object.entries(data.mainTeam).forEach(([pos, pseudo]) => {
               if (typeof pseudo === "string") {
@@ -85,9 +85,7 @@ export const TeamManager = () => {
             });
           }
 
-          // B. Remplaçants
           (data.subsData || []).forEach((sub: ApiMember) => {
-            // "duelist Sub" -> on essaie d'extraire "DUELIST"
             const cleanPos = sub.roleName.replace(" Sub", "").toUpperCase();
             allPlayers.push({
               pseudo: sub.name,
@@ -96,7 +94,6 @@ export const TeamManager = () => {
             });
           });
 
-          // C. Coach
           if (data.coachData) {
             allPlayers.push({
               pseudo: data.coachData.name,
@@ -105,7 +102,6 @@ export const TeamManager = () => {
             });
           }
 
-          // D. Staff
           (data.staffData || []).forEach((staff: ApiMember) => {
             allPlayers.push({
               pseudo: staff.name,
@@ -126,7 +122,6 @@ export const TeamManager = () => {
     fetchCurrentRoster();
   }, [API_URL, teamSelect]);
 
-  // --- 2. GESTION DES MODIFICATIONS ---
   const handlePlayerChange = (
     index: number,
     field: "role" | "position",
@@ -137,11 +132,9 @@ export const TeamManager = () => {
     setPlayers(updatedPlayers);
   };
 
-  // --- 3. SAUVEGARDE VERS L'API ---
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Préparation du payload pour ta route 'updatePositions'
       const updates = players.map((p) => ({
         pseudo: p.pseudo,
         poste: p.position,
@@ -149,7 +142,7 @@ export const TeamManager = () => {
       }));
 
       const response = await fetch(API_URL + "/updateEquipePositions", {
-        method: "PUT", // ou POST selon ta route
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           equipe_name: teamSelect,
@@ -160,7 +153,7 @@ export const TeamManager = () => {
 
       if (response.ok) {
         alert("Composition mise à jour avec succès !");
-        window.location.reload(); // Recharger pour voir les changements sur la carte
+        window.location.reload();
       } else {
         const err = await response.json();
         alert("Erreur: " + err.message);
@@ -173,9 +166,12 @@ export const TeamManager = () => {
     }
   };
 
-  // --- 4. AFFICHAGE (RENDER) ---
+  // --- NOUVELLE FONCTION POUR OUVRIR LA MODALE ---
+  const handleOpenProfile = (pseudo: string) => {
+    setSelectedPlayer(pseudo);
+    setIsModalOpen(true);
+  };
 
-  // Choix des positions à afficher selon le jeu
   const availablePositions =
     game === "League of Legends"
       ? POSITIONS_LOL
@@ -207,25 +203,40 @@ export const TeamManager = () => {
           <tbody>
             {players.map((player, index) => (
               <tr key={index} style={styles.tr}>
-                {/* NOM DU JOUEUR */}
                 <td style={styles.td}>
+                  {/* --- ZONE CLIQUABLE POUR OUVRIR LA MODALE --- */}
                   <div
+                    onClick={() => handleOpenProfile(player.pseudo)} // Clic ici
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: "10px",
+                      cursor: "pointer", // Curseur main pour indiquer le clic
+                      transition: "opacity 0.2s",
                     }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.opacity = "0.7")
+                    }
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                    title="Voir la carte du joueur"
                   >
                     <img
-                      src={icon_bot}
+                      src={icon_bot} // Assure-toi que cette variable est définie ou importée
                       alt="avatar"
                       style={{ width: "30px", borderRadius: "50%" }}
                     />
-                    <span style={{ fontWeight: "bold" }}>{player.pseudo}</span>
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        textDecoration: "underline",
+                        textDecorationColor: "#c9aa71",
+                      }}
+                    >
+                      {player.pseudo}
+                    </span>
                   </div>
                 </td>
 
-                {/* SELECTEUR RÔLE (Titulaire, Remplaçant...) */}
                 <td style={styles.td}>
                   <select
                     value={player.role}
@@ -242,7 +253,6 @@ export const TeamManager = () => {
                   </select>
                 </td>
 
-                {/* SELECTEUR POSTE (Top, Mid, Duelist...) */}
                 <td style={styles.td}>
                   <select
                     value={player.position}
@@ -250,12 +260,10 @@ export const TeamManager = () => {
                       handlePlayerChange(index, "position", e.target.value)
                     }
                     style={styles.select}
-                    // Désactivé si c'est un coach ou membre (optionnel)
                     disabled={
                       player.role === "COACH" || player.role === "MEMBRE"
                     }
                   >
-                    {/* On ajoute toujours l'option actuelle au cas où elle n'est pas dans la liste standard */}
                     {!availablePositions.includes(player.position) && (
                       <option value={player.position}>{player.position}</option>
                     )}
@@ -283,14 +291,21 @@ export const TeamManager = () => {
           {saving ? "Sauvegarde..." : "Enregistrer la composition"}
         </button>
       </div>
+
+      {/* --- INTEGRATION DE LA MODALE --- */}
+      <DataPlayerCard
+        nameUser={selectedPlayer}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
 
-// --- STYLES CSS-IN-JS RAPIDES ---
+// TODO a mettre dans le fichier css
 const styles = {
   container: {
-    backgroundColor: "#0f1923", // Fond sombre style Valo/LoL
+    backgroundColor: "#0f1923",
     padding: "30px",
     borderRadius: "8px",
     maxWidth: "800px",

@@ -12,8 +12,8 @@ import Calendrier from "../composants/pages/calendrier";
 import Evenements from "../composants/pages/evenements";
 import AccueilPortailPatron from "../composants/pages/AccueilPatron";
 import AccueilPortailCoach from "../composants/pages/AccueilCoach";
-
-//requiredRole="JOUEUR"
+import GestionDesPostulantPortailCoach from "../composants/pages/gestionDesInscriptionCoach";
+import StateUser from "../composants/pages/StateUser";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +49,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="COACH">
         <AccueilPortailCoach />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/gestion-postulants-coach",
+    element: (
+      <ProtectedRoute requiredRole="COACH">
+        <GestionDesPostulantPortailCoach />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/stateJoueur",
+    element: (
+      <ProtectedRoute requiredRole="JOUEUR">
+        <StateUser />
       </ProtectedRoute>
     ),
   },

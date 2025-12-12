@@ -13,7 +13,7 @@ export interface User {
   pseudo: string;
   nom: string | null;
   prenom: string | null;
-  date_naissance: Date;
+  date_naissance: string | Date;
   password: string;
   sexe: SexeEnum | null;
   id_droit: number | null;

@@ -19,11 +19,11 @@ type Props = {
   onSubmit: () => void;
   loading?: boolean;
 };
-   // base API pour récupérer les jeux + équipes
-  const EQUIPE_API_BASE =
-    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") +
-    "/api/equipeInscryption";
-    
+
+const EQUIPE_API_BASE =
+  (import.meta.env.VITE_BACKEND_LINK ??
+    "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
+
 const FormulairePostulation: React.FC<Props> = ({
   firstName,
   setFirstName,
@@ -42,80 +42,116 @@ const FormulairePostulation: React.FC<Props> = ({
   onSubmit,
   loading,
 }) => {
-  useEffect(() => {
-    const game = desiredGames || desiredTeam?.split(" — ")[0];
-    if (game === "League Of Legend") {
-      if (!teamRole || teamRole === "joueur") setTeamRole("Top");
-    } else if (game === "Valorant") {
-      if (!teamRole || teamRole === "joueur") setTeamRole("Duelist");
-    } else {
-      setTeamRole("joueur");
-    }
-  }, [desiredGames, desiredTeam, teamRole, setTeamRole]);
-  // états pour la récupération des équipes réelles
+  // --- ÉTATS LOCAUX ---
   const [teamsByGame, setTeamsByGame] = useState<Record<string, string[]>>({});
   const [teamsLoading, setTeamsLoading] = useState(false);
-  const [teamsError, setTeamsError] = useState<string | null>(null);
+  //const [teamsError, setTeamsError] = useState<string | null>(null);
 
-  const formatGameLabel = (key: string) => {
-    if (!key) return key;
-    const k = key.toUpperCase();
-    if (k.includes("LEAGUE")) return "League Of Legend";
-    if (k.includes("VALORANT")) return "Valorant";
-    if (k.includes("FORTNITE")) return "Fortnite";
-    return key;
-  };
+  // --- LOGIQUE 1 : VALEURS PAR DÉFAUT DES RÔLES ---
+  // On ne change le rôle que si le JEU change, pour ne pas écraser le choix de l'utilisateur
+  useEffect(() => {
+    if (roleWish === "coach") return;
 
-  // récupérer la liste jeux -> équipes depuis le backend
+    if (desiredGames === "League Of Legend") {
+      // Si le rôle actuel n'est pas valide pour LoL, on met Top par défaut
+      if (!["Top", "Middle", "Jungle", "Support", "ADC"].includes(teamRole)) {
+        setTeamRole("Top");
+      }
+    } else if (desiredGames === "Valorant") {
+      // Si le rôle actuel n'est pas valide pour Valo, on met Duelist
+      if (
+        ![
+          "DUELIST",
+          "SENTINEL",
+          "INITIATOR",
+          "CONTROLLER",
+          "POLYVALENT",
+        ].includes(teamRole)
+      ) {
+        setTeamRole("DUELIST");
+      }
+    }
+    // On retire 'teamRole' des dépendances pour éviter les boucles infinies
+  }, [desiredGames, roleWish, setTeamRole, teamRole]);
+
+  // --- LOGIQUE 2 : CHARGEMENT DES DONNÉES ---
   useEffect(() => {
     let mounted = true;
-    (async () => {
+    const fetchTeams = async () => {
       setTeamsLoading(true);
       try {
         const res = await fetch(`${EQUIPE_API_BASE}/nameTeamAndGame`, {
-          method: "GET",
           credentials: "include",
         });
+
         if (!mounted) return;
-        if (!res.ok) {
-          const txt = await res.text().catch(() => "");
-          setTeamsError(`Erreur (${res.status}): ${txt}`);
-          setTeamsLoading(false);
-          return;
-        }
-        const data: Record<string, string[]> = await res.json().catch(() => ({}));
-        // transforme les clés backend en libellés lisibles
-        console.log(data)
+
+        if (!res.ok) throw new Error(`Erreur (${res.status})`);
+
+        const data: Record<string, string[]> = await res.json();
+
+        // Mapping des clés (ex: "LEAGUEOFLEGENDES" -> "League Of Legend")
         const mapped: Record<string, string[]> = {};
-        for (const key of Object.keys(data || {})) {
-          const label = formatGameLabel(key);
-          mapped[label] = data[key];
-        }
+        const formatKey = (key: string) => {
+          const k = key.toUpperCase();
+          if (k.includes("LEAGUE")) return "League Of Legend";
+          if (k.includes("VALORANT")) return "Valorant";
+          if (k.includes("FORTNITE")) return "Fortnite";
+          return key;
+        };
+
+        Object.keys(data).forEach((key) => {
+          mapped[formatKey(key)] = data[key];
+        });
+
         setTeamsByGame(mapped);
-        // si aucun jeu sélectionné, préselectionner le premier available
-        if (!desiredGames) {
-          const first = Object.keys(mapped)[0];
-          if (first) setDesiredGames(first);
-        }
       } catch (err) {
-        if (!mounted) return;
-        const message = err instanceof Error ? err.message : String(err);
-        setTeamsError(message ?? "Erreur réseau");
+        console.error("Erreur lors du chargement des équipes :", err);
       } finally {
         if (mounted) setTeamsLoading(false);
       }
-    })();
+    };
+
+    fetchTeams();
     return () => {
       mounted = false;
     };
-  }, [desiredGames, setDesiredGames]);
-  useEffect(() => {
-    const role = roleWish;
-    if (role === "coach") {
+  }, []);
+
+  // --- HANDLERS (Gestionnaires d'événements) ---
+
+  // Gérer le changement de rôle (Joueur/Coach)
+  const handleRoleWishChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    setRoleWish(val);
+
+    // LOGIQUE DÉPLACÉE ICI (Plus propre que useEffect)
+    if (val === "coach") {
       setTeamRole("coach");
       setDesiredTeam("");
+      // Un coach peut vouloir choisir un jeu, donc on ne vide pas forcément desiredGames
+    } else {
+      setTeamRole("joueur"); // Valeur temporaire avant que le useEffect ne mette le bon rôle in-game
     }
-  }, [roleWish, setTeamRole, setDesiredTeam]);
+  };
+
+  // Gérer le changement d'équipe
+  const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const rawValue = e.target.value; // ex: "League Of Legend — Karmine Corp"
+
+    if (!rawValue) return;
+
+    const [gameName, teamName] = rawValue.split(" — ");
+
+    // 1. On met à jour le jeu si nécessaire (auto-detection)
+    if (gameName && gameName !== desiredGames) {
+      setDesiredGames(gameName);
+    }
+
+    // 2. On envoie SEULEMENT le nom de l'équipe au parent
+    // C'est ici qu'on corrige le bug du format "Jeu — Equipe"
+    setDesiredTeam(teamName || rawValue);
+  };
 
   return (
     <form
@@ -125,13 +161,15 @@ const FormulairePostulation: React.FC<Props> = ({
         onSubmit();
       }}
     >
-      <h2>Postules pour rejoindre l'équipe de tes rêves </h2>
+      <h2>Postule pour rejoindre l'équipe de tes rêves</h2>
 
+      {/* --- IDENTITÉ --- */}
       <label htmlFor="firstName">Prénom</label>
       <input
         id="firstName"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
+        required
       />
 
       <label htmlFor="lastName">Nom</label>
@@ -139,6 +177,7 @@ const FormulairePostulation: React.FC<Props> = ({
         id="lastName"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
+        required
       />
 
       <label htmlFor="sexe">Sexe</label>
@@ -148,111 +187,109 @@ const FormulairePostulation: React.FC<Props> = ({
         <option value="non precise">Non précisé</option>
         <option value="autre">Autre</option>
       </select>
+
+      {/* --- RÔLE PRINCIPAL --- */}
       <label htmlFor="roleWish">Rôle souhaité</label>
       <select
         id="roleWish"
         value={roleWish}
-        onChange={(e) => setRoleWish(e.target.value)}
+        onChange={handleRoleWishChange} // Utilisation du handler personnalisé
       >
         <option value="joueur">Joueur</option>
         <option value="coach">Coach</option>
       </select>
 
-    
-      <label htmlFor="desiredGames">
-            Jeu souhaité
-          </label>
-          <select
-            id="desiredGames"
-            value={desiredGames}
-            onChange={(e) => setDesiredGames(e.target.value)}
-          >
-            <option value="">-- Choisir un jeu --</option>
-            {teamsLoading && <option disabled>Chargement...</option>}
-            {teamsError && <option disabled>{teamsError}</option>}
-            {Object.keys(teamsByGame).map((g) => (
-              <option key={g} value={g}>
-                {g}
-              </option>
-            ))}
-          </select>
+      {/* --- JEU --- */}
+      <label htmlFor="desiredGames">Jeu souhaité</label>
+      <select
+        id="desiredGames"
+        value={desiredGames}
+        onChange={(e) => {
+          setDesiredGames(e.target.value);
+          setDesiredTeam(""); // Reset équipe si on change de jeu
+        }}
+      >
+        <option value="">-- Choisir un jeu --</option>
+        {teamsLoading && <option disabled>Chargement...</option>}
+        {Object.keys(teamsByGame).map((g) => (
+          <option key={g} value={g}>
+            {g}
+          </option>
+        ))}
+      </select>
 
-      <label htmlFor="desiredTeam">Équipe souhaitée (choix par jeu)</label>
-      {roleWish === "coach" ? (
-        <input id="desiredTeam" value="" readOnly />
-      ) : (
-        <select
-          id="desiredTeam"
-          value={desiredTeam}
-          onChange={(e) => setDesiredTeam(e.target.value)}
-        >
-          
+      {/* --- ÉQUIPE (Seulement si Joueur) --- */}
+      {roleWish !== "coach" && (
+        <>
+          <label htmlFor="desiredTeam">Équipe souhaitée</label>
+          <select
+            id="desiredTeam"
+            // Astuce : on reconstruit la value combinée pour que le select affiche la bonne option
+            value={desiredTeam ? `${desiredGames} — ${desiredTeam}` : ""}
+            onChange={handleTeamChange}
+            disabled={!desiredGames}
+          >
+            <option value="">-- Choisir une équipe --</option>
+
             {(() => {
-              const selectedGame = desiredGames || desiredTeam?.split(" — ")[0];
-              const teamsForGame = selectedGame ? teamsByGame[selectedGame] || [] : [];
-              if (teamsLoading) return <option disabled>Chargement équipes...</option>;
-              if (teamsError) return <option disabled>{teamsError}</option>;
-              if (teamsForGame.length > 0) {
-                return teamsForGame.map((t) => (
-                  <option key={t} value={`${selectedGame} — ${t}`}>
-                    {`${selectedGame} — ${t}`}
-                  </option>
-                ));
+              const teams = teamsByGame[desiredGames] || [];
+              if (teams.length === 0 && desiredGames) {
+                return <option disabled>Aucune équipe disponible</option>;
               }
-              const game = selectedGame || "League Of Legend";
-              return (
-                <option value={`${game} — Aucune équipe disponible`} disabled>
-                  {`${game} — Aucune équipe disponible`}
+
+              return teams.map((t) => (
+                // La value contient le séparateur pour que le handler puisse retrouver le jeu
+                <option key={t} value={`${desiredGames} — ${t}`}>
+                  {t}{" "}
+                  {/* On affiche juste le nom de l'équipe, c'est plus propre */}
                 </option>
-              );
+              ));
             })()}
-        </select>
+          </select>
+        </>
       )}
 
-      <label htmlFor="teamRole">Rôle dans l'équipe (si applicable)</label>
-      {(() => {
-        if (roleWish === "coach") {
-          return <input id="teamRole" value="coach" readOnly />;
-        }
-        const game = desiredGames || desiredTeam?.split(" — ")[0];
-        if (game === "League Of Legend") {
-          return (
+      {/* --- ROLE IN-GAME (Seulement si Joueur) --- */}
+      {roleWish !== "coach" && (
+        <>
+          <label htmlFor="teamRole">Rôle dans le jeu</label>
+          {desiredGames === "League Of Legend" ? (
             <select
               id="teamRole"
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
               <option value="Top">Top</option>
-              <option value="Middle">Middle</option>
               <option value="Jungle">Jungle</option>
-              <option value="Support">Support</option>
+              <option value="Middle">Middle</option>
               <option value="ADC">ADC</option>
+              <option value="Support">Support</option>
             </select>
-          );
-        }
-        if (game === "Valorant") {
-          return (
+          ) : desiredGames === "Valorant" ? (
             <select
               id="teamRole"
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
               <option value="DUELIST">Duelist</option>
-              <option value="SENTINEL">Sentinel</option>
               <option value="INITIATOR">Initiator</option>
               <option value="CONTROLLER">Controller</option>
+              <option value="SENTINEL">Sentinel</option>
               <option value="POLYVALENT">Polyvalent</option>
             </select>
-          );
-        }
-        return <input id="teamRole" value={teamRole || "joueur"} readOnly />;
-      })()}
-
-      {/* maintenir la synchronisation des valeurs par défaut de teamRole lorsque desiredTeam change (géré dans le useEffect ci-dessus) */}
+          ) : (
+            <input id="teamRole" value="Joueur Polyvalent" disabled />
+          )}
+        </>
+      )}
 
       <div className="form-actions">
-        <button type="submit" className="btn-valider" disabled={!!loading}>
-          {"Terminer"}
+        <button
+          type="submit"
+          className="btn-valider"
+          disabled={loading || teamsLoading}
+        >
+          {loading ? "Envoi..." : "Terminer"}
         </button>
       </div>
     </form>

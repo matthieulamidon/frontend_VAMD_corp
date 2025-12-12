@@ -7,7 +7,7 @@ import FormulairePostulation from "../molecules/formulairePostulation";
 const BodyPostulation: React.FC = () => {
   const navigate = useNavigate();
 
-  const [roleWish, setRoleWish] = useState<string>("visiteur");
+  const [roleWish, setRoleWish] = useState<string>("Joueur");
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string>("");
@@ -96,14 +96,11 @@ const BodyPostulation: React.FC = () => {
           name: lastName,
           firstName,
           sexe:
-            sexe === "homme"
-              ? "HOMME"
-              : sexe === "femme"
-                ? "FEMME"
-                : "NON_PRECISE",
+            sexe === "homme" ? "HOMME" : sexe === "femme" ? "FEMME" : "HOMME",
         }),
         credentials: "include",
       });
+      console.log("Profile update response:", profileRes);
 
       if (!profileRes.ok) {
         const data = await profileRes.json().catch(() => ({}));
@@ -111,6 +108,9 @@ const BodyPostulation: React.FC = () => {
           data?.message ?? `Erreur profil (${profileRes.status})`
         );
       }
+
+      console.log("Profile updated successfully.");
+      console.log("Role Wish:", roleWish);
 
       let finalRes;
       if (roleWish === "coach") {
@@ -120,9 +120,13 @@ const BodyPostulation: React.FC = () => {
           body: JSON.stringify({ nameGame: desiredGames }),
           credentials: "include",
         });
-      } else if (roleWish === "joueur") {
-        const payload = { nameEquipe: desiredTeam, post: teamRole };
-        finalRes = await fetch(`${API_URL}/equipeInscryption`, {
+      } else if (roleWish === "Joueur") {
+        console.log("Desired Team:", desiredTeam);
+        const payload = {
+          nameEquipe: desiredTeam,
+          post: teamRole.toUpperCase(),
+        };
+        finalRes = await fetch(`${API_URL}/inscryptionEquipe`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
