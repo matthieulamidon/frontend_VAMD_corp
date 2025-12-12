@@ -101,7 +101,6 @@ const BodyCalendrier: React.FC = () => {
     fetchEvents();
   }, [EVENTS_API_URL]);
 
-
   // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
     const ev = events.find((e) => e.id === clickInfo.event.id);
@@ -160,21 +159,38 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-right-calendrier">
         {selectedEvent ? (
           <div className="event-details">
-            <div className="title-calendrier title-descrip-event">{selectedEvent.title}</div>
+            <div className="title-calendrier title-descrip-event">
+              {selectedEvent.title}
+            </div>
             <div className="separation sep-des-event"></div>
-            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-descrptn-child-event" />
+            <img
+              src={getLogo(selectedEvent.game)}
+              alt={selectedEvent.game}
+              className="logo-descrptn-child-event"
+            />
             <p>
               <div className="content-descrptn-event-jeu">
                 <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()}
               </div>
               <div className="content-descrptn-event-jeu">
-                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", })}
+                <strong>Date :</strong>{" "}
+                {new Date(selectedEvent.start).toLocaleDateString("fr-FR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
                 <div className="content-descrptn-event-horaires">
-                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                   {"  ⟼  "}
                   {selectedEvent.end && (
                     <>
-                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </>
                   )}
                 </div>
@@ -185,17 +201,19 @@ const BodyCalendrier: React.FC = () => {
                     <strong>Lieu :</strong> {selectedEvent.lieu} <br />
                     {selectedEvent.lieu && (
                       <div className="map-container">
-                        <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
+                        <iframe
+                          src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}
+                        ></iframe>
                       </div>
                     )}
-
                   </>
                 )}
               </div>
               <div className="content-descrptn-event-description">
                 {selectedEvent.description && (
                   <>
-                    <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
+                    <strong className="description-title">Note(s) :</strong>{" "}
+                    {selectedEvent.description} <br />
                   </>
                 )}
               </div>
@@ -210,4 +228,3 @@ const BodyCalendrier: React.FC = () => {
 };
 
 export default BodyCalendrier;
-

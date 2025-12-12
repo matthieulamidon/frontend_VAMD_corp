@@ -10,4 +10,5 @@ function profilJoueur() {
       <Footer />
     </>
   );
-}export default profilJoueur;    
+}
+export default profilJoueur;

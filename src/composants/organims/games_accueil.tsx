@@ -11,7 +11,6 @@ const AccueilGames = () => {
     <div className="body-games-accueil">
       <div className="title-games-accueil">NOS JEUX</div>
       <div className="games-list-accueil">
-
         <a
           href="https://www.leagueoflegends.com/fr-fr/"
           target="_blank"
@@ -41,7 +40,6 @@ const AccueilGames = () => {
           <h1 className="txt-game">FORTNITE</h1>
           <img src={Bg_fortnite} alt="" className="game-img" />
         </a>
-
       </div>
     </div>
   );

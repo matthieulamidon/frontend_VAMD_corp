@@ -8,57 +8,55 @@
 
 .form-left-emargement,
 .form-right-emargement {
-    flex: 1;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 50%;
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
 }
 
 .participant {
-    cursor: pointer;
-    color: white;
-    margin-bottom: 8px;
-    font-weight: bold;
+  cursor: pointer;
+  color: white;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
 .participant.absent {
-    color: red;
-    text-decoration: line-through;
+  color: red;
+  text-decoration: line-through;
 }
 
 .participant.present {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .form-group-emargement {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-
-.btn-submit-emargement{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(217, 113, 255);
-    color: black;
-    font-weight: bold;
-    padding: 10px 20px;
-    width: 90%;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s;
+.btn-submit-emargement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(217, 113, 255);
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 90%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
-
 
 .btn-submit-emargement:hover {
-    background-color: rgb(255, 137, 255);
-    transition: all 0.2s;
+  background-color: rgb(255, 137, 255);
+  transition: all 0.2s;
 }
 
 .commentaire-participant {

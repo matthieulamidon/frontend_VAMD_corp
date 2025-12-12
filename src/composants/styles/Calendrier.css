@@ -308,14 +308,12 @@
   max-height: none !important;
 }
 
-
 /* Détails de l'événement sélectionné */
 .title-descrip-event {
   font-size: 2rem;
   margin: 20px 0 10px 0;
   color: rgb(186, 224, 255);
   text-shadow: var(--text-glow-blue);
-
 }
 
 .sep-des-event {
@@ -349,7 +347,9 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 120, 255, 0.4);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .map-container iframe {
@@ -363,7 +363,6 @@
   box-shadow: 0 0 15px rgba(0, 120, 255, 0.6);
 }
 
-
 .content-descrptn-event-description {
   margin-top: 15px;
   color: rgb(200, 200, 255);
@@ -372,11 +371,11 @@
   line-height: 1.5;
 }
 
-.description-title{
+.description-title {
   font-style: normal;
 }
 
-.fc-event-time{
+.fc-event-time {
   display: none;
 }
 

@@ -1,169 +1,167 @@
 .body-portail-joueur {
-    padding-top: 88px;
-    width: 100%;
-    position: relative;
-    background-color: black;
-    color: white;
+  padding-top: 88px;
+  width: 100%;
+  position: relative;
+  background-color: black;
+  color: white;
 }
 
 .body-portail-joueur-left,
 .body-portail-joueur-right {
-    top: 88px;
-    background-color: rgba(30, 0, 60, 0.9);
-    position: fixed;
-    height: calc(100vh - 88px);
-    z-index: 5;
+  top: 88px;
+  background-color: rgba(30, 0, 60, 0.9);
+  position: fixed;
+  height: calc(100vh - 88px);
+  z-index: 5;
 }
 
 /* ---------------- LEFT ---------------- */
 .body-portail-joueur-left {
-    left: 0;
-    width: 70%;
+  left: 0;
+  width: 70%;
 }
 
 /* ---------------- RIGHT ---------------- */
 .body-portail-joueur-right {
-    right: 0;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  right: 0;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .body-portail-joueur-right-body {
-    width: 88%;
-    height: 91%;
-    background-color: rgb(67, 0, 112);
-    border-radius: 20px;
-    padding: 15px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: #bd00ff #430070;
+  width: 88%;
+  height: 91%;
+  background-color: rgb(67, 0, 112);
+  border-radius: 20px;
+  padding: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #bd00ff #430070;
 }
 
-
 .title-right-portail-joueur {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 1.8rem;
-    color: rgb(255, 186, 253);
-    font-weight: 800;
-    font-family: Helvetica, Arial, sans-serif;
-    text-shadow: var(--text-glow);
-    margin-bottom: 30px;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.8rem;
+  color: rgb(255, 186, 253);
+  font-weight: 800;
+  font-family: Helvetica, Arial, sans-serif;
+  text-shadow: var(--text-glow);
+  margin-bottom: 30px;
 }
 
 .présence-joueur {
-    margin-top: 20px;
-    width: 80%;
-    height: 15px;
-    background-color: rgb(39, 0, 65);
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
+  margin-top: 20px;
+  width: 80%;
+  height: 15px;
+  background-color: rgb(39, 0, 65);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .bar-présence {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .green {
-    background-color: rgb(0, 189, 0);
+  background-color: rgb(0, 189, 0);
 }
 
 .red {
-    background-color: rgb(189, 0, 0);
+  background-color: rgb(189, 0, 0);
 }
 
 .gray {
-    background-color: rgb(144, 144, 144);
+  background-color: rgb(144, 144, 144);
 }
 
 .FUTUR {
-    font-size: 1.6rem;
-    ;
+  font-size: 1.6rem;
 }
 
 .stats-joueur {
-    margin-top: 20px;
-    width: 80%;
-    background-color: rgb(39, 0, 65);
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    padding: 20px;
+  margin-top: 20px;
+  width: 80%;
+  background-color: rgb(39, 0, 65);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
 
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 50px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 50px;
 }
 
 .stat-joueur-line {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-    font-style: italic;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 .chiffre-stats-joueur {
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: white;
-    text-shadow: var(--text-glow-blue);
-    text-align: right;
-    align-self: flex-end;
-    max-width: 60%;
-    font-style: normal;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: var(--text-glow-blue);
+  text-align: right;
+  align-self: flex-end;
+  max-width: 60%;
+  font-style: normal;
 }
 
 .event-passé {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.5s ease;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 .event-passé.active {
-    max-height: 500px;
-    /* ou auto si tu veux */
-    opacity: 1;
+  max-height: 500px;
+  /* ou auto si tu veux */
+  opacity: 1;
 }
 
 .event-toggle-button {
-    width: 90%;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    background-color: rgb(39, 0, 65);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+  width: 90%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background-color: rgb(39, 0, 65);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .event-toggle-button:hover {
-    background-color: rgb(100, 0, 180);
+  background-color: rgb(100, 0, 180);
 }
