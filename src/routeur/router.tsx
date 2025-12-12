@@ -63,7 +63,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/modif-evenement",
+    path: "/modif-evenement/:id",
     element: (
       <ProtectedRoute requiredRole="COACH">
         <ModifEvent />
