@@ -14,9 +14,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import frLocale from '@fullcalendar/core/locales/fr';
 import type { EventClickArg } from "@fullcalendar/core";
 
-
-
-
 interface AgendaEvent {
   id: string;
   title: string;
@@ -39,9 +36,7 @@ interface BackendEvent {
 }
 
 // Convertit l'ENUM backend vers les valeurs front
-const mapBackendEnumToFront = (
-  e: string
-): "lol" | "valo" | "fortnite" => {
+const mapBackendEnumToFront = (e: string): "lol" | "valo" | "fortnite" => {
   switch (e) {
     case "LEAGUEOFLEGENDES": return "lol";
     case "VALORANT": return "valo";
@@ -52,7 +47,7 @@ const mapBackendEnumToFront = (
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") + "/api/events";
+    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") + "/api/events";
 
   const [events, setEvents] = useState<AgendaEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<AgendaEvent | null>(null);
@@ -69,7 +64,10 @@ const BodyCalendrier: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(`${EVENTS_API_URL}/events`);
+        const token = localStorage.getItem("auth_token"); // récupère token si connecté
+        const url = token ? `${EVENTS_API_URL}/event` : `${EVENTS_API_URL}/public`;
+
+        const res = await fetch(url, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
         if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
@@ -96,8 +94,6 @@ const BodyCalendrier: React.FC = () => {
     fetchEvents();
   }, [EVENTS_API_URL]);
 
-
-  // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
     const ev = events.find(e => e.id === clickInfo.event.id);
     if (ev) setSelectedEvent(ev);
@@ -105,7 +101,7 @@ const BodyCalendrier: React.FC = () => {
 
   return (
     <div className="body-calendrier">
-      {/* Colonne de gauche : liste d'événements */}
+      {/* Colonne gauche : liste des événements */}
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
         {events.map((ev) => (
@@ -135,7 +131,7 @@ const BodyCalendrier: React.FC = () => {
         </div>
       </div>
 
-      {/* Colonne de droite : détails de l'événement sélectionné */}
+      {/* Colonne droite : détails de l'événement sélectionné */}
       <div className="body-right-calendrier">
         {selectedEvent ? (
           <div className="event-details">
@@ -147,37 +143,26 @@ const BodyCalendrier: React.FC = () => {
                 <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()}
               </div>
               <div className="content-descrptn-event-jeu">
-                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", })}
+                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })}
                 <div className="content-descrptn-event-horaires">
-                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
                   {"  ⟼  "}
-                  {selectedEvent.end && (
-                    <>
-                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
-                    </>
-                  )}
+                  {selectedEvent.end && new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
                 </div>
               </div>
-              <div className="content-descrptn-event-jeu">
-                {selectedEvent.lieu && (
-                  <>
-                    <strong>Lieu :</strong> {selectedEvent.lieu} <br />
-                    {selectedEvent.lieu && (
-                      <div className="map-container">
-                        <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
-                      </div>
-                    )}
-
-                  </>
-                )}
-              </div>
-              <div className="content-descrptn-event-description">
-                {selectedEvent.description && (
-                  <>
-                    <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
-                  </>
-                )}
-              </div>
+              {selectedEvent.lieu && (
+                <div className="content-descrptn-event-jeu">
+                  <strong>Lieu :</strong> {selectedEvent.lieu} <br />
+                  <div className="map-container">
+                    <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
+                  </div>
+                </div>
+              )}
+              {selectedEvent.description && (
+                <div className="content-descrptn-event-description">
+                  <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
+                </div>
+              )}
             </p>
           </div>
         ) : (
