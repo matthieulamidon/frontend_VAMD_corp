@@ -18,6 +18,7 @@ import ModifEvent from "../composants/pages/ModifEvent";
 //requiredRole="JOUEUR"
 import GestionDesPostulantPortailCoach from "../composants/pages/gestionDesInscriptionCoach";
 import StateUser from "../composants/pages/StateUser";
+import AdminJoueurDashbord from "../composants/organims/AdminJoueurDashbord";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +102,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="ADMIN">
         <PageAdmin />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/adminDashboard",
+    element: (
+      <ProtectedRoute requiredRole="ADMIN">
+        <AdminJoueurDashbord />
       </ProtectedRoute>
     ),
   },
