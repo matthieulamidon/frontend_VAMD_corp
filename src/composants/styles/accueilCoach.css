@@ -1,0 +1,109 @@
+.body-team-manager {
+  width: 100%;
+  position: relative;
+  background-color: black;
+  color: white;
+}
+
+.team-manager-container {
+  background-color: #0f1923;
+  width: 70%;
+  margin-top: 120px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-family: Arial, sans-serif;
+  border: 2px solid rgba(217, 113, 255, 0.8);
+}
+
+.padding-team-manager {
+  padding: 30px;
+}
+
+.team-manager-title {
+  border-bottom: 2px solid rgba(217, 113, 255, 0.8);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: rgb(255, 186, 253);
+  text-shadow: var(--text-glow-blue);
+}
+
+.team-manager-table-container {
+  background-color: #1e2832;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.team-manager-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.team-manager-table th {
+  text-align: left;
+  padding: 15px;
+  background-color: #091428;
+  color: rgb(255, 186, 253);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.team-manager-table tr {
+  border-bottom: 1px solid #333;
+}
+
+.team-manager-table td {
+  padding: 15px;
+}
+
+.team-manager-select {
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #0f1923;
+  color: white;
+  border: 1px solid #444;
+  width: 100%;
+  cursor: pointer;
+}
+
+.team-manager-action-bar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.team-manager-btn-save {
+  padding: 12px 24px;
+  background-color: rgba(217, 113, 255, 0.8);
+  color: #010a13;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.team-manager-btn-save:hover {
+  background-color: rgb(140, 0, 136);
+}
+
+.team-manager-btn-disabled {
+  padding: 12px 24px;
+  background-color: #555;
+  color: #888;
+  border: none;
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+
+.player-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}

@@ -23,6 +23,7 @@ import Pannuhuone from "../../assets/equip/logos_tournois/logo_pannuhuone.png";
 import Teamsecret from "../../assets/equip/logos_tournois/logo_teamsecret.png";
 
 import Logo_Betway from "../../assets/logo_betway.png";
+import LogoVAMD from "../../assets/logo_vamd_icon.png";
 
 const BodyEvenement = () => {
   return (
@@ -103,13 +104,7 @@ const BodyEvenement = () => {
             orgLogo={Blast}
             location="Manchester"
             prize="$863,170"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
           />
 
           <TournoiCard
@@ -120,13 +115,7 @@ const BodyEvenement = () => {
             orgLogo={GVC}
             location="China"
             prize="$60,438"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
           />
 
           <div className="rubrique-partie-tournois-title-body">
@@ -141,13 +130,8 @@ const BodyEvenement = () => {
             orgLogo={GC}
             location="South Korea"
             prize="$500,000"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
+
           />
 
           <TournoiCard
@@ -158,13 +142,8 @@ const BodyEvenement = () => {
             orgLogo={PkmIntern}
             location="Brazil"
             prize="$240,000"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
+
           />
 
           <TournoiCard
@@ -175,13 +154,8 @@ const BodyEvenement = () => {
             orgLogo={Nova}
             location="France, Paris"
             prize="$11,159"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
+
           />
 
           <div className="rubrique-partie-tournois-title-body">
@@ -196,13 +170,8 @@ const BodyEvenement = () => {
             orgLogo={MCC}
             location="Online"
             prize="$9,400 USD"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
+
           />
 
           <TournoiCard
@@ -213,13 +182,8 @@ const BodyEvenement = () => {
             orgLogo={Saudi}
             location="Saudi Arabia"
             prize="$32,024"
-            ekips={[
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-              "/logo_apagnan.png",
-            ]}
+            ekips={[LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD, LogoVAMD]}
+
           />
         </div>
 

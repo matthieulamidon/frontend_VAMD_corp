@@ -3,7 +3,6 @@ import "../styles/accueil.css";
 
 // Images
 import VAMD_ekip from "../../assets/equip/equipe_projet_advm.png";
-import Fleche from "../../assets/fleche.png";
 
 const AccueilEquip = () => {
   return (
@@ -28,10 +27,6 @@ const AccueilEquip = () => {
             repousser les limites pour offrir la meilleure expérience possible à
             la communauté VAMD.
           </p>
-          <button className="btn-voir-equipes">
-            Voir les autres équipes{" "}
-            <img src={Fleche} alt="➜" className="img-fleche" />{" "}
-          </button>
         </div>
       </div>
     </div>
