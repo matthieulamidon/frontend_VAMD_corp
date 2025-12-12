@@ -183,7 +183,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/profil",
+    path: "/profile",
     element: (
       <Suspense fallback={Loader}>
         <ProfilJoueur />

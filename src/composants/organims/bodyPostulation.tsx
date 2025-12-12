@@ -139,7 +139,9 @@ const BodyPostulation: React.FC = () => {
         return;
       }
 
-      if (finalRes && finalRes.ok) {
+      console.log("Final submission response:", finalRes);
+
+      if (finalRes.status === 200) {
         setSuccess("Votre postulation a été enregistrée avec succès !");
         setTimeout(() => navigate("/profil"), 2000);
       } else if (finalRes) {

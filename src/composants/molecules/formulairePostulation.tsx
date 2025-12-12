@@ -54,8 +54,12 @@ const FormulairePostulation: React.FC<Props> = ({
 
     if (desiredGames === "League Of Legend") {
       // Si le rôle actuel n'est pas valide pour LoL, on met Top par défaut
-      if (!["Top", "Middle", "Jungle", "Support", "ADC"].includes(teamRole)) {
-        setTeamRole("Top");
+      if (
+        !["TOPLANER", "MIDLANER", "BOTLANER", "JUNGLER", "SUPORT"].includes(
+          teamRole
+        )
+      ) {
+        setTeamRole("TOPLANER");
       }
     } else if (desiredGames === "Valorant") {
       // Si le rôle actuel n'est pas valide pour Valo, on met Duelist
@@ -259,11 +263,11 @@ const FormulairePostulation: React.FC<Props> = ({
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
-              <option value="Top">Top</option>
-              <option value="Jungle">Jungle</option>
-              <option value="Middle">Middle</option>
-              <option value="ADC">ADC</option>
-              <option value="Support">Support</option>
+              <option value="TOPLANER">Top</option>
+              <option value="JUNGLER">Jungle</option>
+              <option value="MIDLANER">Middle</option>
+              <option value="BOTLANER">ADC</option>
+              <option value="SUPORT">Support</option>
             </select>
           ) : desiredGames === "Valorant" ? (
             <select
