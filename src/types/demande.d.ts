@@ -16,3 +16,10 @@ export interface DemandeCoach {
   id_user: number;
   jeu: JeuxEquipe;
 }
+
+export interface EventCoach {
+  id: number;
+  date: string;
+  name: string;
+  type: string;
+}

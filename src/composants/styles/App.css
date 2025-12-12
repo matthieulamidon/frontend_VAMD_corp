@@ -67,6 +67,51 @@
   box-sizing: border-box;
 }
 
+.vp-menu-deroulant {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  min-width: 180px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.vp-username {
+  position: relative; /* déjà présent, ok */
+}
+
+.vp-menu {
+  position: absolute;
+  background-color: black;
+  top: 100%;       /* juste en dessous du bouton */
+  left: 38%;        /* centré par rapport au parent */
+  transform: translateX(-50%); /* décalage pour centrer pile */
+  min-width: 180px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.vp-menu-item:hover {
+  background-color: rgba(217, 113, 255, 0.1); 
+}
+
+.vp-menu-item.active {
+  background-color: black; /* plus de bleu quand actif */
+  color: white; /* texte noir */
+  font-weight: bold;
+}
 .navbar-left {
   display: flex;
   align-items: center;

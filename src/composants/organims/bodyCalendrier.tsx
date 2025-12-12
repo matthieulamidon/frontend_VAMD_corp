@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import '../styles/App.css';
-import '../styles/Accueil.css';
-import '../styles/Calendrier.css';
+import "../styles/App.css";
+import "../styles/accueil.css";
+import "../styles/Calendrier.css";
 
 // Images
 import Logo_LoL from "../../assets/games/logos_games/logo_lol.png";
@@ -9,9 +9,9 @@ import Logo_Valo from "../../assets/games/logos_games/logo_valo.png";
 import Logo_Fortnite from "../../assets/games/logos_games/logo_fortnite.png";
 
 // Calendrier
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react"; // @fullcalendar/react
 import dayGridPlugin from "@fullcalendar/daygrid";
-import frLocale from '@fullcalendar/core/locales/fr';
+import frLocale from "@fullcalendar/core/locales/fr";
 import type { EventClickArg } from "@fullcalendar/core";
 
 interface AgendaEvent {
@@ -38,36 +38,41 @@ interface BackendEvent {
 // Convertit l'ENUM backend vers les valeurs front
 const mapBackendEnumToFront = (e: string): "lol" | "valo" | "fortnite" => {
   switch (e) {
-    case "LEAGUEOFLEGENDES": return "lol";
-    case "VALORANT": return "valo";
-    case "FORTNITE": return "fortnite";
-    default: return "lol";
+    case "LEAGUEOFLEGENDES":
+      return "lol";
+    case "VALORANT":
+      return "valo";
+    case "FORTNITE":
+      return "fortnite";
+    default:
+      return "lol";
   }
 };
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ?? "http://localhost:4000") + "/api/events";
+    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") + "/api/events";
 
   const [events, setEvents] = useState<AgendaEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<AgendaEvent | null>(null);
 
   const getLogo = (game: AgendaEvent["game"]) => {
     switch (game) {
-      case "lol": return Logo_LoL;
-      case "valo": return Logo_Valo;
-      case "fortnite": return Logo_Fortnite;
-      default: return "";
+      case "lol":
+        return Logo_LoL;
+      case "valo":
+        return Logo_Valo;
+      case "fortnite":
+        return Logo_Fortnite;
+      default:
+        return "";
     }
   };
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const token = localStorage.getItem("auth_token"); // récupère token si connecté
-        const url = token ? `${EVENTS_API_URL}/event` : `${EVENTS_API_URL}/public`;
-
-        const res = await fetch(url, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
+        const res = await fetch(`${EVENTS_API_URL}/events`);
         if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
@@ -94,8 +99,10 @@ const BodyCalendrier: React.FC = () => {
     fetchEvents();
   }, [EVENTS_API_URL]);
 
+
+  // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
-    const ev = events.find(e => e.id === clickInfo.event.id);
+    const ev = events.find((e) => e.id === clickInfo.event.id);
     if (ev) setSelectedEvent(ev);
   };
 
@@ -105,12 +112,28 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
         {events.map((ev) => (
-          <div key={ev.id} className="body-child-event" onClick={() => setSelectedEvent(ev)}>
-            <img src={getLogo(ev.game)} alt={ev.game} className="logo-child-event" />
+          <div
+            key={ev.id}
+            className="body-child-event"
+            onClick={() => setSelectedEvent(ev)}
+          >
+            <img
+              src={getLogo(ev.game)}
+              alt={ev.game}
+              className="logo-child-event"
+            />
             <h3 className="subtitle-child-calendrier">{ev.title}</h3>
             <span className="date-child-event">
-              {new Date(ev.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
-              {ev.end && " - " + new Date(ev.end).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })}
+              {new Date(ev.start).toLocaleDateString("fr-FR", {
+                day: "2-digit",
+                month: "2-digit",
+              })}
+              {ev.end &&
+                " - " +
+                  new Date(ev.end).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                  })}
             </span>
           </div>
         ))}
@@ -135,34 +158,51 @@ const BodyCalendrier: React.FC = () => {
       <div className="body-right-calendrier">
         {selectedEvent ? (
           <div className="event-details">
-            <div className="title-calendrier title-descrip-event">{selectedEvent.title}</div>
+            <div className="title-calendrier title-descrip-event">
+              {selectedEvent.title}
+            </div>
             <div className="separation sep-des-event"></div>
-            <img src={getLogo(selectedEvent.game)} alt={selectedEvent.game} className="logo-descrptn-child-event" />
+            <img
+              src={getLogo(selectedEvent.game)}
+              alt={selectedEvent.game}
+              className="logo-descrptn-child-event"
+            />
             <p>
               <div className="content-descrptn-event-jeu">
                 <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()}
               </div>
               <div className="content-descrptn-event-jeu">
-                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })}
+                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", })}
                 <div className="content-descrptn-event-horaires">
-                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
+                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
                   {"  ⟼  "}
-                  {selectedEvent.end && new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
+                  {selectedEvent.end && (
+                    <>
+                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
+                    </>
+                  )}
                 </div>
               </div>
-              {selectedEvent.lieu && (
-                <div className="content-descrptn-event-jeu">
-                  <strong>Lieu :</strong> {selectedEvent.lieu} <br />
-                  <div className="map-container">
-                    <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
-                  </div>
-                </div>
-              )}
-              {selectedEvent.description && (
-                <div className="content-descrptn-event-description">
-                  <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
-                </div>
-              )}
+              <div className="content-descrptn-event-jeu">
+                {selectedEvent.lieu && (
+                  <>
+                    <strong>Lieu :</strong> {selectedEvent.lieu} <br />
+                    {selectedEvent.lieu && (
+                      <div className="map-container">
+                        <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
+                      </div>
+                    )}
+
+                  </>
+                )}
+              </div>
+              <div className="content-descrptn-event-description">
+                {selectedEvent.description && (
+                  <>
+                    <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
+                  </>
+                )}
+              </div>
             </p>
           </div>
         ) : (

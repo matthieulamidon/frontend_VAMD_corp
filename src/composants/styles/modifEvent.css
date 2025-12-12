@@ -1,0 +1,71 @@
+.body-coach-creation-events {
+  padding-top: 88px;
+  width: 100%;
+  position: relative;
+  background-color: black;
+  color: white;
+}
+
+.form-left-emargement,
+.form-right-emargement {
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+.participant {
+  cursor: pointer;
+  color: white;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.participant.absent {
+  color: red;
+  text-decoration: line-through;
+}
+
+.participant.present {
+  color: white;
+  text-decoration: none;
+}
+
+.form-group-emargement {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-submit-emargement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(217, 113, 255);
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 90%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-submit-emargement:hover {
+  background-color: rgb(255, 137, 255);
+  transition: all 0.2s;
+}
+
+.commentaire-participant {
+  width: 90%;
+  margin: 5px 0 15px 0;
+  padding: 8px;
+  background-color: #1a1a1a;
+  border: 1px solid #7b2cbf;
+  border-radius: 8px;
+  color: white;
+  resize: none;
+}
