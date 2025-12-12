@@ -36,8 +36,8 @@ export function VisuelProfil() {
             Voir le profil
           </a>
           <button
-            onClick={() => {
-              logout();
+            onClick={async () => {
+              await logout();
               if (window.location.pathname === "/") {
                 window.location.reload();
               } else {
