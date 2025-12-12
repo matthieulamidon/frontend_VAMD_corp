@@ -5,6 +5,10 @@ import type { UserCookies } from "../types/user";
 const API_URL =
   import.meta.env.VITE_BACKEND_LINK + "/api" || "http://localhost:4000/api";
 
+const API_USER_URL =
+  import.meta.env.VITE_BACKEND_LINK + "/api/user" ||
+  "http://localhost:4000/api/auth";
+
 // Service d'authentification pour communiquer avec le backend j'ai suivi un tuto et je suis a deux doigts de tout suprimer car on a que un systeme de  login
 export const authService = {
   checkAuth: async (): Promise<UserCookies | false> => {
@@ -62,3 +66,4 @@ export const authService = {
     return data.equipes && data.equipes.length > 0 ? data.equipes[0] : null;
   },
 };
+};export { API_URL, API_USER_URL };

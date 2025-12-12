@@ -1,0 +1,159 @@
+.body-profil-joueur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem 2rem 2rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 0, 28, 0.95) 0%,
+    rgba(12, 6, 40, 0.95) 100%
+  );
+  color: #fff;
+  min-height: 100vh;
+}
+
+.profil-joueur-container {
+  background: linear-gradient(180deg, #0b1428 0%, #101428 100%);
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid rgba(187, 0, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  color: #fff;
+}
+
+.profil-joueur-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(187, 0, 255, 0.7);
+}
+
+/* --- Vue Consultation --- */
+.profil-joueur-container p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: #dcd6e8;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 1rem;
+}
+
+.profil-joueur-container p:last-of-type {
+  border-bottom: none;
+}
+
+.profil-joueur-container p strong {
+  color: #fff;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  width: 180px; /* Aligner les valeurs */
+}
+
+/* --- Vue Édition (Formulaire) --- */
+.profil-joueur-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #dcd6e8;
+  font-size: 0.95rem;
+}
+
+.profil-joueur-container input,
+.profil-joueur-container textarea,
+.profil-joueur-container select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.profil-joueur-container input:focus,
+.profil-joueur-container textarea:focus,
+.profil-joueur-container select:focus {
+  outline: none;
+  border-color: rgba(178, 0, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(178, 0, 255, 0.15);
+}
+
+.profil-joueur-container select option {
+  background-color: #0b1428;
+  color: #dcd6e8;
+}
+
+.profil-joueur-container textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* --- Boutons --- */
+.btn-edit-profil,
+.btn-save,
+.btn-cancel {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out, transform 0.2s;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(187, 0, 255, 0.4);
+}
+
+.btn-edit-profil {
+  display: block;
+  width: 100%;
+  margin-top: 2rem;
+  background-color: rgba(187, 0, 255, 0.8);
+}
+.btn-edit-profil:hover {
+  background-color: rgba(187, 0, 255, 1);
+  transform: scale(1.02);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-save { 
+  background-color: rgba(40, 167, 69, 0.8); 
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+}
+.btn-save:hover { 
+  background-color: rgba(40, 167, 69, 1); 
+}
+
+.btn-cancel { 
+  background-color: rgba(220, 53, 69, 0.8); 
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+}
+.btn-cancel:hover { 
+  background-color: rgba(220, 53, 69, 1); 
+}
+
+.profil-joueur-container button:disabled {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}

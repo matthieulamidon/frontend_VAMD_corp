@@ -14,6 +14,7 @@ import AccueilPortailPatron from "../composants/pages/AccueilPatron";
 import AccueilPortailCoach from "../composants/pages/AccueilCoach";
 import CreationEvent from "../composants/pages/CreationEvent";
 import ModifEvent from "../composants/pages/ModifEvent";
+import ProfilJoueur from "../composants/pages/profilJoueur";
 
 //requiredRole="JOUEUR"
 import GestionDesPostulantPortailCoach from "../composants/pages/gestionDesInscriptionCoach";
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
   {
     path: "/evenements",
     element: <Evenements />,
+  },
+  {
+    path: "/profil",
+    element: <ProfilJoueur />,
   },
 ]);
 
