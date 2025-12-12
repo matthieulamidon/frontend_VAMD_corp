@@ -134,25 +134,25 @@ const NavbarJoueur = () => {
             {teamSelect ? teamSelect : "Sélecteur d'équipe"}
           </a>
           <span className={`vp-arrow ${open ? "open" : ""}`}>▼</span>
-        </div>
 
-        {open && (
-          <div className="vp-menu">
-            {teams.length > 0 ? (
-              teams.map((teamName, index) => (
-                <button
-                  key={index}
-                  className={`vp-menu-item btn ${teamSelect === teamName ? "active" : ""}`}
-                  onClick={() => handleTeamClick(teamName)}
-                >
-                  {teamName}
-                </button>
-              ))
-            ) : (
-              <div className="vp-menu-item">Aucune équipe</div>
-            )}
-          </div>
-        )}
+          {open && (
+            <div className="vp-menu">
+              {teams.length > 0 ? (
+                teams.map((teamName, index) => (
+                  <button
+                    key={index}
+                    className={`vp-menu-item btn ${teamSelect === teamName ? "active" : ""}`}
+                    onClick={() => handleTeamClick(teamName)}
+                  >
+                    {teamName}
+                  </button>
+                ))
+              ) : (
+                <div className="vp-menu-item">Aucune équipe</div>
+              )}
+            </div>
+          )}
+        </div>
 
         <a href="/calendrier" className="btnnav">
           Calendrier

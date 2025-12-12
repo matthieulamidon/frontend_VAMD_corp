@@ -51,8 +51,7 @@ const mapBackendEnumToFront = (e: string): "lol" | "valo" | "fortnite" => {
 
 const BodyCalendrier: React.FC = () => {
   const EVENTS_API_URL =
-    (import.meta.env.VITE_BACKEND_LINK ??
-      "https://backend-vamd-corp.onrender.com") + "/api/events";
+    (import.meta.env.VITE_BACKEND_LINK ?? "https://backend-vamd-corp.onrender.com") + "/api/events";
 
   const [events, setEvents] = useState<AgendaEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<AgendaEvent | null>(null);
@@ -74,8 +73,7 @@ const BodyCalendrier: React.FC = () => {
     const fetchEvents = async () => {
       try {
         const res = await fetch(`${EVENTS_API_URL}/events`);
-        if (!res.ok)
-          throw new Error("Erreur lors de la récupération des événements");
+        if (!res.ok) throw new Error("Erreur lors de la récupération des événements");
 
         const data: BackendEvent[] = await res.json();
         const formatted: AgendaEvent[] = data.map((ev) => ({
@@ -101,6 +99,7 @@ const BodyCalendrier: React.FC = () => {
     fetchEvents();
   }, [EVENTS_API_URL]);
 
+
   // Click sur un événement du calendrier
   const handleEventClick = (clickInfo: EventClickArg) => {
     const ev = events.find((e) => e.id === clickInfo.event.id);
@@ -109,7 +108,7 @@ const BodyCalendrier: React.FC = () => {
 
   return (
     <div className="body-calendrier">
-      {/* Colonne de gauche : liste d'événements */}
+      {/* Colonne gauche : liste des événements */}
       <div className="body-left-calendrier">
         <h1 className="title-calendrier">AGENDA</h1>
         {events.map((ev) => (
@@ -155,7 +154,7 @@ const BodyCalendrier: React.FC = () => {
         </div>
       </div>
 
-      {/* Colonne de droite : détails de l'événement sélectionné */}
+      {/* Colonne droite : détails de l'événement sélectionné */}
       <div className="body-right-calendrier">
         {selectedEvent ? (
           <div className="event-details">
@@ -173,24 +172,13 @@ const BodyCalendrier: React.FC = () => {
                 <strong>Jeu :</strong> {selectedEvent.game.toUpperCase()}
               </div>
               <div className="content-descrptn-event-jeu">
-                <strong>Date :</strong>{" "}
-                {new Date(selectedEvent.start).toLocaleDateString("fr-FR", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                })}
+                <strong>Date :</strong> {new Date(selectedEvent.start).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", })}
                 <div className="content-descrptn-event-horaires">
-                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  {new Date(selectedEvent.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
                   {"  ⟼  "}
                   {selectedEvent.end && (
                     <>
-                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {new Date(selectedEvent.end).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", })}
                     </>
                   )}
                 </div>
@@ -201,19 +189,17 @@ const BodyCalendrier: React.FC = () => {
                     <strong>Lieu :</strong> {selectedEvent.lieu} <br />
                     {selectedEvent.lieu && (
                       <div className="map-container">
-                        <iframe
-                          src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}
-                        ></iframe>
+                        <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(selectedEvent.lieu)}&output=embed`}></iframe>
                       </div>
                     )}
+
                   </>
                 )}
               </div>
               <div className="content-descrptn-event-description">
                 {selectedEvent.description && (
                   <>
-                    <strong className="description-title">Note(s) :</strong>{" "}
-                    {selectedEvent.description} <br />
+                    <strong className="description-title">Note(s) :</strong> {selectedEvent.description} <br />
                   </>
                 )}
               </div>

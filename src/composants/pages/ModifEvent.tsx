@@ -115,7 +115,7 @@ function ModifEvent() {
   const handleEmarger = () => {
     console.log("Émargement final :", participants);
     localStorage.setItem(`emargedEvent-${id}`, "true");
-    navigate("/accueil-coach");
+    navigate("/portail-coach");
   };
 
   const updateComment = (id: number, comment: string) => {
