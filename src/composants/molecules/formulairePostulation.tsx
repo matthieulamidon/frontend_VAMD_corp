@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/connexionUtilisateur.css";
 
 type Props = {
@@ -6,8 +6,8 @@ type Props = {
   setFirstName: (v: string) => void;
   lastName: string;
   setLastName: (v: string) => void;
-  sex: string;
-  setSex: (v: string) => void;
+  sexe: string;
+  setSexe: (v: string) => void;
   roleWish: string;
   setRoleWish: (v: string) => void;
   desiredGames: string;
@@ -20,13 +20,17 @@ type Props = {
   loading?: boolean;
 };
 
+const EQUIPE_API_BASE =
+  (import.meta.env.VITE_BACKEND_LINK ??
+    "https://backend-vamd-corp.onrender.com") + "/api/equipeInscryption";
+
 const FormulairePostulation: React.FC<Props> = ({
   firstName,
   setFirstName,
   lastName,
   setLastName,
-  sex,
-  setSex,
+  sexe,
+  setSexe,
   roleWish,
   setRoleWish,
   desiredGames,
@@ -38,23 +42,116 @@ const FormulairePostulation: React.FC<Props> = ({
   onSubmit,
   loading,
 }) => {
+  // --- ÉTATS LOCAUX ---
+  const [teamsByGame, setTeamsByGame] = useState<Record<string, string[]>>({});
+  const [teamsLoading, setTeamsLoading] = useState(false);
+  //const [teamsError, setTeamsError] = useState<string | null>(null);
+
+  // --- LOGIQUE 1 : VALEURS PAR DÉFAUT DES RÔLES ---
+  // On ne change le rôle que si le JEU change, pour ne pas écraser le choix de l'utilisateur
   useEffect(() => {
-    const game = desiredGames || desiredTeam?.split(" — ")[0];
-    if (game === "League Of Legend") {
-      if (!teamRole || teamRole === "joueur") setTeamRole("Top");
-    } else if (game === "Valorant") {
-      if (!teamRole || teamRole === "joueur") setTeamRole("Duelist");
-    } else {
-      setTeamRole("joueur");
+    if (roleWish === "coach") return;
+
+    if (desiredGames === "League Of Legend") {
+      // Si le rôle actuel n'est pas valide pour LoL, on met Top par défaut
+      if (!["Top", "Middle", "Jungle", "Support", "ADC"].includes(teamRole)) {
+        setTeamRole("Top");
+      }
+    } else if (desiredGames === "Valorant") {
+      // Si le rôle actuel n'est pas valide pour Valo, on met Duelist
+      if (
+        ![
+          "DUELIST",
+          "SENTINEL",
+          "INITIATOR",
+          "CONTROLLER",
+          "POLYVALENT",
+        ].includes(teamRole)
+      ) {
+        setTeamRole("DUELIST");
+      }
     }
-  }, [desiredGames, desiredTeam, teamRole, setTeamRole]);
+    // On retire 'teamRole' des dépendances pour éviter les boucles infinies
+  }, [desiredGames, roleWish, setTeamRole, teamRole]);
+
+  // --- LOGIQUE 2 : CHARGEMENT DES DONNÉES ---
   useEffect(() => {
-    const role = roleWish;
-    if (role === "coach") {
+    let mounted = true;
+    const fetchTeams = async () => {
+      setTeamsLoading(true);
+      try {
+        const res = await fetch(`${EQUIPE_API_BASE}/nameTeamAndGame`, {
+          credentials: "include",
+        });
+
+        if (!mounted) return;
+
+        if (!res.ok) throw new Error(`Erreur (${res.status})`);
+
+        const data: Record<string, string[]> = await res.json();
+
+        // Mapping des clés (ex: "LEAGUEOFLEGENDES" -> "League Of Legend")
+        const mapped: Record<string, string[]> = {};
+        const formatKey = (key: string) => {
+          const k = key.toUpperCase();
+          if (k.includes("LEAGUE")) return "League Of Legend";
+          if (k.includes("VALORANT")) return "Valorant";
+          if (k.includes("FORTNITE")) return "Fortnite";
+          return key;
+        };
+
+        Object.keys(data).forEach((key) => {
+          mapped[formatKey(key)] = data[key];
+        });
+
+        setTeamsByGame(mapped);
+      } catch (err) {
+        console.error("Erreur lors du chargement des équipes :", err);
+      } finally {
+        if (mounted) setTeamsLoading(false);
+      }
+    };
+
+    fetchTeams();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // --- HANDLERS (Gestionnaires d'événements) ---
+
+  // Gérer le changement de rôle (Joueur/Coach)
+  const handleRoleWishChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    setRoleWish(val);
+
+    // LOGIQUE DÉPLACÉE ICI (Plus propre que useEffect)
+    if (val === "coach") {
       setTeamRole("coach");
       setDesiredTeam("");
+      // Un coach peut vouloir choisir un jeu, donc on ne vide pas forcément desiredGames
+    } else {
+      setTeamRole("joueur"); // Valeur temporaire avant que le useEffect ne mette le bon rôle in-game
     }
-  }, [roleWish, setTeamRole, setDesiredTeam]);
+  };
+
+  // Gérer le changement d'équipe
+  const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const rawValue = e.target.value; // ex: "League Of Legend — Karmine Corp"
+
+    if (!rawValue) return;
+
+    const [gameName, teamName] = rawValue.split(" — ");
+
+    // 1. On met à jour le jeu si nécessaire (auto-detection)
+    if (gameName && gameName !== desiredGames) {
+      setDesiredGames(gameName);
+    }
+
+    // 2. On envoie SEULEMENT le nom de l'équipe au parent
+    // C'est ici qu'on corrige le bug du format "Jeu — Equipe"
+    setDesiredTeam(teamName || rawValue);
+  };
 
   return (
     <form
@@ -64,13 +161,15 @@ const FormulairePostulation: React.FC<Props> = ({
         onSubmit();
       }}
     >
-      <h2>Postules pour rejoindre l'équipe de tes rêves </h2>
+      <h2>Postule pour rejoindre l'équipe de tes rêves</h2>
 
+      {/* --- IDENTITÉ --- */}
       <label htmlFor="firstName">Prénom</label>
       <input
         id="firstName"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
+        required
       />
 
       <label htmlFor="lastName">Nom</label>
@@ -78,105 +177,119 @@ const FormulairePostulation: React.FC<Props> = ({
         id="lastName"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
+        required
       />
 
-      <label htmlFor="sex">Sexe</label>
-      <select id="sex" value={sex} onChange={(e) => setSex(e.target.value)}>
+      <label htmlFor="sexe">Sexe</label>
+      <select id="sexe" value={sexe} onChange={(e) => setSexe(e.target.value)}>
         <option value="homme">Homme</option>
         <option value="femme">Femme</option>
         <option value="non precise">Non précisé</option>
         <option value="autre">Autre</option>
       </select>
+
+      {/* --- RÔLE PRINCIPAL --- */}
       <label htmlFor="roleWish">Rôle souhaité</label>
       <select
         id="roleWish"
         value={roleWish}
-        onChange={(e) => setRoleWish(e.target.value)}
+        onChange={handleRoleWishChange} // Utilisation du handler personnalisé
       >
         <option value="joueur">Joueur</option>
         <option value="coach">Coach</option>
       </select>
 
+      {/* --- JEU --- */}
       <label htmlFor="desiredGames">Jeu souhaité</label>
       <select
         id="desiredGames"
         value={desiredGames}
-        onChange={(e) => setDesiredGames(e.target.value)}
+        onChange={(e) => {
+          setDesiredGames(e.target.value);
+          setDesiredTeam(""); // Reset équipe si on change de jeu
+        }}
       >
         <option value="">-- Choisir un jeu --</option>
-        <option value="League Of Legend">League Of Legend</option>
-        <option value="Fortnite">Fortnite</option>
-        <option value="Valorant">Valorant</option>
-        <option value="Fifa">Fifa</option>
+        {teamsLoading && <option disabled>Chargement...</option>}
+        {Object.keys(teamsByGame).map((g) => (
+          <option key={g} value={g}>
+            {g}
+          </option>
+        ))}
       </select>
 
-      <label htmlFor="desiredTeam">Équipe souhaitée (choix par jeu)</label>
-      {roleWish === "coach" ? (
-        <input id="desiredTeam" value="" readOnly />
-      ) : (
-        <select
-          id="desiredTeam"
-          value={desiredTeam}
-          onChange={(e) => setDesiredTeam(e.target.value)}
-        >
-          {(() => {
-            const game =
-              desiredGames ||
-              desiredTeam?.split(" — ")[0] ||
-              "League Of Legend";
-            return [1, 2, 3, 4].map((n) => (
-              <option
-                key={n}
-                value={`${game} — Équipe ${n}`}
-              >{`${game} — Équipe ${n}`}</option>
-            ));
-          })()}
-        </select>
+      {/* --- ÉQUIPE (Seulement si Joueur) --- */}
+      {roleWish !== "coach" && (
+        <>
+          <label htmlFor="desiredTeam">Équipe souhaitée</label>
+          <select
+            id="desiredTeam"
+            // Astuce : on reconstruit la value combinée pour que le select affiche la bonne option
+            value={desiredTeam ? `${desiredGames} — ${desiredTeam}` : ""}
+            onChange={handleTeamChange}
+            disabled={!desiredGames}
+          >
+            <option value="">-- Choisir une équipe --</option>
+
+            {(() => {
+              const teams = teamsByGame[desiredGames] || [];
+              if (teams.length === 0 && desiredGames) {
+                return <option disabled>Aucune équipe disponible</option>;
+              }
+
+              return teams.map((t) => (
+                // La value contient le séparateur pour que le handler puisse retrouver le jeu
+                <option key={t} value={`${desiredGames} — ${t}`}>
+                  {t}{" "}
+                  {/* On affiche juste le nom de l'équipe, c'est plus propre */}
+                </option>
+              ));
+            })()}
+          </select>
+        </>
       )}
 
-      <label htmlFor="teamRole">Rôle dans l'équipe (si applicable)</label>
-      {(() => {
-        if (roleWish === "coach") {
-          return <input id="teamRole" value="coach" readOnly />;
-        }
-        const game = desiredGames || desiredTeam?.split(" — ")[0];
-        if (game === "League Of Legend") {
-          return (
+      {/* --- ROLE IN-GAME (Seulement si Joueur) --- */}
+      {roleWish !== "coach" && (
+        <>
+          <label htmlFor="teamRole">Rôle dans le jeu</label>
+          {desiredGames === "League Of Legend" ? (
             <select
               id="teamRole"
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
               <option value="Top">Top</option>
-              <option value="Middle">Middle</option>
               <option value="Jungle">Jungle</option>
-              <option value="Support">Support</option>
+              <option value="Middle">Middle</option>
               <option value="ADC">ADC</option>
+              <option value="Support">Support</option>
             </select>
-          );
-        }
-        if (game === "Valorant") {
-          return (
+          ) : desiredGames === "Valorant" ? (
             <select
               id="teamRole"
               value={teamRole}
               onChange={(e) => setTeamRole(e.target.value)}
             >
-              <option value="Duelist">Duelist</option>
-              <option value="Sentinel">Sentinel</option>
-              <option value="Initiator">Initiator</option>
-              <option value="Controller">Controller</option>
+              <option value="DUELIST">Duelist</option>
+              <option value="INITIATOR">Initiator</option>
+              <option value="CONTROLLER">Controller</option>
+              <option value="SENTINEL">Sentinel</option>
+              <option value="POLYVALENT">Polyvalent</option>
             </select>
-          );
-        }
-        return <input id="teamRole" value={teamRole || "joueur"} readOnly />;
-      })()}
-
-      {/* maintenir la synchronisation des valeurs par défaut de teamRole lorsque desiredTeam change (géré dans le useEffect ci-dessus) */}
+          ) : (
+            <input id="teamRole" value="Joueur Polyvalent" disabled />
+          )}
+        </>
+      )}
 
       <div className="form-actions">
-        <button type="submit" className="btn-valider" disabled={!!loading}>
-          {"Terminer"}
+        <button
+          type="submit"
+          className="btn-valider"
+          disabled={loading || teamsLoading}
+        >
+          {loading ? "Envoi..." : "Terminer"}
         </button>
       </div>
     </form>

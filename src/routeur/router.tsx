@@ -16,6 +16,8 @@ import CreationEvent from "../composants/pages/CreationEvent";
 import ModifEvent from "../composants/pages/ModifEvent";
 
 //requiredRole="JOUEUR"
+import GestionDesPostulantPortailCoach from "../composants/pages/gestionDesInscriptionCoach";
+import StateUser from "../composants/pages/StateUser";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute requiredRole="COACH">
         <AccueilPortailCoach />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/gestion-postulants-coach",
+    element: (
+      <ProtectedRoute requiredRole="COACH">
+        <GestionDesPostulantPortailCoach />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/stateJoueur",
+    element: (
+      <ProtectedRoute requiredRole="JOUEUR">
+        <StateUser />
       </ProtectedRoute>
     ),
   },

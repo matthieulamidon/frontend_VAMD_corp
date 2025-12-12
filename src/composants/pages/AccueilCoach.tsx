@@ -1,15 +1,7 @@
-import NavbarJoueur from "../organims/navbarJoueur";
 import { useEffect, useState } from "react";
-import '../styles/coachEvents.css';
 import { useNavigate } from "react-router-dom";
-
-
-type EventCoach = {
-  id: number;
-  date: string;
-  name: string;
-  type: string;
-};
+import NavbarCoach from "../organims/navbarCoach";
+import TeamManager from "../organims/TeamManager";
 
 function AccueilPortailCoach() {
 
@@ -40,7 +32,8 @@ function AccueilPortailCoach() {
 
   return (
     <>
-      <NavbarJoueur />
+      <NavbarCoach />
+      <TeamManager />
       <div className="body-coach-events">
         <div className="tableau-events-coach">
           <div className="title-tableau-events-coach">Événements</div>

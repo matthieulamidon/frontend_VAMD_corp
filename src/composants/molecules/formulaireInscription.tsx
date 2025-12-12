@@ -81,8 +81,8 @@ const FormulaireInscription: React.FC = () => {
         setError(data?.message ?? `Erreur (${res.status})`);
       }
     } catch (err) {
-      console.error(err);
-      setError("Erreur réseau lors de la création du compte.");
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message ?? "Erreur réseau lors de la création du compte.");
     } finally {
       setLoading(false);
     }

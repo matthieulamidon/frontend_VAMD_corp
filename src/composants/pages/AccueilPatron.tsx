@@ -6,7 +6,7 @@ function AccueilPortailPatron() {
       <NavbarJoueur />
       <br></br>
       <br></br>
-      <h1>Bienvenue sur le portail joueur</h1>
+      <h1>Bienvenue sur le portail Patron</h1>
     </>
   );
 }

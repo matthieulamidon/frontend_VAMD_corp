@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { TeamPage } from "../organims/PlayerSelected";
 import NavbarJoueur from "../organims/navbarJoueur";
 import '../styles/accueilJoueur.css';
 
@@ -116,6 +117,10 @@ function AccueilPortailJoueur() {
           </div>
         </div>
       </div>
+      <br></br>
+      <br></br>
+      <h1>Bienvenue sur le portail joueur</h1>
+      <TeamPage />
     </>
   );
 }

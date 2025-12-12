@@ -21,6 +21,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const checkAuthStatus = async () => {
     const response = await authService.checkAuth();
+    const responseEquipe = await authService.equipeParDefault();
+    console.log("Equipe par défaut:", responseEquipe);
     if (response === false) {
       setIsAuthenticated(false);
       setRole("VISITOR");
@@ -37,9 +39,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         break;
       case 3:
         setRole("COACH");
+        setTeamSelect(responseEquipe || "");
         break;
       case 4:
         setRole("JOUEUR");
+        setTeamSelect(responseEquipe || "");
         break;
       case 5:
         setRole("USER");
@@ -66,7 +70,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   }, []);
 
   const setTeamSelectFun = useCallback((team: string) => {
-    // TODO : implémenter la sélection d'équipe
     setTeamSelect(team);
   }, []);
 
