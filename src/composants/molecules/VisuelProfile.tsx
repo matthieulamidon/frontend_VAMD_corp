@@ -38,8 +38,11 @@ export function VisuelProfil() {
           <button
             onClick={() => {
               logout();
-              window.location.reload();
-              window.location.href = "/";
+              if (window.location.pathname === "/") {
+                window.location.reload();
+              } else {
+                window.location.href = "/";
+              }
             }}
             className="vp-menu-item btn"
           >
