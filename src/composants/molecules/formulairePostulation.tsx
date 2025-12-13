@@ -94,11 +94,10 @@ const FormulairePostulation: React.FC<Props> = ({
 
         const data: Record<string, string[]> = await res.json();
 
-        // Mapping des clés (ex: "LEAGUEOFLEGENDES" -> "League Of Legend")
         const mapped: Record<string, string[]> = {};
         const formatKey = (key: string) => {
           const k = key.toUpperCase();
-          if (k.includes("LEAGUE")) return "LEAGUEOFLEGENDES";
+          if (k.includes("LEAGUEOFLEGENDES")) return "LEAGUEOFLEGENDES";
           if (k.includes("VALORANT")) return "VALORANT";
           if (k.includes("FORTNITE")) return "FORTNITE";
           return key;
@@ -257,7 +256,7 @@ const FormulairePostulation: React.FC<Props> = ({
       {roleWish !== "coach" && (
         <>
           <label htmlFor="teamRole">Rôle dans le jeu</label>
-          {desiredGames === "League Of Legend" ? (
+          {desiredGames === "LEAGUEOFLEGENDES" ? (
             <select
               id="teamRole"
               value={teamRole}
@@ -269,7 +268,7 @@ const FormulairePostulation: React.FC<Props> = ({
               <option value="BOTLANER">ADC</option>
               <option value="SUPORT">Support</option>
             </select>
-          ) : desiredGames === "Valorant" ? (
+          ) : desiredGames === "VALORANT" ? (
             <select
               id="teamRole"
               value={teamRole}
