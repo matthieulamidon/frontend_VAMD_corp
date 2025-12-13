@@ -241,9 +241,8 @@ export function TeamPage() {
   return (
     <div
       style={{
-        backgroundColor: "#010a13",
         minHeight: "100vh",
-        padding: "40px 20px",
+        padding: "00px 20px",
         fontFamily: "Arial, sans-serif",
         display: "flex",
         flexDirection: "column",
