@@ -52,7 +52,7 @@ const FormulairePostulation: React.FC<Props> = ({
   useEffect(() => {
     if (roleWish === "coach") return;
 
-    if (desiredGames === "League Of Legend") {
+    if (desiredGames === "LEAGUEOFLEGENDES") {
       // Si le rôle actuel n'est pas valide pour LoL, on met Top par défaut
       if (
         !["TOPLANER", "MIDLANER", "BOTLANER", "JUNGLER", "SUPORT"].includes(
@@ -61,7 +61,7 @@ const FormulairePostulation: React.FC<Props> = ({
       ) {
         setTeamRole("TOPLANER");
       }
-    } else if (desiredGames === "Valorant") {
+    } else if (desiredGames === "VALORANT") {
       // Si le rôle actuel n'est pas valide pour Valo, on met Duelist
       if (
         ![
@@ -98,9 +98,9 @@ const FormulairePostulation: React.FC<Props> = ({
         const mapped: Record<string, string[]> = {};
         const formatKey = (key: string) => {
           const k = key.toUpperCase();
-          if (k.includes("LEAGUE")) return "League Of Legend";
-          if (k.includes("VALORANT")) return "Valorant";
-          if (k.includes("FORTNITE")) return "Fortnite";
+          if (k.includes("LEAGUE")) return "LEAGUEOFLEGENDES";
+          if (k.includes("VALORANT")) return "VALORANT";
+          if (k.includes("FORTNITE")) return "FORTNITE";
           return key;
         };
 
