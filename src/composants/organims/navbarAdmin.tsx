@@ -44,14 +44,9 @@ const NavbarAdmin = () => {
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
         <VisuelProfil />
         <OptionSimplePourNavbar />
-        <a href="/" onClick={toggleMenu}>
-          Accueil
-        </a>
-        <a href="/calendrier" onClick={toggleMenu}>
-          Calendrier
-        </a>
-        <a href="/evenements" onClick={toggleMenu}>
-          Événements
+        <br></br>
+        <a href="/adminDashboard" className="btnnav">
+          Gestion de User
         </a>
         <div className="bottom-sidemenu"></div>
       </div>

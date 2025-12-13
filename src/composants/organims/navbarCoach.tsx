@@ -123,8 +123,8 @@ const NavbarJoueur = () => {
 
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
         <VisuelProfil />
-        <a href="/portail-joueur" className="btnnav">
-          Accueil Joueur
+        <a href="/portail-coach" className="btnnav">
+          Accueil Coach
         </a>
 
         {/* Menu Latéral : Même logique que la navbar principale */}
