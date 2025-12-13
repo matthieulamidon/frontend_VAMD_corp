@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { TeamPage } from "../organims/PlayerSelected";
 import NavbarJoueur from "../organims/navbarJoueur";
 import "../styles/accueilJoueur.css";
-import Footer from "../organims/footer";
 
 function AccueilPortailJoueur() {
   type EventBefore = {

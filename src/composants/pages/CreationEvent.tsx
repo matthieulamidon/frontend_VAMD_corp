@@ -57,9 +57,11 @@ function CreationEvent() {
       setEventLieu("");
       setEventDateDebut("");
       setEventDateFin("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      alert(`Erreur lors de la création de l'entraînement : ${err.message}`);
+      alert(
+        `Erreur lors de la création de l'entraînement : ${err instanceof Error ? err.message : "Erreur inconnue"}`
+      );
     }
   };
 
@@ -122,9 +124,11 @@ function CreationEvent() {
       setDateFin("");
       setCagnotte("");
       setDescription("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      alert(`Erreur lors de la création du match : ${err.message}`);
+      alert(
+        `Erreur lors de la création du match : ${err instanceof Error ? err.message : "Erreur inconnue"}`
+      );
     }
   };
 
@@ -220,7 +224,10 @@ function CreationEvent() {
                 </div>
 
                 <div className="form-group">
-                  <button onClick={handleCreateEvent} className="btn-submit-event">
+                  <button
+                    onClick={handleCreateEvent}
+                    className="btn-submit-event"
+                  >
                     Créer
                   </button>
                 </div>
@@ -317,7 +324,10 @@ function CreationEvent() {
                 </div>
 
                 <div className="form-group" style={{ marginTop: "16px" }}>
-                  <button onClick={handleCreateBigEvent} className="btn-submit-event">
+                  <button
+                    onClick={handleCreateBigEvent}
+                    className="btn-submit-event"
+                  >
                     Créer
                   </button>
                 </div>
