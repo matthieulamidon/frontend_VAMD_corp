@@ -335,14 +335,16 @@
   width: calc(100% / 3);
 }
 
+@media (max-width: 1130px) {
+  .body-filter-games-events,
+  .body-content-events {
+    width: 90%;
+  }
+}
+
 @media (max-width: 990px) {
   .txt-betway {
     font-size: 1.5rem;
-  }
-}
-@media (max-width: 830px) {
-  .game-logo-filter-img {
-    display: none;
   }
 }
 @media (max-width: 700px) {
@@ -351,5 +353,20 @@
   }
   .body-content-events {
     width: 90%;
+  }
+}
+@media (max-width: 645px) {
+  .overwfilter {
+    display: none;
+  }
+}
+@media (max-width: 557px) {
+  .rocketlfilter {
+    display: none;
+  }
+}
+@media (max-width: 475px) {
+  .pokemonfilter {
+    display: none;
   }
 }

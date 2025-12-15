@@ -1,5 +1,5 @@
 .body-calendrier {
-  padding-top: 88px;
+  padding-top: 120px;
   width: 100%;
   position: relative;
   background-color: black;
@@ -9,7 +9,7 @@
 .body-left-calendrier,
 .body-middle-calendrier,
 .body-right-calendrier {
-  padding-top: 88px;
+  padding-top: 120px;
   top: 0;
   background-color: rgba(30, 0, 60, 0.9);
 }
@@ -48,14 +48,17 @@
 }
 
 .title-calendrier {
+  display: flex;
   text-align: center;
-  font-size: 3rem;
+  font-size: clamp(1rem, 4vw, 3rem);
   color: rgb(255, 186, 253);
   font-weight: bold;
   font-family: Helvetica;
   text-shadow: var(--text-glow);
   margin-bottom: 2rem;
+  padding: 10px;
 }
+
 
 .classmnt-content {
   display: flex;
@@ -185,7 +188,7 @@
 /* Header du mois */
 .fc .fc-toolbar-title {
   color: rgb(255, 186, 253);
-  font-size: 3rem;
+  font-size: clamp(1rem, 4vw, 3rem);
   font-weight: bold;
   text-shadow:
     0 0 10px rgba(187, 0, 255, 0.7),
@@ -310,7 +313,7 @@
 
 /* Détails de l'événement sélectionné */
 .title-descrip-event {
-  font-size: 2rem;
+  font-size: clamp(1rem, 4vw, 2rem);
   margin: 20px 0 10px 0;
   color: rgb(186, 224, 255);
   text-shadow: var(--text-glow-blue);
@@ -336,7 +339,7 @@
   margin-bottom: 15px;
   color: rgb(186, 186, 255);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: clamp(0.5rem, 4vw, 1.2rem);
   text-shadow: var(--text-glow-blue);
 }
 
@@ -366,7 +369,6 @@
 .content-descrptn-event-description {
   margin-top: 15px;
   color: rgb(200, 200, 255);
-  font-size: 1.2rem;
   font-style: italic;
   line-height: 1.5;
 }
@@ -385,3 +387,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+@media (max-width: 780px) {
+  .body-left-calendrier{
+    display: none;
+  }
+  .body-middle-calendrier {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .body-right-calendrier {
+    display: none;
+  }
+}
+
+@media (max-width: 780px) {
+  .fc-button-group{
+    display: none;
+  }
+}
+

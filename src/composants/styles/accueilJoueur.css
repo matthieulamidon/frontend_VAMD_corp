@@ -33,6 +33,7 @@
 
 .body-portail-joueur-right-body {
   width: 88%;
+  min-width: 165px;
   height: 91%;
   background-color: rgb(67, 0, 112);
   border-radius: 20px;
@@ -46,7 +47,8 @@
 .title-right-portail-joueur {
   margin-top: 30px;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  padding: 10px;
   color: rgb(255, 186, 253);
   font-weight: 800;
   font-family: Helvetica, Arial, sans-serif;
@@ -93,7 +95,7 @@
 }
 
 .FUTUR {
-  font-size: 1.6rem;
+  font-size: clamp(1rem, 3vw, 1.8rem);
 }
 
 .stats-joueur {
@@ -113,8 +115,12 @@
 
   color: white;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.5rem, 4vw, 1rem);
   margin-bottom: 50px;
+}
+
+.title-bienvenue-port-joueur{
+  font-size: clamp(0.5rem, 4vw, 3rem);
 }
 
 .stat-joueur-line {
@@ -122,13 +128,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: clamp(0.5rem, 3vw, 1.1rem);
   font-style: italic;
 }
 
 .chiffre-stats-joueur {
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: clamp(0.5rem, 1.5vw, 1.2rem);
   color: white;
   text-shadow: var(--text-glow-blue);
   text-align: right;

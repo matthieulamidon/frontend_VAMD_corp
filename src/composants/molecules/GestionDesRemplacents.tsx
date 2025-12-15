@@ -1,4 +1,4 @@
-// --- 1. Définition des types de données ---
+// --- 1. Définition des types de données --- 
 // Chaque personne a un nom et une URL pour son icône (rôle ou visage)
 export type MemberProps = {
   name: string;

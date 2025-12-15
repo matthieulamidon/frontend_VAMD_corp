@@ -54,7 +54,7 @@
 
 .navbar {
   background-color: rgb(9, 0, 15);
-  padding: 1rem 2rem;
+  padding: 0.2rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,6 +119,7 @@
 }
 
 .navbar-right {
+  padding-left: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -226,9 +227,6 @@
     display: block;
   }
 
-  .btnnav {
-    display: none;
-  }
 }
 
 .side-menu {
@@ -298,6 +296,10 @@
   .logoNavbar {
     height: 40px;
   }
+
+  .btneventsnavcoach {
+    display: none;
+  }
 }
 
 @media (max-width: 990px) {
@@ -315,19 +317,22 @@
   }
 }
 
-@media (max-width: 700px) {
-  .btnnav:nth-child(4) {
+
+@media (max-width: 760px) {
+  .btnekipnavbarcoach,
+  .vp-arrow {
     display: none;
   }
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 700px) {
   .btnnav:nth-child(3) {
     display: none;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 570px) {
   .btnnav:nth-child(2) {
     display: none;
   }

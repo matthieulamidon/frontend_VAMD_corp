@@ -1,11 +1,11 @@
 .vp-container {
   display: flex;
   align-items: center;
-  gap: 12px;
   position: relative;
   user-select: none;
   color: white;
   font-family: Helvetica;
+      margin: 1rem 0;
 }
 
 .vp-avatar {

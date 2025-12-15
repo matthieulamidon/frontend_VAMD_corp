@@ -20,7 +20,7 @@ export function OptionSimplePourNavbar() {
     case "PATRON":
       content = (
         <div>
-          <a href="/portail-patron" className="btnnav">
+          <a href="/portail-patron" className="btnnav btntogglecoach">
             Portail Patron
           </a>
         </div>
@@ -53,14 +53,6 @@ export function OptionSimplePourNavbar() {
         </div>
       );
       break;
-    default:
-      content = (
-        <div>
-          <a href="/connexion" className="btnnav">
-            connexion
-          </a>
-        </div>
-      );
   }
 
   return <>{content}</>;

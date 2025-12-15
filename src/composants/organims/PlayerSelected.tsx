@@ -8,7 +8,7 @@ import icon_bot from "../../assets/map/bot_icon.png";
 import icon_coach from "../../assets/map/icone_coach.png";
 import LeagueOfLegendsSelected from "../molecules/LeagueIfLeagendsSelectioned";
 import { SimpleValorantSideList } from "../molecules/ValorantSelectioned";
-
+//Me me dédouane de cette façon de coder. Impossible pour moi de faire de la responsivité la dessus. Adrien
 // --- DEFINITION DES TYPES ---
 
 // Type pour les jeux supportés dans l'état local

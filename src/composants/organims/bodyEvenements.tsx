@@ -71,25 +71,25 @@ const BodyEvenement: React.FC = () => {
       <div className="filter-games-events">
         <div className="body-filter-games-events">
           <div className="filter-tous-games-events">TOUS</div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events valofilter">
             <img src={Logo_Valo} alt="Valo" className="game-logo-filter-img" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events lolfilter">
             <img src={Logo_LoL} alt="Lol" className="game-logo-filter-img" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events fortnitefilter">
             <img src={Logo_Fortnite} alt="Fortnite" className="game-logo-filter-img" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events fc26filter">
             <img src={Logo_Fc26} alt="Fc26" className="game-logo-filter-img" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events pokemonfilter">
             <img src={Logo_Pokemon} alt="Pokemon" className="game-logo-filter-img pokemon" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events rocketlfilter">
             <img src={Logo_RocketL} alt="Rocket League" className="game-logo-filter-img" />
           </div>
-          <div className="filter-logo-games-events">
+          <div className="filter-logo-games-events overwfilter">
             <img src={Logo_OW} alt="OverWatch" className="game-logo-filter-img" />
           </div>
         </div>
