@@ -295,6 +295,7 @@
   .equip-description h2 {
     font-size: 2em;
   }
+
 }
 
 @media (max-width: 800px) {
@@ -345,6 +346,13 @@
     text-align: center;
   }
 }
+
+@media (max-width: 600px) {
+  .game-item {
+    font-size: 0.1rem !important;
+  }
+}
+
 
 /* Effet d’étoiles scintillantes en arrière-plan */
 /* Couche principale : beaucoup d’étoiles visibles */

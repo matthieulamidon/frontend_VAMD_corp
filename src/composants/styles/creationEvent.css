@@ -13,8 +13,7 @@
   margin-top: 30px;
   border-radius: 20px;
   border: 2px solid rgba(217, 113, 255, 0.8);
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px;
   margin-bottom: 50px;
 }
 
@@ -24,7 +23,7 @@
   padding-left: 20px;
   align-items: center;
   text-align: left;
-  font-size: 2rem;
+  font-size: clamp(1rem, 4vw, 2rem);
   height: 70px;
   color: rgb(255, 186, 253);
   font-weight: bold;

@@ -85,7 +85,7 @@ const NavbarJoueur = () => {
 
           <div className="vp-username" onClick={() => setOpen(!open)}>
             <span></span>
-            <a className="btnnav">
+            <a className="btnnav btnekipnavbarcoach">
               {teamSelect ? teamSelect : "Sélecteur d'équipe"}
             </a>
             <span className={`vp-arrow ${open ? "open" : ""}`}>▼</span>
@@ -108,11 +108,12 @@ const NavbarJoueur = () => {
               )}
             </div>
           )}
+          
 
           <a href="/calendrier" className="btnnav">
             Calendrier
           </a>
-          <a href="/evenements" className="btnnav">
+          <a href="/evenements" className="btnnav btneventsnavcoach">
             Événements
           </a>
         </div>

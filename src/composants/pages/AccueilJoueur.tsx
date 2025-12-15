@@ -80,7 +80,7 @@ function AccueilPortailJoueur() {
       <NavbarJoueur />
       <div className="body-portail-joueur">
         <div className="body-portail-joueur-left">
-          <h1>Bienvenue sur le portail joueur</h1>
+          <h1 className="title-bienvenue-port-joueur">Bienvenue sur le portail joueur</h1>
           <TeamPage />
         </div>
 
